@@ -1,0 +1,17 @@
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        jcenter() // Warning: this repository is going to shut down soon
+    }
+}
+rootProject.name = "Patterns"
+include ':app'
+include ':core'
+include ':core_android'
+include ':feature_main'
+include ':feature_main_android'
+include ':domain'
+include ':repo_impl'
+include ':use_case_impl'
