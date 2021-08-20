@@ -1,7 +1,7 @@
 package ru.gubatenko.domain.usecase
 
-import ru.gubatenko.domain.model.Greeting
+import ru.gubatenko.domain.model.Activity
 
 interface GreetingUseCase {
-    suspend fun multipleGreeting(): List<Greeting>
+    suspend fun activity(): Activity
 }

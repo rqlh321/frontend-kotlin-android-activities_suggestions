@@ -8,21 +8,29 @@ import ru.gubatenko.core_android.android.LiveDataStateObservableFactory
 import ru.gubatenko.feature_main.ClickOnMainContentSideEffect
 import ru.gubatenko.feature_main.LoadMainContentSideEffect
 import ru.gubatenko.feature_main.MainStore
-import ru.gubatenko.repo_impl.GreetingRepoImpl
+import ru.gubatenko.feature_main.RefreshMainContentSideEffect
+import ru.gubatenko.repo_impl.ActivityRepoImpl
 import ru.gubatenko.use_case_impl.GreetingUseCaseImpl
 
 class MainViewModelFactory : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         val event = LiveDataEventDispatcher<MainStore.Event>()
+        val useCase = GreetingUseCaseImpl(
+            repo = ActivityRepoImpl()
+        )
         val sideEffects = SideEffects.Builder<MainStore.Action, MainStore.SideAction>()
             .appendSideEffect(
                 sideEffect = LoadMainContentSideEffect(
-                    useCase = GreetingUseCaseImpl(
-                        GreetingRepoImpl()
-                    )
+                    useCase = useCase
                 )
             )
             .appendSideEffect(sideEffect = ClickOnMainContentSideEffect(eventDispatcher = event))
+            .appendSideEffect(
+                sideEffect = RefreshMainContentSideEffect(
+                    eventDispatcher = event,
+                    useCase = useCase
+                )
+            )
             .build()
 
         val store = MainStore(

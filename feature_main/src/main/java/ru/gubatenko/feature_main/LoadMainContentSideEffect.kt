@@ -15,10 +15,15 @@ class LoadMainContentSideEffect(
     ) {
         try {
             reducerCallback.invoke(MainStore.SideAction.LoadStart)
-            val greetings = useCase.multipleGreeting()
-            reducerCallback.invoke(MainStore.SideAction.LoadSuccess(greetings))
+            val activity = useCase.activity()
+            reducerCallback.invoke(MainStore.SideAction.LoadSuccess(activity))
         } catch (e: Exception) {
-            reducerCallback.invoke(MainStore.SideAction.LoadError)
+            reducerCallback.invoke(
+                MainStore.SideAction.LoadError(
+                    retryButtonText = "Retry",
+                    errorMessageText = e.message ?: "Undefined error"
+                )
+            )
         }
     }
 }

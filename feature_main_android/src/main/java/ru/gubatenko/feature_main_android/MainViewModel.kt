@@ -16,14 +16,26 @@ class MainViewModel(
     val state = (store.state as LiveDataStateObservable)
 
     init {
+        load()
+    }
+
+    private fun load() {
         viewModelScope.launch(Dispatchers.IO) {
             store.process(MainStore.Action.LoadContent)
         }
     }
 
+    fun reload() = load()
+
     fun onContentClick() {
         viewModelScope.launch {
             store.process(MainStore.Action.ClickOnContent)
+        }
+    }
+
+    fun refresh() {
+        viewModelScope.launch(Dispatchers.IO) {
+            store.process(MainStore.Action.RefreshContent)
         }
     }
 }

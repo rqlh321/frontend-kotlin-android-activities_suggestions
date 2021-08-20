@@ -13,6 +13,6 @@ class ClickOnMainContentSideEffect(
         action: MainStore.Action.ClickOnContent,
         reducerCallback: suspend (MainStore.SideAction) -> Unit
     ) {
-        eventDispatcher.dispatch(MainStore.Event.ShowToast)
+        eventDispatcher.dispatch(MainStore.Event.ShowToast("Toast!"))
     }
 }
