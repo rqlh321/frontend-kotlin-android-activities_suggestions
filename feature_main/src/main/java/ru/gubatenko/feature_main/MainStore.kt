@@ -19,26 +19,35 @@ class MainStore(
         object LoadContent : Action()
         object ClickOnContent : Action()
         object RefreshContent : Action()
+        object SaveContent : Action()
     }
 
     sealed class Event {
         data class ShowToast(val message: String) : Event()
+        data class NavigateTo(val locationId: Int) : Event()
     }
 
     sealed class SideAction {
         object RefreshStart : SideAction()
         object RefreshError : SideAction()
+        data class RefreshSuccess(
+            val activity: Activity,
+        ) : SideAction()
+
         object LoadStart : SideAction()
         data class LoadError(
             val retryButtonText: String,
             val errorMessageText: String,
         ) : SideAction()
 
-        data class LoadSuccess(val activity: Activity) : SideAction()
+        data class LoadSuccess(
+            val saveButtonText: String,
+            val activity: Activity,
+        ) : SideAction()
     }
 
     data class State(
-        val actionText: String? = null,
+        val action: Activity? = null,
         val isActionTextVisible: Boolean = false,
 
         val errorText: String? = null,
@@ -46,6 +55,9 @@ class MainStore(
 
         val retryButtonText: String? = null,
         val isRetryButtonVisible: Boolean = false,
+
+        val saveButtonText: String? = null,
+        val isSaveButtonVisible: Boolean = false,
 
         val isLoadingProgressVisible: Boolean = false,
         val isRefreshProgressVisible: Boolean = false,

@@ -6,6 +6,7 @@
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.365625" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.365625" />
+        <entry key="core_android/src/main/res/layout/fragment_auth.xml" value="0.365625" />
         <entry key="feature_main_android/src/main/res/layout/activity_main.xml" value="0.365625" />
         <entry key="feature_main_android/src/main/res/layout/fragment_main.xml" value="0.20416666666666666" />
       </map>

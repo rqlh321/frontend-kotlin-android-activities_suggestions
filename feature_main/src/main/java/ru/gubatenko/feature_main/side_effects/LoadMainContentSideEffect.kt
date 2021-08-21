@@ -1,7 +1,8 @@
-package ru.gubatenko.feature_main
+package ru.gubatenko.feature_main.side_effects
 
 import ru.gubatenko.core.SideEffect
 import ru.gubatenko.domain.usecase.GreetingUseCase
+import ru.gubatenko.feature_main.MainStore
 
 class LoadMainContentSideEffect(
     private val useCase: GreetingUseCase
@@ -16,7 +17,12 @@ class LoadMainContentSideEffect(
         try {
             reducerCallback.invoke(MainStore.SideAction.LoadStart)
             val activity = useCase.activity()
-            reducerCallback.invoke(MainStore.SideAction.LoadSuccess(activity))
+            reducerCallback.invoke(
+                MainStore.SideAction.LoadSuccess(
+                    saveButtonText = "Save",
+                    activity = activity
+                )
+            )
         } catch (e: Exception) {
             reducerCallback.invoke(
                 MainStore.SideAction.LoadError(

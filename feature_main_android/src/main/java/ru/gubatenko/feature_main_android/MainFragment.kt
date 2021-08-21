@@ -8,7 +8,9 @@ import android.widget.Toast
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import ru.gubatenko.core_android.android.onClick
 import ru.gubatenko.feature_main.MainStore
 
 class MainFragment : Fragment(R.layout.fragment_main) {
@@ -18,6 +20,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private val mainText: TextView by lazy { requireView().findViewById(R.id.result_text_id) }
     private val errorText: TextView by lazy { requireView().findViewById(R.id.error_text_id) }
     private val retryButton: Button by lazy { requireView().findViewById(R.id.retry_button_id) }
+    private val saveButton: Button by lazy { requireView().findViewById(R.id.save_button_id) }
     private val loadingProgress: ContentLoadingProgressBar by lazy { requireView().findViewById(R.id.loading_progress_id) }
     private val refresh: SwipeRefreshLayout by lazy { requireView().findViewById(R.id.refresh_id) }
 
@@ -26,6 +29,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
 
         mainText.onClick(viewModel::onContentClick)
         retryButton.onClick(viewModel::reload)
+        saveButton.onClick(viewModel::save)
         refresh.setOnRefreshListener(viewModel::refresh)
 
         viewModel.event.observe(viewLifecycleOwner, ::handle)
@@ -39,6 +43,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
                 event.message,
                 Toast.LENGTH_SHORT
             ).show()
+            is MainStore.Event.NavigateTo -> findNavController().navigate(event.locationId)
         }
     }
 
@@ -50,7 +55,10 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         retryButton.text = state.retryButtonText
         retryButton.visibility = if (state.isRetryButtonVisible) View.VISIBLE else View.GONE
 
-        mainText.text = state.actionText
+        saveButton.text = state.saveButtonText
+        saveButton.visibility = if (state.isSaveButtonVisible) View.VISIBLE else View.GONE
+
+        mainText.text = state.action?.activity
         mainText.visibility = if (state.isActionTextVisible) View.VISIBLE else View.GONE
 
         errorText.text = state.errorText

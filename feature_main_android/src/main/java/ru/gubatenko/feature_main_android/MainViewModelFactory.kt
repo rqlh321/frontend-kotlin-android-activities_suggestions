@@ -5,10 +5,11 @@ import androidx.lifecycle.ViewModelProvider
 import ru.gubatenko.core.SideEffects
 import ru.gubatenko.core_android.android.LiveDataEventDispatcher
 import ru.gubatenko.core_android.android.LiveDataStateObservableFactory
-import ru.gubatenko.feature_main.ClickOnMainContentSideEffect
-import ru.gubatenko.feature_main.LoadMainContentSideEffect
+import ru.gubatenko.feature_main.side_effects.ClickOnMainContentSideEffect
+import ru.gubatenko.feature_main.side_effects.ClickOnSaveSideEffect
+import ru.gubatenko.feature_main.side_effects.LoadMainContentSideEffect
 import ru.gubatenko.feature_main.MainStore
-import ru.gubatenko.feature_main.RefreshMainContentSideEffect
+import ru.gubatenko.feature_main.side_effects.RefreshMainContentSideEffect
 import ru.gubatenko.repo_impl.ActivityRepoImpl
 import ru.gubatenko.use_case_impl.GreetingUseCaseImpl
 
@@ -25,6 +26,7 @@ class MainViewModelFactory : ViewModelProvider.Factory {
                 )
             )
             .appendSideEffect(sideEffect = ClickOnMainContentSideEffect(eventDispatcher = event))
+            .appendSideEffect(sideEffect = ClickOnSaveSideEffect(eventDispatcher = event))
             .appendSideEffect(
                 sideEffect = RefreshMainContentSideEffect(
                     eventDispatcher = event,

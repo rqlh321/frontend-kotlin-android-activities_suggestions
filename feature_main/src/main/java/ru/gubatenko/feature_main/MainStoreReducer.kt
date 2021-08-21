@@ -15,8 +15,11 @@ class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
             isRetryButtonVisible = false,
             retryButtonText = null,
 
+            isSaveButtonVisible = false,
+            saveButtonText = null,
+
             isActionTextVisible = false,
-            actionText = null,
+            action = null,
 
             isErrorTextVisible = false,
             errorText = null,
@@ -27,6 +30,8 @@ class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
 
             isRetryButtonVisible = false,
             retryButtonText = null,
+
+            isSaveButtonVisible = true,
 
             isErrorTextVisible = false,
             errorText = null,
@@ -39,13 +44,20 @@ class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
             isRetryButtonVisible = true,
             retryButtonText = newAction.retryButtonText,
 
+            isSaveButtonVisible = false,
+            saveButtonText = null,
+
             isActionTextVisible = false,
-            actionText = null,
+            action = null,
 
             isErrorTextVisible = true,
             errorText = newAction.errorMessageText,
         )
         is MainStore.SideAction.RefreshError -> currentState.copy(
+            isRefreshProgressVisible = false,
+        )
+        is MainStore.SideAction.RefreshSuccess -> currentState.copy(
+            action = newAction.activity,
             isRefreshProgressVisible = false,
         )
         is MainStore.SideAction.LoadSuccess -> currentState.copy(
@@ -56,8 +68,11 @@ class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
             isRetryButtonVisible = false,
             retryButtonText = null,
 
+            isSaveButtonVisible = true,
+            saveButtonText = newAction.saveButtonText,
+
             isActionTextVisible = true,
-            actionText = newAction.activity.activity,
+            action = newAction.activity,
 
             isErrorTextVisible = false,
             errorText = null,

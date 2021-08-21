@@ -1,9 +1,6 @@
 package ru.gubatenko.feature_main_android
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import ru.gubatenko.core_android.android.BaseViewModel
 import ru.gubatenko.core_android.android.LiveDataEventDispatcher
 import ru.gubatenko.core_android.android.LiveDataStateObservable
 import ru.gubatenko.feature_main.MainStore
@@ -11,7 +8,7 @@ import ru.gubatenko.feature_main.MainStore
 class MainViewModel(
     val event: LiveDataEventDispatcher<MainStore.Event>,
     private val store: MainStore
-) : ViewModel() {
+) : BaseViewModel() {
 
     val state = (store.state as LiveDataStateObservable)
 
@@ -19,24 +16,25 @@ class MainViewModel(
         load()
     }
 
-    private fun load() {
-        viewModelScope.launch(Dispatchers.IO) {
-            store.process(MainStore.Action.LoadContent)
-        }
+    private fun load() = io {
+        store.process(MainStore.Action.LoadContent)
     }
 
     fun reload() = load()
 
-    fun onContentClick() {
-        viewModelScope.launch {
-            store.process(MainStore.Action.ClickOnContent)
-        }
+    fun save() = io {
+        store.process(MainStore.Action.SaveContent)
     }
 
-    fun refresh() {
-        throw Exception("unauthorized")
-        // viewModelScope.launch(Dispatchers.IO) {
-        //     store.process(MainStore.Action.RefreshContent)
-        // }
+    fun onContentClick() = default {
+        store.process(MainStore.Action.ClickOnContent)
+    }
+
+    fun refresh() = io {
+        store.process(MainStore.Action.RefreshContent)
+    }
+
+    override fun onUnknownUserException() = default {
+        event.dispatch(MainStore.Event.NavigateTo(R.id.auth_fragment_id))
     }
 }

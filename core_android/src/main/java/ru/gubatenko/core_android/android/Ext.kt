@@ -1,4 +1,4 @@
-package ru.gubatenko.feature_main_android
+package ru.gubatenko.core_android.android
 
 import android.view.View
 

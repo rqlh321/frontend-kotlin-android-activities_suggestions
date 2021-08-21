@@ -7,8 +7,12 @@
 
     <fragment
         android:id="@+id/main_fragment_id"
-        android:name="ru.gubatenko.patterns.main.MainFragment"
-        android:label="@string/main_fragment_label"
+        android:name="ru.gubatenko.feature_main_android.MainFragment"
         tools:layout="@layout/fragment_main" />
+
+    <dialog
+        android:id="@+id/auth_fragment_id"
+        android:name="ru.gubatenko.core_android.android.auth.AuthFragment"
+        tools:layout="@layout/fragment_auth" />
 
 </navigation>
