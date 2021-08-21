@@ -34,8 +34,9 @@ class MainViewModel(
     }
 
     fun refresh() {
-        viewModelScope.launch(Dispatchers.IO) {
-            store.process(MainStore.Action.RefreshContent)
-        }
+        throw Exception("unauthorized")
+        // viewModelScope.launch(Dispatchers.IO) {
+        //     store.process(MainStore.Action.RefreshContent)
+        // }
     }
 }

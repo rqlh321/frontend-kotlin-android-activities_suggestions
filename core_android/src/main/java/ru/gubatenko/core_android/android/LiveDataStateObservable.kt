@@ -2,8 +2,6 @@ package ru.gubatenko.core_android.android
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import ru.gubatenko.core.StateObservable
 
 class LiveDataStateObservable<State : Any>(initialState: State) : StateObservable<State> {

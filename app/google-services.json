@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "415842981247",
+    "project_id": "good-boy-50061",
+    "storage_bucket": "good-boy-50061.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:415842981247:android:c4cdface9948b09dba364a",
+        "android_client_info": {
+          "package_name": "ru.gubatenko.patterns"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "415842981247-run8q1657614k0dt6a0kom9qdhi1lt6u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.gubatenko.patterns",
+            "certificate_hash": "6f6a4dd56382a1d0b34fb95517eace4b23ba17b4"
+          }
+        },
+        {
+          "client_id": "415842981247-vm042nh8li91pb0l9gfhgkold0k142vi.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyiasXxZKvC0-48EZIqSuxI6QNkbaceXk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "415842981247-vm042nh8li91pb0l9gfhgkold0k142vi.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
