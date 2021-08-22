@@ -6,14 +6,14 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.ContentLoadingProgressBar
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import ru.gubatenko.core_android.android.BaseFragment
 import ru.gubatenko.core_android.android.onClick
 import ru.gubatenko.feature_main.MainStore
 
-class MainFragment : Fragment(R.layout.fragment_main) {
+class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private val viewModel: MainViewModel by viewModels { MainViewModelFactory() }
 
@@ -23,6 +23,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
     private val saveButton: Button by lazy { requireView().findViewById(R.id.save_button_id) }
     private val loadingProgress: ContentLoadingProgressBar by lazy { requireView().findViewById(R.id.loading_progress_id) }
     private val refresh: SwipeRefreshLayout by lazy { requireView().findViewById(R.id.refresh_id) }
+
+    override fun successAuthorization() = viewModel.onSuccessAuthorization()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

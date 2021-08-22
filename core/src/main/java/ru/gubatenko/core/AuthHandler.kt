@@ -1,6 +1,6 @@
 package ru.gubatenko.core
 
-interface AuthHandler {
-    fun signIn()
-    fun signOut()
+object AuthHandler {
+    const val AUTH_REQUEST_BROADCAST = "AUTH_REQUEST_BROADCAST"
+    const val AUTH_SUCCESS_BROADCAST = "AUTH_SUCCESS_BROADCAST"
 }
