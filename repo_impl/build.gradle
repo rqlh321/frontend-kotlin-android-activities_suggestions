@@ -10,5 +10,4 @@ java {
 
 dependencies {
     implementation project(path: ':domain')
-    implementation project(path: ':data')
 }
