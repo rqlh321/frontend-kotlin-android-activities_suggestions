@@ -9,8 +9,8 @@ import androidx.core.widget.ContentLoadingProgressBar
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import ru.gubatenko.core_android.android.BaseFragment
-import ru.gubatenko.core_android.android.onClick
+import ru.gubatenko.mvi_android.android.BaseFragment
+import ru.gubatenko.mvi_android.android.onClick
 import ru.gubatenko.feature_main.MainStore
 
 class MainFragment : BaseFragment(R.layout.fragment_main) {

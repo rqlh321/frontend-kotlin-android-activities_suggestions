@@ -1,4 +1,4 @@
-package ru.gubatenko.core_android.android
+package ru.gubatenko.mvi_android.android
 
 import android.util.Log
 import androidx.lifecycle.ViewModel

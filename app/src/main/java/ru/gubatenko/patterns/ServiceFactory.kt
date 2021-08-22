@@ -3,8 +3,8 @@ package ru.gubatenko.patterns
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
-import ru.gubatenko.data.ActivitySourceService
-import ru.gubatenko.data.dto.ActivityDto
+import ru.gubatenko.repo_impl.ActivitySourceService
+import ru.gubatenko.repo_impl.dto.ActivityDto
 
 object ServiceFactory {
 

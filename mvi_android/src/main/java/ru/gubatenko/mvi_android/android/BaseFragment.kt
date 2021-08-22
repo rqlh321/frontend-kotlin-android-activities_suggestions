@@ -1,4 +1,4 @@
-package ru.gubatenko.core_android.android
+package ru.gubatenko.mvi_android.android
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -6,7 +6,7 @@ import android.content.Intent
 import android.content.IntentFilter
 import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import ru.gubatenko.mvi.AuthHandler.AUTH_SUCCESS_BROADCAST
+import ru.gubatenko.domain.AUTH_SUCCESS_BROADCAST
 
 abstract class BaseFragment(layout: Int) : Fragment(layout) {
 

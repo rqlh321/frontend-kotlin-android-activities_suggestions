@@ -5,9 +5,9 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
-import ru.gubatenko.data.ActivityDataToDomain
-import ru.gubatenko.data.ActivitySourceService
-import ru.gubatenko.data.dto.ActivityDto
+import ru.gubatenko.repo_impl.ActivityDataToDomain
+import ru.gubatenko.repo_impl.ActivitySourceService
+import ru.gubatenko.repo_impl.dto.ActivityDto
 import ru.gubatenko.domain.model.Activity
 import ru.gubatenko.domain.repo.ActivitySourceRepo
 import ru.gubatenko.domain.repo.Mapper

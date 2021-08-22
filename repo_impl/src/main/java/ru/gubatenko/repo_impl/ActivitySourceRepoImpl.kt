@@ -1,7 +1,6 @@
 package ru.gubatenko.repo_impl
 
-import ru.gubatenko.data.ActivitySourceService
-import ru.gubatenko.data.dto.ActivityDto
+import ru.gubatenko.repo_impl.dto.ActivityDto
 import ru.gubatenko.domain.model.Activity
 import ru.gubatenko.domain.repo.ActivitySourceRepo
 import ru.gubatenko.domain.repo.Mapper

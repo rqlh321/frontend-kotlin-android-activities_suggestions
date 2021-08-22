@@ -35,8 +35,7 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':data')
-    implementation project(path: ':mvi')
+    implementation project(path: ':domain')
     implementation project(path: ':feature_main_android')
     implementation project(path: ':use_case_impl')
     implementation project(path: ':repo_impl')
@@ -49,13 +48,13 @@ dependencies {
 
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation project(path: ':domain')
 
     def nav_version = "2.3.5"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     implementation platform('com.google.firebase:firebase-bom:28.4.0')
+
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-crashlytics-ktx'
     implementation 'com.google.firebase:firebase-perf-ktx'

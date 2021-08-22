@@ -1,4 +1,4 @@
-package ru.gubatenko.core_android
+package ru.gubatenko.mvi_android
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -4,8 +4,8 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import ru.gubatenko.mvi.EventDispatcher
 import ru.gubatenko.mvi.SideEffects
-import ru.gubatenko.core_android.android.LiveDataEventDispatcher
-import ru.gubatenko.core_android.android.LiveDataStateObservableFactory
+import ru.gubatenko.mvi_android.android.LiveDataEventDispatcher
+import ru.gubatenko.mvi_android.android.LiveDataStateObservableFactory
 import ru.gubatenko.feature_main.MainStore
 import ru.gubatenko.feature_main.side_effects.ClickOnMainContentSideEffect
 import ru.gubatenko.feature_main.side_effects.ClickOnSaveSideEffect

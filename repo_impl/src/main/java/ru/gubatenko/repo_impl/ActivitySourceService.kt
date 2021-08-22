@@ -1,6 +1,6 @@
-package ru.gubatenko.data
+package ru.gubatenko.repo_impl
 
-import ru.gubatenko.data.dto.ActivityDto
+import ru.gubatenko.repo_impl.dto.ActivityDto
 
 interface ActivitySourceService {
 

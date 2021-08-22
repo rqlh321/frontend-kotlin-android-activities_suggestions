@@ -1,4 +1,4 @@
-package ru.gubatenko.core_android.android
+package ru.gubatenko.mvi_android.android
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import ru.gubatenko.mvi.AuthHandler
-import ru.gubatenko.core_android.R
+import ru.gubatenko.domain.AUTH_REQUEST_BROADCAST
+import ru.gubatenko.mvi_android.R
 
 class AuthFragment : BottomSheetDialogFragment() {
 
@@ -30,7 +30,7 @@ class AuthFragment : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         signInButton.onClick {
             dismiss()
-            localBroadcastManager.sendBroadcast(Intent(AuthHandler.AUTH_REQUEST_BROADCAST))
+            localBroadcastManager.sendBroadcast(Intent(AUTH_REQUEST_BROADCAST))
         }
     }
 }

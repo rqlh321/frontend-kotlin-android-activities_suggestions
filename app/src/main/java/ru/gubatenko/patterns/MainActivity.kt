@@ -14,8 +14,8 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
-import ru.gubatenko.mvi.AuthHandler.AUTH_REQUEST_BROADCAST
-import ru.gubatenko.mvi.AuthHandler.AUTH_SUCCESS_BROADCAST
+import ru.gubatenko.domain.AUTH_REQUEST_BROADCAST
+import ru.gubatenko.domain.AUTH_SUCCESS_BROADCAST
 
 class MainActivity : AppCompatActivity() {
 
