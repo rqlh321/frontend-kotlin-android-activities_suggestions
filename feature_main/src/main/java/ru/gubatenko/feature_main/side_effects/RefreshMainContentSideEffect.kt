@@ -1,12 +1,12 @@
 package ru.gubatenko.feature_main.side_effects
 
-import ru.gubatenko.core.EventDispatcher
-import ru.gubatenko.core.SideEffect
-import ru.gubatenko.domain.usecase.GreetingUseCase
+import ru.gubatenko.mvi.EventDispatcher
+import ru.gubatenko.mvi.SideEffect
+import ru.gubatenko.domain.usecase.ActivityUseCase
 import ru.gubatenko.feature_main.MainStore
 
 class RefreshMainContentSideEffect(
-    private val useCase: GreetingUseCase,
+    private val useCase: ActivityUseCase,
     private val eventDispatcher: EventDispatcher<MainStore.Event>
 ) : SideEffect<MainStore.Action.RefreshContent, MainStore.SideAction> {
 

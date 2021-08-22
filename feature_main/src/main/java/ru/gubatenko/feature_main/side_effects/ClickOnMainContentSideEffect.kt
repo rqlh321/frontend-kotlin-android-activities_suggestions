@@ -1,7 +1,7 @@
 package ru.gubatenko.feature_main.side_effects
 
-import ru.gubatenko.core.EventDispatcher
-import ru.gubatenko.core.SideEffect
+import ru.gubatenko.mvi.EventDispatcher
+import ru.gubatenko.mvi.SideEffect
 import ru.gubatenko.feature_main.MainStore
 
 class ClickOnMainContentSideEffect(

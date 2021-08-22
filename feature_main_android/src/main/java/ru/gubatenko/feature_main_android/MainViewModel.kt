@@ -1,16 +1,18 @@
 package ru.gubatenko.feature_main_android
 
+import ru.gubatenko.mvi.EventDispatcher
 import ru.gubatenko.core_android.android.BaseViewModel
 import ru.gubatenko.core_android.android.LiveDataEventDispatcher
 import ru.gubatenko.core_android.android.LiveDataStateObservable
 import ru.gubatenko.feature_main.MainStore
 
 class MainViewModel(
-    val event: LiveDataEventDispatcher<MainStore.Event>,
+    dispatcher: EventDispatcher<MainStore.Event>,
     private val store: MainStore
 ) : BaseViewModel() {
 
     val state = (store.state as LiveDataStateObservable)
+    val event = (dispatcher as LiveDataEventDispatcher<MainStore.Event>)
 
     init {
         load()
@@ -23,7 +25,8 @@ class MainViewModel(
     fun reload() = load()
 
     fun save() = io {
-        store.process(MainStore.Action.SaveContent)
+        store.process(MainStore.Action.SaveContent(state.stateValue.action))
+        store.process(MainStore.Action.LoadContent)
     }
 
     fun onContentClick() = default {

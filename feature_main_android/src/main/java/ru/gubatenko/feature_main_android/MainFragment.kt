@@ -6,16 +6,16 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.widget.ContentLoadingProgressBar
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.gubatenko.core_android.android.BaseFragment
 import ru.gubatenko.core_android.android.onClick
 import ru.gubatenko.feature_main.MainStore
 
 class MainFragment : BaseFragment(R.layout.fragment_main) {
 
-    private val viewModel: MainViewModel by viewModels { MainViewModelFactory() }
+    private val viewModel: MainViewModel by viewModel()
 
     private val mainText: TextView by lazy { requireView().findViewById(R.id.result_text_id) }
     private val errorText: TextView by lazy { requireView().findViewById(R.id.error_text_id) }

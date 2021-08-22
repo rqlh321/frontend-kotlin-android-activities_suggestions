@@ -1,8 +1,8 @@
 package ru.gubatenko.feature_main
 
-import ru.gubatenko.core.AbstractStore
-import ru.gubatenko.core.SideEffects
-import ru.gubatenko.core.StateObservable
+import ru.gubatenko.mvi.AbstractStore
+import ru.gubatenko.mvi.SideEffects
+import ru.gubatenko.mvi.StateObservable
 import ru.gubatenko.domain.model.Activity
 
 class MainStore(
@@ -19,7 +19,9 @@ class MainStore(
         object LoadContent : Action()
         object ClickOnContent : Action()
         object RefreshContent : Action()
-        object SaveContent : Action()
+        data class SaveContent(
+            val action: Activity?
+        ) : Action()
     }
 
     sealed class Event {

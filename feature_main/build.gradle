@@ -9,6 +9,6 @@ java {
 }
 
 dependencies {
-    api project(path: ':core')
-    api project(path: ':domain')
+    implementation project(path: ':mvi')
+    implementation project(path: ':domain')
 }

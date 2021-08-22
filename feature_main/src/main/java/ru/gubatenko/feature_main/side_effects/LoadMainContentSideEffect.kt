@@ -1,11 +1,11 @@
 package ru.gubatenko.feature_main.side_effects
 
-import ru.gubatenko.core.SideEffect
-import ru.gubatenko.domain.usecase.GreetingUseCase
+import ru.gubatenko.mvi.SideEffect
+import ru.gubatenko.domain.usecase.ActivityUseCase
 import ru.gubatenko.feature_main.MainStore
 
 class LoadMainContentSideEffect(
-    private val useCase: GreetingUseCase
+    private val useCase: ActivityUseCase
 ) : SideEffect<MainStore.Action.LoadContent, MainStore.SideAction> {
 
     override fun actionId() = MainStore.Action.LoadContent::class.java

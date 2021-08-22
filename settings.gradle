@@ -8,8 +8,8 @@ dependencyResolutionManagement {
 }
 rootProject.name = "Patterns"
 include ':app'
-include ':core'
-include ':core_android'
+include ':mvi'
+include ':mvi_android'
 include ':feature_main'
 include ':feature_main_android'
 include ':domain'

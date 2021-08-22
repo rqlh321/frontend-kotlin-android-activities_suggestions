@@ -1,6 +1,6 @@
 package ru.gubatenko.feature_main
 
-import ru.gubatenko.core.Reducer
+import ru.gubatenko.mvi.Reducer
 
 class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
     override fun invoke(
