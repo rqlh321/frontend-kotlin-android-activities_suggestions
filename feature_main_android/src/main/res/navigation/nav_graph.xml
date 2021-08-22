@@ -12,7 +12,7 @@
 
     <dialog
         android:id="@+id/auth_fragment_id"
-        android:name="ru.gubatenko.mvi_android.android.AuthFragment"
+        android:name="ru.gubatenko.common_android.AuthFragment"
         tools:layout="@layout/fragment_auth" />
 
 </navigation>

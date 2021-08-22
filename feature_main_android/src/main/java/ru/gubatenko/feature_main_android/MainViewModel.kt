@@ -1,7 +1,7 @@
 package ru.gubatenko.feature_main_android
 
 import ru.gubatenko.mvi.EventDispatcher
-import ru.gubatenko.mvi_android.android.BaseViewModel
+import ru.gubatenko.common_android.BaseViewModel
 import ru.gubatenko.mvi_android.android.LiveDataEventDispatcher
 import ru.gubatenko.mvi_android.android.LiveDataStateObservable
 import ru.gubatenko.feature_main.MainStore

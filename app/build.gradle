@@ -37,8 +37,7 @@ android {
 dependencies {
     implementation project(path: ':domain')
     implementation project(path: ':feature_main_android')
-    implementation project(path: ':use_case_impl')
-    implementation project(path: ':repo_impl')
+    implementation project(path: ':domain_impl')
 
     implementation "io.insert-koin:koin-android:3.1.2"
 

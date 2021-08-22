@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
       <module name="Patterns.app" target="11" />
+      <module name="Patterns.common_android" target="11" />
       <module name="Patterns.feature_main_android" target="11" />
       <module name="Patterns.mvi_android" target="11" />
     </bytecodeTargetLevel>
