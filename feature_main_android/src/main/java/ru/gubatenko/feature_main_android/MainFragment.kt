@@ -52,7 +52,9 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
     private fun render(state: MainStore.State) {
         refresh.isEnabled = state.isRefreshEnabled
         refresh.isRefreshing = state.isRefreshInProgress
+
         if (state.isLoadingProgressVisible) loadingProgress.show() else loadingProgress.hide()
+
         retryButton.text = state.retryButtonText
         retryButton.visibility = if (state.isRetryButtonVisible) View.VISIBLE else View.GONE
 
