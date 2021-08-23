@@ -1,16 +1,15 @@
 package ru.gubatenko.feature_main
 
+import ru.gubatenko.domain.model.Activity
 import ru.gubatenko.mvi.AbstractStore
 import ru.gubatenko.mvi.SideEffects
 import ru.gubatenko.mvi.StateObservable
-import ru.gubatenko.domain.model.Activity
 
 class MainStore(
     sideEffects: SideEffects<Action, SideAction>,
-    stateObservableFactory: StateObservable.Factory,
+    stateObservable: StateObservable<State>,
 ) : AbstractStore<MainStore.Action, MainStore.SideAction, MainStore.State>(
-    initialState = State(),
-    stateObservableFactory = stateObservableFactory,
+    stateObservable = stateObservable,
     reducer = MainStoreReducer(),
     sideEffects = sideEffects
 ) {
@@ -19,9 +18,7 @@ class MainStore(
         object LoadContent : Action()
         object ClickOnContent : Action()
         object RefreshContent : Action()
-        data class SaveContent(
-            val action: Activity?
-        ) : Action()
+        object SaveContent : Action()
     }
 
     sealed class Event {
@@ -36,7 +33,9 @@ class MainStore(
             val activity: Activity,
         ) : SideAction()
 
-        object LoadStart : SideAction()
+        object LoadStart: SideAction()
+        object SavingStart: SideAction()
+
         data class LoadError(
             val retryButtonText: String,
             val errorMessageText: String,
@@ -60,9 +59,10 @@ class MainStore(
 
         val saveButtonText: String? = null,
         val isSaveButtonVisible: Boolean = false,
+        val isSaveButtonClickable: Boolean = false,
 
         val isLoadingProgressVisible: Boolean = false,
-        val isRefreshProgressVisible: Boolean = false,
+        val isRefreshInProgress: Boolean = false,
         val isRefreshEnabled: Boolean = false,
     )
 }

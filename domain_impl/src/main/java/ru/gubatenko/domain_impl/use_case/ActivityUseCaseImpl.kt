@@ -1,4 +1,4 @@
-package ru.gubatenko.domain_impl
+package ru.gubatenko.domain_impl.use_case
 
 import ru.gubatenko.domain.model.Activity
 import ru.gubatenko.domain.repo.ActivitySourceRepo

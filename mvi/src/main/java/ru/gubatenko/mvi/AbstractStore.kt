@@ -1,14 +1,11 @@
 package ru.gubatenko.mvi
 
 abstract class AbstractStore<Action : Any, SideAction : Any, State : Any>(
-    initialState: State,
-    stateObservableFactory: StateObservable.Factory,
+    val stateObservable: StateObservable<State>,
     private val logger: Logger? = null,
     private val reducer: Reducer<State, SideAction>,
     private val sideEffects: SideEffects<Action, SideAction>,
 ) : Store<Action> {
-
-    val state: StateObservable<State> = stateObservableFactory.create(initialState)
 
     override suspend fun process(action: Action) {
         logger?.log("process action: $action")
@@ -16,9 +13,9 @@ abstract class AbstractStore<Action : Any, SideAction : Any, State : Any>(
     }
 
     private fun produceNextAction(sideAction: SideAction) {
-        logger?.log("current state: ${state.stateValue}; sideAction: $sideAction")
-        val newState = reducer(state.stateValue, sideAction)
-        state.stateValue = newState
+        logger?.log("current state: ${stateObservable.stateValue}; sideAction: $sideAction")
+        val newState = reducer(stateObservable.stateValue, sideAction)
+        stateObservable.stateValue = newState
         logger?.log("new state: $newState")
     }
 }

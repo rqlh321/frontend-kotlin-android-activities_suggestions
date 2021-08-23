@@ -1,12 +1,13 @@
 package ru.gubatenko.feature_main.side_effects
 
-import ru.gubatenko.mvi.SideEffect
-import ru.gubatenko.domain.exception.UnknownUserException
 import ru.gubatenko.domain.usecase.ActivityUseCase
 import ru.gubatenko.feature_main.MainStore
+import ru.gubatenko.mvi.SideEffect
+import ru.gubatenko.mvi.StateObservable
 
 class ClickOnSaveSideEffect(
-    private val useCase: ActivityUseCase
+    private val state: StateObservable<MainStore.State>,
+    private val useCase: ActivityUseCase,
 ) : SideEffect<MainStore.Action.SaveContent, MainStore.SideAction> {
 
     override fun actionId() = MainStore.Action.SaveContent::class.java
@@ -15,8 +16,7 @@ class ClickOnSaveSideEffect(
         action: MainStore.Action.SaveContent,
         reducerCallback: suspend (MainStore.SideAction) -> Unit
     ) {
-        val actionToSave = action.action ?: return
+        val actionToSave = state.stateValue.action ?: return
         useCase.save(actionToSave)
-        throw UnknownUserException()
     }
 }

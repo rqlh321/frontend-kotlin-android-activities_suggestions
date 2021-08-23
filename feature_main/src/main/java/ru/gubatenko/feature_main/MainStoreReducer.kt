@@ -7,16 +7,18 @@ class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
         currentState: MainStore.State,
         newAction: MainStore.SideAction
     ): MainStore.State = when (newAction) {
+        is MainStore.SideAction.SavingStart -> currentState.copy(
+            isSaveButtonClickable = false,
+        )
         is MainStore.SideAction.LoadStart -> currentState.copy(
             isLoadingProgressVisible = true,
-            isRefreshProgressVisible = false,
+            isRefreshInProgress = false,
             isRefreshEnabled = false,
 
             isRetryButtonVisible = false,
             retryButtonText = null,
 
-            isSaveButtonVisible = false,
-            saveButtonText = null,
+            isSaveButtonClickable = false,
 
             isActionTextVisible = false,
             action = null,
@@ -26,26 +28,27 @@ class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
         )
         is MainStore.SideAction.RefreshStart -> currentState.copy(
             isLoadingProgressVisible = false,
-            isRefreshProgressVisible = true,
+            isRefreshInProgress = true,
 
             isRetryButtonVisible = false,
             retryButtonText = null,
 
             isSaveButtonVisible = true,
+            isSaveButtonClickable = true,
 
             isErrorTextVisible = false,
             errorText = null,
         )
         is MainStore.SideAction.LoadError -> currentState.copy(
             isLoadingProgressVisible = false,
-            isRefreshProgressVisible = false,
+            isRefreshInProgress = false,
             isRefreshEnabled = false,
 
             isRetryButtonVisible = true,
             retryButtonText = newAction.retryButtonText,
 
             isSaveButtonVisible = false,
-            saveButtonText = null,
+            isSaveButtonClickable = false,
 
             isActionTextVisible = false,
             action = null,
@@ -54,21 +57,23 @@ class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
             errorText = newAction.errorMessageText,
         )
         is MainStore.SideAction.RefreshError -> currentState.copy(
-            isRefreshProgressVisible = false,
+            isRefreshInProgress = false,
         )
         is MainStore.SideAction.RefreshSuccess -> currentState.copy(
             action = newAction.activity,
-            isRefreshProgressVisible = false,
+            isRefreshInProgress = false,
         )
         is MainStore.SideAction.LoadSuccess -> currentState.copy(
             isLoadingProgressVisible = false,
-            isRefreshProgressVisible = false,
+            isRefreshInProgress = false,
             isRefreshEnabled = true,
 
             isRetryButtonVisible = false,
             retryButtonText = null,
 
             isSaveButtonVisible = true,
+            isSaveButtonClickable = true,
+
             saveButtonText = newAction.saveButtonText,
 
             isActionTextVisible = true,

@@ -8,10 +8,10 @@ import android.widget.Toast
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.gubatenko.common_android.BaseFragment
 import ru.gubatenko.common_android.onClick
 import ru.gubatenko.feature_main.MainStore
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainFragment : BaseFragment(R.layout.fragment_main) {
 
@@ -51,7 +51,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
     private fun render(state: MainStore.State) {
         refresh.isEnabled = state.isRefreshEnabled
-        refresh.isRefreshing = state.isRefreshProgressVisible
+        refresh.isRefreshing = state.isRefreshInProgress
         if (state.isLoadingProgressVisible) loadingProgress.show() else loadingProgress.hide()
 
         retryButton.text = state.retryButtonText
@@ -59,6 +59,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
 
         saveButton.text = state.saveButtonText
         saveButton.visibility = if (state.isSaveButtonVisible) View.VISIBLE else View.GONE
+        saveButton.isClickable = state.isSaveButtonClickable
 
         mainText.text = state.action?.activity
         mainText.visibility = if (state.isActionTextVisible) View.VISIBLE else View.GONE

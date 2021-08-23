@@ -1,10 +1,12 @@
 package ru.gubatenko.feature_main.side_effects
 
-import ru.gubatenko.mvi.SideEffect
 import ru.gubatenko.domain.usecase.ActivityUseCase
 import ru.gubatenko.feature_main.MainStore
+import ru.gubatenko.mvi.SideEffect
+import ru.gubatenko.mvi.StateObservable
 
 class LoadMainContentSideEffect(
+    private val state: StateObservable<MainStore.State>,
     private val useCase: ActivityUseCase
 ) : SideEffect<MainStore.Action.LoadContent, MainStore.SideAction> {
 
@@ -15,6 +17,9 @@ class LoadMainContentSideEffect(
         reducerCallback: suspend (MainStore.SideAction) -> Unit
     ) {
         try {
+            if (state.stateValue.isRefreshInProgress) {
+                return
+            }
             reducerCallback.invoke(MainStore.SideAction.LoadStart)
             val activity = useCase.activity()
             reducerCallback.invoke(
