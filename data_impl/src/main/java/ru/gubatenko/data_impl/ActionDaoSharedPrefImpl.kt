@@ -1,7 +1,7 @@
-package ru.gubatenko.patterns.storage
+package ru.gubatenko.data_impl
 
-import ru.gubatenko.domain_impl.data.dao.ActivityDao
-import ru.gubatenko.domain_impl.data.entity.ActivityStored
+import ru.gubatenko.data.dao.ActivityDao
+import ru.gubatenko.data.entity.ActivityStored
 
 class ActionDaoSharedPrefImpl : ActivityDao {
 

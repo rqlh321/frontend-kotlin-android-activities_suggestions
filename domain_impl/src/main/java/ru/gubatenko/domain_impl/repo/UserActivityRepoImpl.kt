@@ -3,8 +3,8 @@ package ru.gubatenko.domain_impl.repo
 import ru.gubatenko.domain.model.Activity
 import ru.gubatenko.domain.repo.Mapper
 import ru.gubatenko.domain.repo.UserActivityRepo
-import ru.gubatenko.domain_impl.data.dao.ActivityDao
-import ru.gubatenko.domain_impl.data.entity.ActivityStored
+import ru.gubatenko.data.dao.ActivityDao
+import ru.gubatenko.data.entity.ActivityStored
 
 class UserActivityRepoImpl(
     private val dao: ActivityDao,

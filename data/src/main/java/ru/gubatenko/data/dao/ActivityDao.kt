@@ -1,6 +1,6 @@
-package ru.gubatenko.domain_impl.data.dao
+package ru.gubatenko.data.dao
 
-import ru.gubatenko.domain_impl.data.entity.ActivityStored
+import ru.gubatenko.data.entity.ActivityStored
 
 interface ActivityDao {
     suspend fun save(activity: ActivityStored)

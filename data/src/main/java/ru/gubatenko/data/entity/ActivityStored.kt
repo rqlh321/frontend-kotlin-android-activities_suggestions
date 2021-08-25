@@ -1,4 +1,4 @@
-package ru.gubatenko.domain_impl.data.entity
+package ru.gubatenko.data.entity
 
 class ActivityStored(
     val activity: String,

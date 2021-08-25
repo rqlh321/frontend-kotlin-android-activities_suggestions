@@ -1,4 +1,4 @@
-package ru.gubatenko.domain_impl.data.dto
+package ru.gubatenko.data.dto
 
 data class ActivityDto(
     val activity: String,

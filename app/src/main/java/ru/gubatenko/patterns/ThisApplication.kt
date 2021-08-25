@@ -4,14 +4,12 @@ import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import org.koin.dsl.module
-import ru.gubatenko.domain_impl.data.dao.ActivityDao
-import ru.gubatenko.domain_impl.mapperImplModuleDI
+import ru.gubatenko.data_impl.mapperImplModuleDI
+import ru.gubatenko.data_impl.serviceImplModuleDI
 import ru.gubatenko.domain_impl.repoImplModuleDI
-import ru.gubatenko.domain_impl.serviceImplModuleDI
 import ru.gubatenko.domain_impl.usaCaseImplModuleDI
 import ru.gubatenko.feature_main_android.mainFeatureAndroidModuleDI
-import ru.gubatenko.patterns.storage.ActionDaoSharedPrefImpl
+import ru.gubatenko.data_impl.daoModuleDI
 
 class ThisApplication : Application() {
 
@@ -21,7 +19,7 @@ class ThisApplication : Application() {
             androidLogger()
             androidContext(this@ThisApplication)
             modules(
-                module { single<ActivityDao> { ActionDaoSharedPrefImpl() } },
+                daoModuleDI,
                 serviceImplModuleDI,
                 mapperImplModuleDI,
                 repoImplModuleDI,
