@@ -1,5 +1,6 @@
 package ru.gubatenko.data_impl
 
+import androidx.room.Room
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -12,10 +13,13 @@ import ru.gubatenko.data.service.ActivitySourceService
 import ru.gubatenko.data_impl.mapper.ActivityDtoToDomain
 import ru.gubatenko.data_impl.mapper.ActivityFromDomainToStoredRoom
 import ru.gubatenko.data_impl.mapper.ActivityFromStoredToDomain
+import ru.gubatenko.data_impl.sqlite.ActivityStoredEntity
+import ru.gubatenko.data_impl.sqlite.AppDatabase
 import ru.gubatenko.domain.model.Activity
 
 val daoModuleDI = module {
-    single<ActivityDao> { ActionDaoSharedPrefImpl() }
+    single { Room.databaseBuilder(get(), AppDatabase::class.java, "database-name").build() }
+    single<ActivityDao<*>> { get<AppDatabase>().activityDao() }
 }
 val serviceImplModuleDI = module {
     single<Retrofit> {

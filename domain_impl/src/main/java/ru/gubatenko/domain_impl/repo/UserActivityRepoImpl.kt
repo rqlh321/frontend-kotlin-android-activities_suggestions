@@ -7,7 +7,7 @@ import ru.gubatenko.domain.model.Activity
 import ru.gubatenko.domain.repo.UserActivityRepo
 
 class UserActivityRepoImpl(
-    private val dao: ActivityDao,
+    private val dao: ActivityDao<ActivityStored>,
     private val toStored: Mapper<Activity, ActivityStored>,
     private val toDomain: Mapper<ActivityStored, Activity>,
 ) : UserActivityRepo {

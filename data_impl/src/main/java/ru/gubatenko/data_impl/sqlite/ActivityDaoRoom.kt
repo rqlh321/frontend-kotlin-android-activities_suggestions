@@ -1,17 +1,16 @@
 package ru.gubatenko.data_impl.sqlite
 
 import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
 import ru.gubatenko.data.dao.ActivityDao
-import ru.gubatenko.data.entity.ActivityStored
 
 @Dao
-interface ActivityDaoRoom : ActivityDao {
+interface ActivityDaoRoom : ActivityDao<ActivityStoredEntity> {
 
-    override suspend fun save(activity: ActivityStored) {
-        TODO("Not yet implemented")
-    }
+    @Insert
+    override suspend fun save(activity: ActivityStoredEntity)
 
-    override suspend fun activities(): List<ActivityStored> {
-        TODO("Not yet implemented")
-    }
+    @Query("SELECT * FROM activity_table")
+    override suspend fun activities(): List<ActivityStoredEntity>
 }
