@@ -4,7 +4,6 @@ import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import ru.gubatenko.data_impl.mapperImplModuleDI
 import ru.gubatenko.data_impl.serviceImplModuleDI
 import ru.gubatenko.domain_impl.repoImplModuleDI
 import ru.gubatenko.domain_impl.usaCaseImplModuleDI
@@ -21,7 +20,6 @@ class ThisApplication : Application() {
             modules(
                 daoModuleDI,
                 serviceImplModuleDI,
-                mapperImplModuleDI,
                 repoImplModuleDI,
                 usaCaseImplModuleDI,
                 mainFeatureAndroidModuleDI,

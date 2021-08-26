@@ -1,20 +1,18 @@
 package ru.gubatenko.domain_impl.repo
 
 import ru.gubatenko.domain.model.Activity
-import ru.gubatenko.domain.repo.Mapper
 import ru.gubatenko.domain.repo.UserActivityRepo
 import ru.gubatenko.data.dao.ActivityDao
-import ru.gubatenko.data.entity.ActivityStored
+import ru.gubatenko.data.entity.toDomain
+import ru.gubatenko.data.entity.toStored
 
 class UserActivityRepoImpl(
     private val dao: ActivityDao,
-    private val fromDomain: Mapper<Activity, ActivityStored>,
-    private val toDomain: Mapper<ActivityStored, Activity>,
 ) : UserActivityRepo {
 
-    override suspend fun create(value: Activity) = dao.save(fromDomain.convert(value))
+    override suspend fun create(value: Activity) = dao.save(value.toStored())
 
-    override suspend fun read() = dao.activities().map(toDomain::convert)
+    override suspend fun read() = dao.activities().map { it.toDomain() }
 
     override suspend fun update(value: Activity) {
         TODO("Not yet implemented")
