@@ -1,19 +1,21 @@
 package ru.gubatenko.domain_impl.repo
 
-import ru.gubatenko.data.dto.toDomain
+import ru.gubatenko.data.Mapper
+import ru.gubatenko.data.dto.ActivityDto
+import ru.gubatenko.data.service.ActivitySourceService
 import ru.gubatenko.domain.model.Activity
 import ru.gubatenko.domain.repo.ActivitySourceRepo
-import ru.gubatenko.data.service.ActivitySourceService
 
 class ActivitySourceRepoImpl(
     private val service: ActivitySourceService,
+    private val toDomain: Mapper<ActivityDto, Activity>,
 ) : ActivitySourceRepo {
 
     override suspend fun create(value: Activity) {
         TODO("Not yet implemented")
     }
 
-    override suspend fun read() = service.activity().toDomain()
+    override suspend fun read() = toDomain.map(service.activity())
 
     override suspend fun update(value: Activity) {
         TODO("Not yet implemented")
