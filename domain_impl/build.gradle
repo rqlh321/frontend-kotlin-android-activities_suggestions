@@ -9,6 +9,6 @@ java {
 }
 dependencies {
     implementation project(path: ':data')
-    implementation project(path: ':domain')
+    api project(path: ':domain')
     implementation "io.insert-koin:koin-core:3.1.2"
 }

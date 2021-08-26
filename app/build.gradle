@@ -35,7 +35,6 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':domain')
     implementation project(path: ':feature_main_android')
     implementation project(path: ':domain_impl')
     implementation project(path: ':data_impl')

@@ -32,7 +32,6 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':mvi')
     implementation project(path: ':domain')
     implementation project(path: ':feature_main')
     implementation project(path: ':mvi_android')
