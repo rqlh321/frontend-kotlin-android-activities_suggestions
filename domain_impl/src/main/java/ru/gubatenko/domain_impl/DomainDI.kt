@@ -11,10 +11,12 @@ val repoImplModuleDI = module {
     single<ActivityRepo> {
         ActivityRepoImpl(
             dao = get(),
-            service = get(),
-            dtoToDomain = get(named("1")),
-            domainToStored = get(named("2")),
-            storedToDomain = get(named("3"))
+            activitySourceService = get(),
+            userService = get(),
+            domainToStored = get(named("domainToStored")),
+            storedToDomain = get(named("storedToDomain")),
+            domainToDto = get(named("domainToDto")),
+            dtoToDomain = get(named("dtoToDomain")),
         )
     }
 }
