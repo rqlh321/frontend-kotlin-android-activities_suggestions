@@ -9,6 +9,9 @@ import ru.gubatenko.data.dao.ActivityDao
 interface ActivityDaoRoom : ActivityDao<ActivityStoredEntity> {
 
     @Insert
+    override suspend fun saveAll(activity: List<ActivityStoredEntity>)
+
+    @Insert
     override suspend fun save(activity: ActivityStoredEntity)
 
     @Query("SELECT * FROM activity_table")
