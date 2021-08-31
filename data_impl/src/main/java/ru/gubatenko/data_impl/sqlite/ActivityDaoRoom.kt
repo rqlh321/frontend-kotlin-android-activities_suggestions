@@ -14,6 +14,12 @@ interface ActivityDaoRoom : ActivityDao<ActivityStoredEntity> {
     @Insert
     override suspend fun save(activity: ActivityStoredEntity)
 
+    @Query("SELECT * FROM activity_table WHERE is_synced==0")
+    override suspend fun getNotSynced(): List<ActivityStoredEntity>
+
+    @Query("UPDATE activity_table SET is_synced=1 WHERE uid IN (:ids)")
+    override suspend fun updateAsSynced(ids: List<Long>)
+
     @Query("SELECT * FROM activity_table")
-    override suspend fun activities(): List<ActivityStoredEntity>
+    override suspend fun all(): List<ActivityStoredEntity>
 }

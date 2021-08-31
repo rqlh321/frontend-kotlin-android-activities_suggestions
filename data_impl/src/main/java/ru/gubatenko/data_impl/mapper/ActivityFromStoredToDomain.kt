@@ -6,6 +6,7 @@ import ru.gubatenko.domain.model.Activity
 
 class ActivityFromStoredToDomain : Mapper<ActivityStored, Activity>() {
     override fun map(data: ActivityStored) = Activity(
+        uid = data.uid,
         activity = data.activity,
         type = null,
         accessibility = null,

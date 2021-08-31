@@ -28,8 +28,11 @@ class ActivityRepoImpl(
     }
 
     override suspend fun read(query: ActivityRepo.ReadQuery) = when (query) {
+        is ActivityRepo.ReadQuery.NotSyncedActivityFromLocalStorageReadQuery ->{
+            dao.getNotSynced().map(storedToDomain::map)
+        }
         is ActivityRepo.ReadQuery.ActivityFromLocalStorageReadQuery -> {
-            dao.activities().map(storedToDomain::map)
+            dao.all().map(storedToDomain::map)
         }
         is ActivityRepo.ReadQuery.NewActivityFromSourceServerReadQuery -> {
             listOf(dtoToDomain.map(activitySourceService.activity()))
@@ -37,7 +40,7 @@ class ActivityRepoImpl(
     }
 
     override suspend fun update(query: ActivityRepo.UpdateQuery) = when (query) {
-        else -> Unit
+        is ActivityRepo.UpdateQuery.AllActivitiesSynced -> dao.updateAsSynced(query.activities.mapNotNull { it.uid })
     }
 
     override suspend fun delete(query: ActivityRepo.DeleteQuery) = when (query) {

@@ -41,11 +41,11 @@ class ThisApplication : Application() {
             .setConstraints(constraint)
             .build()
 
-//        WorkManager.getInstance(this)
-//            .enqueueUniquePeriodicWork(
-//                "MyAppNameBackgroundSync",
-//                ExistingPeriodicWorkPolicy.KEEP,
-//                uploadWorkRequest
-//            )
+        WorkManager.getInstance(this)
+            .enqueueUniquePeriodicWork(
+                "MyAppNameBackgroundSync",
+                ExistingPeriodicWorkPolicy.KEEP,
+                uploadWorkRequest
+            )
     }
 }

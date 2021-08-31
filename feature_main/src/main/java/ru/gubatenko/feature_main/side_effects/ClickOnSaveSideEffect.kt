@@ -18,6 +18,5 @@ class ClickOnSaveSideEffect(
     ) {
         val actionToSave = state.stateValue.action ?: return
         useCase.save(actionToSave)
-        useCase.sync()
     }
 }

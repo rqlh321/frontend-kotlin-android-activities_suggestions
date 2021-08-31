@@ -16,9 +16,13 @@ interface ActivityRepo {
     sealed class ReadQuery {
         object NewActivityFromSourceServerReadQuery : ReadQuery()
         object ActivityFromLocalStorageReadQuery : ReadQuery()
+        object NotSyncedActivityFromLocalStorageReadQuery : ReadQuery()
     }
 
-    sealed class UpdateQuery
+    sealed class UpdateQuery {
+        data class AllActivitiesSynced(val activities: List<Activity>) : UpdateQuery()
+    }
+
     sealed class DeleteQuery
 
 }

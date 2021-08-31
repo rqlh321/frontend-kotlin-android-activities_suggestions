@@ -6,6 +6,7 @@ import ru.gubatenko.domain.model.Activity
 
 class ActivityDtoToDomain : Mapper<ActivityDto, Activity>() {
     override fun map(data: ActivityDto) = Activity(
+        uid = null,
         activity = data.activity,
         type = null,
         accessibility = null,

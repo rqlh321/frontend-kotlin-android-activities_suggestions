@@ -16,7 +16,12 @@ class ActivityUseCaseImpl(
         .create(ActivityRepo.CreateQuery.NewActivityToLocalStorage(listOf(activity)))
 
     override suspend fun sync() {
-        val data = repo.read(ActivityRepo.ReadQuery.ActivityFromLocalStorageReadQuery)
-        repo.create(ActivityRepo.CreateQuery.NewActivityToWebStorage(data))
+        val data = repo.read(ActivityRepo.ReadQuery.NotSyncedActivityFromLocalStorageReadQuery)
+        if (data.isEmpty()) {
+            return
+        } else {
+            repo.create(ActivityRepo.CreateQuery.NewActivityToWebStorage(data))
+            repo.update(ActivityRepo.UpdateQuery.AllActivitiesSynced(data))
+        }
     }
 }
