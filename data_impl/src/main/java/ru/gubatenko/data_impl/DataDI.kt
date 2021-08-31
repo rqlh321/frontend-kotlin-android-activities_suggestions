@@ -10,10 +10,12 @@ import ru.gubatenko.data.dao.ActivityDao
 import ru.gubatenko.data.dto.ActivityDto
 import ru.gubatenko.data.entity.ActivityStored
 import ru.gubatenko.data.service.ActivitySourceService
+import ru.gubatenko.data.service.UserService
 import ru.gubatenko.data_impl.mapper.ActivityDtoToDomain
 import ru.gubatenko.data_impl.mapper.ActivityFromDomainToStoredRoom
 import ru.gubatenko.data_impl.mapper.ActivityFromStoredToDomain
-import ru.gubatenko.data_impl.sqlite.ActivityStoredEntity
+import ru.gubatenko.data_impl.mapper.DomainToActivityDto
+import ru.gubatenko.data_impl.service.UserServiceImpl
 import ru.gubatenko.data_impl.sqlite.AppDatabase
 import ru.gubatenko.domain.model.Activity
 
@@ -29,12 +31,14 @@ val serviceImplModuleDI = module {
             .build()
     }
     single<ActivitySourceService> { get<Retrofit>().create(ActivitySourceServiceRetrofit::class.java) }
+    single<UserService> { UserServiceImpl() }
 }
 
 val dtoMapperImplModuleDI = module {
-    single<Mapper<ActivityDto, Activity>>(named("1")) { ActivityDtoToDomain() }
+    single<Mapper<ActivityDto, Activity>>(named("dtoToDomain")) { ActivityDtoToDomain() }
+    single<Mapper<Activity, ActivityDto>>(named("domainToDto")) { DomainToActivityDto() }
 }
 val storedMapperImplModuleDI = module {
-    single<Mapper<Activity, ActivityStored>>(named("2")) { ActivityFromDomainToStoredRoom() }
-    single<Mapper<ActivityStored, Activity>>(named("3")) { ActivityFromStoredToDomain() }
+    single<Mapper<Activity, ActivityStored>>(named("domainToStored")) { ActivityFromDomainToStoredRoom() }
+    single<Mapper<ActivityStored, Activity>>(named("storedToDomain")) { ActivityFromStoredToDomain() }
 }

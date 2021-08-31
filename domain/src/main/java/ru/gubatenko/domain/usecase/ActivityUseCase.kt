@@ -5,4 +5,5 @@ import ru.gubatenko.domain.model.Activity
 interface ActivityUseCase {
     suspend fun activity(): Activity
     suspend fun save(activity: Activity)
+    suspend fun sync()
 }
