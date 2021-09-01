@@ -1,5 +1,6 @@
-package ru.gubatenko.data_impl.service
+package ru.gubatenko.patterns.firebase.service
 
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -13,10 +14,11 @@ class UserServiceImpl : UserService {
     override suspend fun post(data: List<ActivityDto>) {
         try {
             Firebase.firestore.runTransaction { transaction ->
+                val uid = Firebase.auth.currentUser?.uid ?: throw UnknownUserException()
                 data.forEach { dto ->
                     transaction.set(
                         Firebase.firestore.collection("user_data")
-                            .document("user_id:123")
+                            .document(uid)
                             .collection("activity")
                             .document(),
                         dto
