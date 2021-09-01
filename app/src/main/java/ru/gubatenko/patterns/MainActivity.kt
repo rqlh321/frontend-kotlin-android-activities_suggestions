@@ -14,6 +14,9 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import ru.gubatenko.domain.AUTH_REQUEST_BROADCAST
 import ru.gubatenko.domain.AUTH_SUCCESS_BROADCAST
 
@@ -34,9 +37,13 @@ class MainActivity : AppCompatActivity() {
         try {
             val signedInAccountFromIntent = GoogleSignIn.getSignedInAccountFromIntent(it?.data)
             val account = signedInAccountFromIntent.getResult(ApiException::class.java)
-            account.id
-            localBroadcastManager.sendBroadcast(Intent(AUTH_SUCCESS_BROADCAST))
-            AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+            val credential = GoogleAuthProvider.getCredential(account.idToken, null)
+            Firebase.auth.signInWithCredential(credential).addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    localBroadcastManager.sendBroadcast(Intent(AUTH_SUCCESS_BROADCAST))
+                    AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+                }
+            }
         } catch (e: Exception) {
             Toast.makeText(this, e.message, Toast.LENGTH_SHORT).show()
         }
@@ -52,6 +59,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Firebase.auth.addAuthStateListener {
+            if (it.currentUser != null) {
+                AppCompatDelegate.setDefaultNightMode(MODE_NIGHT_YES)
+            }
+        }
     }
 
     override fun onStart() {
