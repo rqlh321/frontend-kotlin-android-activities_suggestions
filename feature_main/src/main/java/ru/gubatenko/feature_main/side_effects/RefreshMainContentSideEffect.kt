@@ -1,12 +1,12 @@
 package ru.gubatenko.feature_main.side_effects
 
+import ru.gubatenko.domain.usecase.GetSuggestedActivityUseCase
+import ru.gubatenko.feature_main.MainStore
 import ru.gubatenko.mvi.EventDispatcher
 import ru.gubatenko.mvi.SideEffect
-import ru.gubatenko.domain.usecase.ActivityUseCase
-import ru.gubatenko.feature_main.MainStore
 
 class RefreshMainContentSideEffect(
-    private val useCase: ActivityUseCase,
+    private val useCase: GetSuggestedActivityUseCase,
     private val eventDispatcher: EventDispatcher<MainStore.Event>
 ) : SideEffect<MainStore.Action.RefreshContent, MainStore.SideAction> {
 
@@ -18,7 +18,7 @@ class RefreshMainContentSideEffect(
     ) {
         try {
             reducerCallback.invoke(MainStore.SideAction.RefreshStart)
-            val activity = useCase.activity()
+            val activity = useCase.execute()
             reducerCallback.invoke(MainStore.SideAction.RefreshSuccess(activity))
         } catch (e: Exception) {
             eventDispatcher.dispatch(MainStore.Event.ShowToast(e.message ?: "Undefined error"))
