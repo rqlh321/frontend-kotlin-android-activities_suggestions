@@ -7,13 +7,12 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:text="Reveal your self!"
+        android:id="@+id/title_text_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Button
-        android:id="@+id/sign_in_button_id"
-        android:text="Coming out"
+        android:id="@+id/accept_button_id"
         android:layout_marginTop="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

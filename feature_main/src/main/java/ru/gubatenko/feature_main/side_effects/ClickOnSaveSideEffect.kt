@@ -6,7 +6,7 @@ import ru.gubatenko.mvi.SideEffect
 import ru.gubatenko.mvi.StateObservable
 
 class ClickOnSaveSideEffect(
-    private val state: StateObservable<MainStore.State>,
+    private val stateObservable: StateObservable<MainStore.State>,
     private val useCase: SaveActivityToLocalStorageUseCase,
 ) : SideEffect<MainStore.Action.SaveContent, MainStore.SideAction> {
 
@@ -16,7 +16,7 @@ class ClickOnSaveSideEffect(
         action: MainStore.Action.SaveContent,
         reducerCallback: suspend (MainStore.SideAction) -> Unit
     ) {
-        val actionToSave = state.stateValue.action ?: return
+        val actionToSave = stateObservable.stateValue.action ?: return
         useCase.execute(actionToSave)
     }
 }

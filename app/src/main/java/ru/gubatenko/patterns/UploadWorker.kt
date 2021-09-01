@@ -2,12 +2,11 @@ package ru.gubatenko.patterns
 
 import android.content.Context
 import android.content.Intent
-import android.util.Log
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.work.*
+import com.example.navigation.AUTH_REQUEST_BROADCAST
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import ru.gubatenko.domain.AUTH_REQUEST_BROADCAST
 import ru.gubatenko.domain.exception.UnknownUserException
 import ru.gubatenko.domain.usecase.SyncActivitiesWithServerUseCase
 import java.util.concurrent.TimeUnit
@@ -25,17 +24,15 @@ class UploadWorker(
             useCase.execute()
             Result.success()
         } catch (e: UnknownUserException) {
-            Log.d(this.javaClass.simpleName, e.message ?: "")
             localBroadcastManager.sendBroadcast(Intent(AUTH_REQUEST_BROADCAST))
             Result.failure()
         } catch (e: Exception) {
-            Log.d(this.javaClass.simpleName, e.message ?: "")
             Result.retry()
         }
     }
 }
 
-fun Context.runUploadWorker(){
+fun Context.runUploadWorker() {
     val constraint = Constraints.Builder()
         .setRequiredNetworkType(NetworkType.CONNECTED)
         .build()

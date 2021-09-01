@@ -14,6 +14,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.work.*
+import com.example.feature_auth_android.offerAuthAndroidModuleDI
+import com.example.navigation.AUTH_REQUEST_BROADCAST
+import com.example.navigation.AUTH_SUCCESS_BROADCAST
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
@@ -27,8 +30,6 @@ import ru.gubatenko.data_impl.daoModuleDI
 import ru.gubatenko.data_impl.dtoMapperImplModuleDI
 import ru.gubatenko.data_impl.serviceImplModuleDI
 import ru.gubatenko.data_impl.storedMapperImplModuleDI
-import ru.gubatenko.domain.AUTH_REQUEST_BROADCAST
-import ru.gubatenko.domain.AUTH_SUCCESS_BROADCAST
 import ru.gubatenko.domain_impl.repoImplModuleDI
 import ru.gubatenko.domain_impl.usaCaseImplModuleDI
 import ru.gubatenko.feature_main_android.mainFeatureAndroidModuleDI
@@ -74,6 +75,7 @@ class ThisApplication : Application(), Application.ActivityLifecycleCallbacks {
                 serviceImplModuleDI,
                 repoImplModuleDI,
                 usaCaseImplModuleDI,
+                offerAuthAndroidModuleDI,
                 mainFeatureAndroidModuleDI,
             )
         }

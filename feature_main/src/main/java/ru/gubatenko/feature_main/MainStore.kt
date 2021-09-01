@@ -24,6 +24,7 @@ class MainStore(
     sealed class Event {
         data class ShowToast(val message: String) : Event()
         data class NavigateTo(val locationId: Int) : Event()
+        object NavigateToAuthFlow : Event()
     }
 
     sealed class SideAction {

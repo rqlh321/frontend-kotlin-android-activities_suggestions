@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.example.navigation.NavigationRoot
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import ru.gubatenko.common_android.BaseFragment
 import ru.gubatenko.common_android.onClick
@@ -44,6 +45,7 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
                 Toast.LENGTH_SHORT
             ).show()
             is MainStore.Event.NavigateTo -> findNavController().navigate(event.locationId)
+            is MainStore.Event.NavigateToAuthFlow -> (requireActivity() as? NavigationRoot)?.startAuthorizationFlow()
         }
     }
 

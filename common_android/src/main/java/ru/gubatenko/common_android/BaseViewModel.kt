@@ -15,7 +15,7 @@ abstract class BaseViewModel : ViewModel() {
     protected fun main(block: suspend () -> Unit) = suspendFun(Dispatchers.Main, block)
     protected fun unconfined(block: suspend () -> Unit) = suspendFun(Dispatchers.Unconfined, block)
 
-    protected abstract fun onUnknownUserException()
+    protected open fun onUnknownUserException() = Unit
 
     fun onSuccessAuthorization() = Unit
 

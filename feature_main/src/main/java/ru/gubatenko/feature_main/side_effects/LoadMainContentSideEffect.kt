@@ -6,7 +6,7 @@ import ru.gubatenko.mvi.SideEffect
 import ru.gubatenko.mvi.StateObservable
 
 class LoadMainContentSideEffect(
-    private val state: StateObservable<MainStore.State>,
+    private val stateObservable: StateObservable<MainStore.State>,
     private val useCase: GetSuggestedActivityUseCase
 ) : SideEffect<MainStore.Action.LoadContent, MainStore.SideAction> {
 
@@ -17,7 +17,7 @@ class LoadMainContentSideEffect(
         reducerCallback: suspend (MainStore.SideAction) -> Unit
     ) {
         try {
-            if (state.stateValue.isRefreshInProgress) {
+            if (stateObservable.stateValue.isRefreshInProgress) {
                 return
             }
             reducerCallback.invoke(MainStore.SideAction.LoadStart)
