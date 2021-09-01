@@ -12,6 +12,7 @@ import ru.gubatenko.data_impl.storedMapperImplModuleDI
 import ru.gubatenko.domain_impl.repoImplModuleDI
 import ru.gubatenko.domain_impl.usaCaseImplModuleDI
 import ru.gubatenko.feature_main_android.mainFeatureAndroidModuleDI
+import ru.gubatenko.patterns.firebase.service.serviceFirebaseImplModuleDI
 import java.util.concurrent.TimeUnit
 
 class ThisApplication : Application() {
@@ -25,6 +26,7 @@ class ThisApplication : Application() {
                 storedMapperImplModuleDI,
                 dtoMapperImplModuleDI,
                 daoModuleDI,
+                serviceFirebaseImplModuleDI,
                 serviceImplModuleDI,
                 repoImplModuleDI,
                 usaCaseImplModuleDI,
@@ -34,10 +36,14 @@ class ThisApplication : Application() {
 
         val constraint = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.CONNECTED)
-            .setRequiresBatteryNotLow(true)
             .build()
 
-        val uploadWorkRequest = PeriodicWorkRequestBuilder<UploadWorker>(5, TimeUnit.SECONDS)
+        val uploadWorkRequest = PeriodicWorkRequestBuilder<UploadWorker>(
+            repeatInterval = 1,
+            repeatIntervalTimeUnit = TimeUnit.MINUTES,
+            flexTimeInterval = 10,
+            flexTimeIntervalUnit = TimeUnit.SECONDS
+        )
             .setConstraints(constraint)
             .build()
 
