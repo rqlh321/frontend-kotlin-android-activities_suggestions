@@ -4,13 +4,13 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
-import androidx.work.CoroutineWorker
-import androidx.work.WorkerParameters
+import androidx.work.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import ru.gubatenko.domain.AUTH_REQUEST_BROADCAST
 import ru.gubatenko.domain.exception.UnknownUserException
 import ru.gubatenko.domain.usecase.SyncActivitiesWithServerUseCase
+import java.util.concurrent.TimeUnit
 
 class UploadWorker(
     appContext: Context,
@@ -33,4 +33,26 @@ class UploadWorker(
             Result.retry()
         }
     }
+}
+
+fun Context.runUploadWorker(){
+    val constraint = Constraints.Builder()
+        .setRequiredNetworkType(NetworkType.CONNECTED)
+        .build()
+
+    val uploadWorkRequest = PeriodicWorkRequestBuilder<UploadWorker>(
+        repeatInterval = 1,
+        repeatIntervalTimeUnit = TimeUnit.MINUTES,
+        flexTimeInterval = 10,
+        flexTimeIntervalUnit = TimeUnit.SECONDS
+    )
+        .setConstraints(constraint)
+        .build()
+
+    WorkManager.getInstance(this)
+        .enqueueUniquePeriodicWork(
+            "MyAppNameBackgroundSync",
+            ExistingPeriodicWorkPolicy.KEEP,
+            uploadWorkRequest
+        )
 }

@@ -8,12 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import ru.gubatenko.domain.AUTH_SUCCESS_BROADCAST
 
-abstract class BaseFragment(layout: Int) : Fragment(layout) {
+abstract class BaseFragment<VM:BaseViewModel>(layout: Int) : Fragment(layout) {
 
-    protected abstract fun successAuthorization()
+    protected abstract val viewModel: VM
 
     private val authSuccessBroadcastListener = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) = successAuthorization()
+        override fun onReceive(context: Context?, intent: Intent?) = viewModel.onSuccessAuthorization()
     }
 
     private val localBroadcastManager by lazy {

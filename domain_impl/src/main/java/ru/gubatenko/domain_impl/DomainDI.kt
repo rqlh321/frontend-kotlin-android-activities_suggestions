@@ -26,6 +26,11 @@ val repoImplModuleDI = module {
 }
 val usaCaseImplModuleDI = module {
     single<GetSuggestedActivityUseCase> { GetSuggestedActivityUseCaseImpl(repo = get()) }
-    single<SaveActivityToLocalStorageUseCase> { SaveActivityToLocalStorageUseCaseImpl(repo = get()) }
+    single<SaveActivityToLocalStorageUseCase> {
+        SaveActivityToLocalStorageUseCaseImpl(
+            repo = get(),
+            prefs = get()
+        )
+    }
     single<SyncActivitiesWithServerUseCase> { SyncActivitiesWithServerUseCaseImpl(repo = get()) }
 }

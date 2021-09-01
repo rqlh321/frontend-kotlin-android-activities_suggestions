@@ -14,6 +14,6 @@ class ClickOnMainContentSideEffect(
         action: MainStore.Action.ClickOnContent,
         reducerCallback: suspend (MainStore.SideAction) -> Unit
     ) {
-        eventDispatcher.dispatch(MainStore.Event.ShowToast("Toast!"))
+        eventDispatcher.dispatch(MainStore.Event.ShowToast("ClickOnMainContentSideEffect.execute"))
     }
 }

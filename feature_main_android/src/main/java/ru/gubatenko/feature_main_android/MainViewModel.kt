@@ -41,7 +41,4 @@ class MainViewModel(
         event.dispatch(MainStore.Event.NavigateTo(R.id.auth_fragment_id))
     }
 
-    fun onSuccessAuthorization() = default {
-        store.process(MainStore.Action.ClickOnContent)
-    }
 }

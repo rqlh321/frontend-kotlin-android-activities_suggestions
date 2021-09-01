@@ -9,6 +9,7 @@ import ru.gubatenko.data.Mapper
 import ru.gubatenko.data.dao.ActivityDao
 import ru.gubatenko.data.dto.ActivityDto
 import ru.gubatenko.data.entity.ActivityStored
+import ru.gubatenko.data.prefs.Preference
 import ru.gubatenko.data.service.ActivitySourceService
 import ru.gubatenko.data_impl.mapper.ActivityDtoToDomain
 import ru.gubatenko.data_impl.mapper.ActivityFromDomainToStoredRoom
@@ -38,4 +39,5 @@ val dtoMapperImplModuleDI = module {
 val storedMapperImplModuleDI = module {
     single<Mapper<Activity, ActivityStored>>(named("domainToStored")) { ActivityFromDomainToStoredRoom() }
     single<Mapper<ActivityStored, Activity>>(named("storedToDomain")) { ActivityFromStoredToDomain() }
+    single<Preference> { PreferenceSharedPrefs(get()) }
 }
