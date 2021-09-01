@@ -3,9 +3,13 @@ package ru.gubatenko.domain_impl
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import ru.gubatenko.domain.repo.ActivityRepo
-import ru.gubatenko.domain.usecase.ActivityUseCase
+import ru.gubatenko.domain.usecase.GetSuggestedActivityUseCase
+import ru.gubatenko.domain.usecase.SaveActivityToLocalStorageUseCase
+import ru.gubatenko.domain.usecase.SyncActivitiesWithServerUseCase
 import ru.gubatenko.domain_impl.repo.ActivityRepoImpl
-import ru.gubatenko.domain_impl.use_case.ActivityUseCaseImpl
+import ru.gubatenko.domain_impl.use_case.GetSuggestedActivityUseCaseImpl
+import ru.gubatenko.domain_impl.use_case.SaveActivityToLocalStorageUseCaseImpl
+import ru.gubatenko.domain_impl.use_case.SyncActivitiesWithServerUseCaseImpl
 
 val repoImplModuleDI = module {
     single<ActivityRepo> {
@@ -21,5 +25,7 @@ val repoImplModuleDI = module {
     }
 }
 val usaCaseImplModuleDI = module {
-    single<ActivityUseCase> { ActivityUseCaseImpl(repo = get()) }
+    single<GetSuggestedActivityUseCase> { GetSuggestedActivityUseCaseImpl(repo = get()) }
+    single<SaveActivityToLocalStorageUseCase> { SaveActivityToLocalStorageUseCaseImpl(repo = get()) }
+    single<SyncActivitiesWithServerUseCase> { SyncActivitiesWithServerUseCaseImpl(repo = get()) }
 }

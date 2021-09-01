@@ -5,17 +5,17 @@ import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
-import ru.gubatenko.domain.usecase.ActivityUseCase
+import ru.gubatenko.domain.usecase.SyncActivitiesWithServerUseCase
 
 class UploadWorker(
     appContext: Context, workerParams: WorkerParameters
 ) : CoroutineWorker(appContext, workerParams), KoinComponent {
 
-    private val useCase: ActivityUseCase by inject()
+    private val useCase: SyncActivitiesWithServerUseCase by inject()
 
     override suspend fun doWork(): Result {
         return try {
-            useCase.sync()
+            useCase.execute()
             Result.success()
         } catch (e: Exception) {
             e.printStackTrace()
