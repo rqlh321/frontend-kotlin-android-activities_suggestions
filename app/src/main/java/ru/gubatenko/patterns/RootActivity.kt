@@ -19,7 +19,7 @@ import ru.gubatenko.domain.usecase.IsAuthorizedUseCase
 import ru.gubatenko.domain_impl.rootScopeRepoImplModuleDI
 import ru.gubatenko.domain_impl.rootScopeUsaCaseImplModuleDI
 
-class RootActivity : AppCompatActivity(), NavigationRoot {
+class RootActivity : AppCompatActivity(R.layout.activity_root), NavigationRoot {
 
     private val rootScope = listOf(
         rootScopeStoredMapperImplModuleDI,
@@ -35,7 +35,6 @@ class RootActivity : AppCompatActivity(), NavigationRoot {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         loadKoinModules(rootScope)
-        setContentView(R.layout.activity_root)
         if (savedInstanceState == null) {
             lifecycleScope.launchWhenCreated {
                 if (isAuthorizedUseCase.execute()) {
@@ -44,7 +43,6 @@ class RootActivity : AppCompatActivity(), NavigationRoot {
                 }
             }
         }
-
     }
 
     override fun onDestroy() {
@@ -53,7 +51,7 @@ class RootActivity : AppCompatActivity(), NavigationRoot {
     }
 
     override fun startAuthorizationFlow() {
-        findNavController(R.id.nav_host_fragment).navigate(R.id.auth_graph)
+        findNavController(R.id.root_host_fragment).navigate(R.id.auth_graph)
     }
 
 }
