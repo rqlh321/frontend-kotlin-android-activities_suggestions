@@ -11,6 +11,7 @@ import ru.gubatenko.data.dto.ActivityDto
 import ru.gubatenko.data.entity.ActivityStored
 import ru.gubatenko.data.prefs.Preference
 import ru.gubatenko.data.service.ActivitySourceService
+import ru.gubatenko.data.service.UserService
 import ru.gubatenko.data_impl.mapper.ActivityDtoToDomain
 import ru.gubatenko.data_impl.mapper.ActivityFromDomainToStoredRoom
 import ru.gubatenko.data_impl.mapper.ActivityFromStoredToDomain
@@ -18,11 +19,11 @@ import ru.gubatenko.data_impl.mapper.DomainToActivityDto
 import ru.gubatenko.data_impl.sqlite.AppDatabase
 import ru.gubatenko.domain.model.Activity
 
-val daoModuleDI = module {
+val rootScopeDaoModuleDI = module {
     single { Room.databaseBuilder(get(), AppDatabase::class.java, "database-name").build() }
     single<ActivityDao<*>> { get<AppDatabase>().activityDao() }
 }
-val serviceImplModuleDI = module {
+val rootScopeServiceImplModuleDI = module {
     single<Retrofit> {
         Retrofit.Builder()
             .baseUrl("https://www.boredapi.com/api/")
@@ -30,13 +31,14 @@ val serviceImplModuleDI = module {
             .build()
     }
     single<ActivitySourceService> { get<Retrofit>().create(ActivitySourceServiceRetrofit::class.java) }
+    single<UserService> { UserServiceImpl() }
 }
 
-val dtoMapperImplModuleDI = module {
+val rootScopeDtoMapperImplModuleDI = module {
     single<Mapper<ActivityDto, Activity>>(named("dtoToDomain")) { ActivityDtoToDomain() }
     single<Mapper<Activity, ActivityDto>>(named("domainToDto")) { DomainToActivityDto() }
 }
-val storedMapperImplModuleDI = module {
+val rootScopeStoredMapperImplModuleDI = module {
     single<Mapper<Activity, ActivityStored>>(named("domainToStored")) { ActivityFromDomainToStoredRoom() }
     single<Mapper<ActivityStored, Activity>>(named("storedToDomain")) { ActivityFromStoredToDomain() }
     single<Preference> { PreferenceSharedPrefs(get()) }

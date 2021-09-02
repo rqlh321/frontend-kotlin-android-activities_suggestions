@@ -1,4 +1,4 @@
-package com.example.feature_auth_android
+package com.example.feature_auth_android.offer_auth
 
 import com.example.feature_auth.OfferAuthStore
 import ru.gubatenko.common_android.BaseViewModel

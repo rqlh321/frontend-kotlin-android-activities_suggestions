@@ -13,7 +13,7 @@ import ru.gubatenko.domain_impl.use_case.GetSuggestedActivityUseCaseImpl
 import ru.gubatenko.domain_impl.use_case.SaveActivityToLocalStorageUseCaseImpl
 import ru.gubatenko.domain_impl.use_case.SyncActivitiesWithServerUseCaseImpl
 
-val repoImplModuleDI = module {
+val rootScopeRepoImplModuleDI = module {
     single<ActivityRepo> {
         ActivityRepoImpl(
             dao = get(),
@@ -26,7 +26,7 @@ val repoImplModuleDI = module {
         )
     }
 }
-val usaCaseImplModuleDI = module {
+val rootScopeUsaCaseImplModuleDI = module {
     single<GetSuggestedActivityUseCase> { GetSuggestedActivityUseCaseImpl(repo = get()) }
     single<SaveActivityToLocalStorageUseCase> {
         SaveActivityToLocalStorageUseCaseImpl(

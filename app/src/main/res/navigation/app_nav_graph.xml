@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_nav_graph.xml"
     app:startDestination="@id/main_graph">
 
+    <include app:graph="@navigation/auth_graph" />
     <include app:graph="@navigation/main_graph" />
-
-    <dialog
-        android:id="@+id/auth_fragment_id"
-        android:name="com.example.feature_auth_android.OfferAuthFragment"
-        tools:layout="@layout/fragment_offer_auth" />
 
 </navigation>

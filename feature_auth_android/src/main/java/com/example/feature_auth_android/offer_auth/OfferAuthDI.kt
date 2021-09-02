@@ -1,4 +1,4 @@
-package com.example.feature_auth_android
+package com.example.feature_auth_android.offer_auth
 
 import com.example.feature_auth.OfferAuthStore
 import com.example.feature_auth.side_effects.AcceptAuthOfferSideEffect
@@ -29,7 +29,9 @@ val offerAuthAndroidModuleDI = module {
     single(named(OFFER_AUTH_SIDE_EFFECTS)) {
         SideEffects.Builder<OfferAuthStore.Action, OfferAuthStore.SideAction>()
             .append(sideEffect = RejectAuthOfferSideEffect(useCase = get()))
-            .append(sideEffect = AcceptAuthOfferSideEffect(useCase = get(), eventDispatcher = get(named(OFFER_AUTH_EVENT_DISPATCHER))))
+            .append(sideEffect = AcceptAuthOfferSideEffect(useCase = get(), eventDispatcher = get(named(
+                OFFER_AUTH_EVENT_DISPATCHER
+            ))))
             .build()
     }
     single {
