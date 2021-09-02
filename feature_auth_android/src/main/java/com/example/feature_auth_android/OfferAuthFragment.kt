@@ -13,6 +13,8 @@ import com.example.feature_auth.OfferAuthStore
 import com.example.navigation.AUTH_REQUEST_BROADCAST
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 import ru.gubatenko.common_android.onClick
 
 class OfferAuthFragment : BottomSheetDialogFragment() {
@@ -36,10 +38,16 @@ class OfferAuthFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadKoinModules(offerAuthAndroidModuleDI)
         acceptButton.onClick(viewModel::accept)
 
         viewModel.state.observe(viewLifecycleOwner, ::render)
         viewModel.event.observe(viewLifecycleOwner, ::handle)
+    }
+
+    override fun onDestroyView() {
+        unloadKoinModules(offerAuthAndroidModuleDI)
+        super.onDestroyView()
     }
 
     private fun handle(event: OfferAuthStore.Event) {

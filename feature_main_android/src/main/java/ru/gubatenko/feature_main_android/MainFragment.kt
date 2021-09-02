@@ -10,6 +10,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.navigation.NavigationRoot
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 import ru.gubatenko.common_android.BaseFragment
 import ru.gubatenko.common_android.onClick
 import ru.gubatenko.feature_main.MainStore
@@ -27,6 +29,7 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        loadKoinModules(mainFeatureAndroidModuleDI)
 
         mainText.onClick(viewModel::onContentClick)
         retryButton.onClick(viewModel::reload)
@@ -35,6 +38,11 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
 
         viewModel.event.observe(viewLifecycleOwner, ::handle)
         viewModel.state.observe(viewLifecycleOwner, ::render)
+    }
+
+    override fun onDestroyView() {
+        unloadKoinModules(mainFeatureAndroidModuleDI)
+        super.onDestroyView()
     }
 
     private fun handle(event: MainStore.Event) {
