@@ -9,16 +9,16 @@ import androidx.core.widget.ContentLoadingProgressBar
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.navigation.NavigationRoot
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import ru.gubatenko.common_android.BaseFragment
 import ru.gubatenko.common_android.onClick
+import ru.gubatenko.common_android.sharedGraphViewModel
 import ru.gubatenko.feature_main.MainStore
 
 class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
 
-    override val viewModel: MainViewModel by viewModel()
+    override val viewModel: MainViewModel by sharedGraphViewModel(R.id.main_graph)
 
     private val mainText: TextView by lazy { requireView().findViewById(R.id.result_text_id) }
     private val errorText: TextView by lazy { requireView().findViewById(R.id.error_text_id) }
