@@ -3,13 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/app_nav_graph.xml"
-    app:startDestination="@id/frame_fragment">
+    app:startDestination="@id/main_graph">
+
+    <include app:graph="@navigation/main_graph" />
 
     <fragment
-        android:id="@+id/frame_fragment"
-        android:name="ru.gubatenko.patterns.FrameFragment"
-        tools:layout="@layout/fragment_frame" />
-
-    <include app:graph="@navigation/auth_graph" />
-
+        android:id="@+id/test_fragment_id"
+        android:name="ru.gubatenko.patterns.TestFragment"
+        tools:layout="@layout/fragment_test" />
 </navigation>
