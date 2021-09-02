@@ -6,10 +6,17 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.tasks.await
 import ru.gubatenko.data.dto.ActivityDto
+import ru.gubatenko.data.dto.UserDto
 import ru.gubatenko.data.service.UserService
 import ru.gubatenko.domain.exception.UnknownUserException
 
 class UserServiceImpl : UserService {
+
+    override suspend fun user() = Firebase.auth.currentUser?.let {
+        UserDto(
+            uid = it.uid
+        )
+    }
 
     override suspend fun post(data: List<ActivityDto>) {
         try {

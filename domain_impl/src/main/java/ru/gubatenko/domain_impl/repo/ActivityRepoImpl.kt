@@ -28,7 +28,7 @@ class ActivityRepoImpl(
     }
 
     override suspend fun read(query: ActivityRepo.ReadQuery) = when (query) {
-        is ActivityRepo.ReadQuery.NotSyncedActivityFromLocalStorageReadQuery ->{
+        is ActivityRepo.ReadQuery.NotSyncedActivityFromLocalStorageReadQuery -> {
             dao.getNotSynced().map(storedToDomain::map)
         }
         is ActivityRepo.ReadQuery.ActivityFromLocalStorageReadQuery -> {
@@ -43,7 +43,5 @@ class ActivityRepoImpl(
         is ActivityRepo.UpdateQuery.AllActivitiesSynced -> dao.updateAsSynced(query.activities.mapNotNull { it.uid })
     }
 
-    override suspend fun delete(query: ActivityRepo.DeleteQuery) = when (query) {
-        else -> Unit
-    }
+    override suspend fun delete(query: ActivityRepo.DeleteQuery) = Unit
 }

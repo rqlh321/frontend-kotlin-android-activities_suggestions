@@ -15,7 +15,7 @@ class ThisApplication : Application() {
         startKoin { androidContext(this@ThisApplication) }
         LocalBroadcastManager.getInstance(this)
             .registerReceiver(
-                SuccessAuthReceiver(),
+                SuccessAuthApplicationLevelReceiver(),
                 IntentFilter(AUTH_SUCCESS_BROADCAST)
             )
     }
