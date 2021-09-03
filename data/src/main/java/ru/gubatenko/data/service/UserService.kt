@@ -8,4 +8,6 @@ interface UserService {
     suspend fun user(): UserDto?
 
     suspend fun post(data: List<ActivityDto>)
+
+    suspend fun signOut()
 }

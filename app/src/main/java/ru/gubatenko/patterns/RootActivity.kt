@@ -8,6 +8,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.findNavController
 import com.example.navigation.AUTH_SUCCESS_BROADCAST
 import com.example.navigation.NavigationRoot
+import com.example.navigation.NavigationScope
 import org.koin.android.ext.android.inject
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
@@ -53,5 +54,7 @@ class RootActivity : AppCompatActivity(R.layout.activity_root), NavigationRoot {
     override fun startAuthorizationFlow() {
         findNavController(R.id.root_host_fragment).navigate(R.id.auth_graph)
     }
+
+    override fun navigationScopeId(scope: NavigationScope) = R.id.frame_graph_id
 
 }

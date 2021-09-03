@@ -15,7 +15,9 @@ interface UserRepo {
 
     }
 
-    sealed class UpdateQuery
+    sealed class UpdateQuery{
+        object SignOutUserQuery : UserRepo.UpdateQuery()
+    }
 
     sealed class DeleteQuery
 

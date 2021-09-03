@@ -2,11 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/main_graph"
-        android:title="@string/app_name" />
+        android:id="@+id/main_graph_id"
+        android:title="Идеи" />
+
+    <item
+        android:id="@+id/profile_graph_id"
+        android:title="Профиль" />
 
     <item
         android:id="@+id/test_fragment_id"
-        android:title="@string/app_name" />
+        android:title="Тест" />
 
 </menu>

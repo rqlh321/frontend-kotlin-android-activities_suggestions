@@ -17,7 +17,7 @@ abstract class BaseViewModel : ViewModel() {
 
     protected open fun onUnknownUserException() = Unit
 
-    fun onSuccessAuthorization() = Unit
+    open fun onSuccessAuthorization() = Unit
 
     private fun suspendFun(
         dispatcher: CoroutineDispatcher,
