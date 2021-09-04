@@ -29,4 +29,6 @@ val rootScopeUsaCaseImplModuleDI = module {
     single<SyncActivitiesWithServerUseCase> { SyncActivitiesWithServerUseCaseImpl(repo = get()) }
     single<AuthOfferIsViewedUseCase> { AuthOfferIsViewedUseCaseImpl(prefs = get()) }
     single<IsAuthorizedUseCase> { IsAuthorizedUseCaseImpl(repo = get()) }
+    single<GetSignedInUserUseCase> { GetSignedInUserUseCaseImpl(repo = get()) }
+    single<SignOutUseCase> { SignOutUseCaseImpl(repo = get()) }
 }

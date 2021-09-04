@@ -5,10 +5,12 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.navigation.NavigationRoot
+import com.example.navigation.NavigationScope
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import ru.gubatenko.common_android.BaseFragment
@@ -16,9 +18,9 @@ import ru.gubatenko.common_android.onClick
 import ru.gubatenko.common_android.sharedGraphViewModel
 import ru.gubatenko.feature_main.MainStore
 
-class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
+class MainFragment : BaseFragment(R.layout.fragment_main) {
 
-    override val viewModel: MainViewModel by sharedGraphViewModel(R.id.main_graph)
+    private val viewModel: MainViewModel by sharedGraphViewModel(NavigationScope.MAIN_SCOPE)
 
     private val mainText: TextView by lazy { requireView().findViewById(R.id.result_text_id) }
     private val errorText: TextView by lazy { requireView().findViewById(R.id.error_text_id) }
@@ -64,16 +66,16 @@ class MainFragment : BaseFragment<MainViewModel>(R.layout.fragment_main) {
         if (state.isLoadingProgressVisible) loadingProgress.show() else loadingProgress.hide()
 
         retryButton.text = state.retryButtonText
-        retryButton.visibility = if (state.isRetryButtonVisible) View.VISIBLE else View.GONE
+        retryButton.isVisible = state.isRetryButtonVisible
 
         saveButton.text = state.saveButtonText
-        saveButton.visibility = if (state.isSaveButtonVisible) View.VISIBLE else View.GONE
+        saveButton.isVisible = state.isSaveButtonVisible
         saveButton.isClickable = state.isSaveButtonClickable
 
         mainText.text = state.action?.activity
-        mainText.visibility = if (state.isActionTextVisible) View.VISIBLE else View.GONE
+        mainText.isVisible = state.isActionTextVisible
 
         errorText.text = state.errorText
-        errorText.visibility = if (state.isErrorTextVisible) View.VISIBLE else View.GONE
+        errorText.isVisible = state.isErrorTextVisible
     }
 }

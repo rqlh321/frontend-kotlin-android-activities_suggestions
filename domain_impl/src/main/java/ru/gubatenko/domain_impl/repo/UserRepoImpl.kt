@@ -13,12 +13,18 @@ class UserRepoImpl(
 
     override suspend fun read(query: UserRepo.ReadQuery) = when (query) {
         is UserRepo.ReadQuery.GetSignedInUserQuery -> {
-            service.user()?.let { User(uid = it.uid) }?.let(::listOf) ?: emptyList()
+            service.user()?.let {
+                User(
+                    uid = it.uid,
+                    name = it.name,
+                    avatar = it.avatar,
+                )
+            }?.let(::listOf) ?: emptyList()
         }
     }
 
-    override suspend fun update(query: UserRepo.UpdateQuery) {
-        TODO("Not yet implemented")
+    override suspend fun update(query: UserRepo.UpdateQuery) = when(query){
+        UserRepo.UpdateQuery.SignOutUserQuery -> service.signOut()
     }
 
     override suspend fun delete(query: UserRepo.DeleteQuery) {

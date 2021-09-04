@@ -2,10 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/app_nav_graph.xml"
-    app:startDestination="@id/main_graph">
+    android:id="@+id/frame_graph_id"
+    app:startDestination="@id/test_fragment_id">
 
     <include app:graph="@navigation/main_graph" />
+    <include app:graph="@navigation/profile_graph" />
 
     <fragment
         android:id="@+id/test_fragment_id"

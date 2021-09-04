@@ -14,7 +14,9 @@ class UserServiceImpl : UserService {
 
     override suspend fun user() = Firebase.auth.currentUser?.let {
         UserDto(
-            uid = it.uid
+            uid = it.uid,
+            name = it.displayName?:"",
+            avatar = it.photoUrl?.toString(),
         )
     }
 
@@ -39,4 +41,6 @@ class UserServiceImpl : UserService {
             }
         }
     }
+
+    override suspend fun signOut() = Firebase.auth.signOut()
 }
