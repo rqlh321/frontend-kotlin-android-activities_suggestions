@@ -10,15 +10,16 @@ import com.bumptech.glide.Glide
 import com.example.feature_profile.ProfileStore
 import com.example.navigation.NavigationRoot
 import com.example.navigation.NavigationScope
+import com.example.navigation.OnSuccessAuthorizationSensitive
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import ru.gubatenko.common_android.BaseFragment
 import ru.gubatenko.common_android.onClick
 import ru.gubatenko.common_android.sharedGraphViewModel
 
-class ProfileFragment : BaseFragment<ProfileViewModel>(R.layout.fragment_profile) {
+class ProfileFragment : BaseFragment(R.layout.fragment_profile), OnSuccessAuthorizationSensitive {
 
-    override val viewModel: ProfileViewModel by sharedGraphViewModel(NavigationScope.PROFILE_SCOPE)
+    private val viewModel: ProfileViewModel by sharedGraphViewModel(NavigationScope.PROFILE_SCOPE)
 
     private val avatar: ImageView by lazy { requireView().findViewById(R.id.avatar_id) }
     private val name: TextView by lazy { requireView().findViewById(R.id.name_id) }
@@ -54,5 +55,9 @@ class ProfileFragment : BaseFragment<ProfileViewModel>(R.layout.fragment_profile
         signIn.isVisible = state.isSignInButtonVisible
         signOut.text = state.signOutButtonText
         signOut.isVisible = state.isSignOutButtonVisible
+    }
+
+    override fun handleSuccessAuthorization() {
+        viewModel.successAuthorization()
     }
 }

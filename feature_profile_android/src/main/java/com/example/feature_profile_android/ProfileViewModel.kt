@@ -30,5 +30,8 @@ class ProfileViewModel(
         store.process(ProfileStore.Action.ClickOnSignOut)
     }
 
-    override fun onSuccessAuthorization() = load()
+    fun successAuthorization() {
+        load()
+    }
+
 }
