@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdk 31
-
+    compileSdk projectCompileSdk
+    buildToolsVersion buildTools
     defaultConfig {
-        minSdk 21
-        targetSdk 31
+        minSdk projectMinSdk
+        targetSdk projectTargetSdk
         versionCode 1
         versionName "1.0"
 
@@ -35,12 +35,12 @@ dependencies {
     implementation project(path: ':feature_auth')
     implementation project(path: ':common_android')
 
-    implementation platform('com.google.firebase:firebase-bom:28.4.0')
-    implementation 'com.google.firebase:firebase-auth-ktx'
-    implementation 'com.google.android.gms:play-services-auth:19.2.0'
-    implementation 'com.firebaseui:firebase-ui-auth:4.3.2'
+    implementation platform(firebase.bom)
+    implementation firebase.auth
+    implementation firebase.auth_ui
+    implementation google.play_services_auth
 
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    testImplementation test.junit
+    androidTestImplementation test.junit_ext
+    androidTestImplementation test.espresso
 }

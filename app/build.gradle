@@ -7,12 +7,12 @@ plugins {
 }
 
 android {
-    compileSdk 31
-
+    compileSdk projectCompileSdk
+    buildToolsVersion buildTools
     defaultConfig {
         applicationId "ru.gubatenko.patterns"
-        minSdk 21
-        targetSdk 30
+        minSdk projectMinSdk
+        targetSdk projectTargetSdk
         versionCode 1
         versionName "1.0"
 
@@ -52,27 +52,22 @@ dependencies {
     implementation project(path: ':data_impl')
     implementation project(path: ':navigation')
 
-    implementation "io.insert-koin:koin-android:3.1.2"
+    implementation koin.android
     
-    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation android_sdk.core
+    implementation android_sdk.appcompat
+    implementation android_sdk.material
+    implementation android_sdk.fragment
+    implementation android_sdk.worker
+    implementation android_sdk.navigation_fragment
+    implementation android_sdk.navigation_ui
 
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.fragment:fragment-ktx:1.4.0-alpha08'
+    implementation platform(firebase.bom)
+    implementation firebase.analytics
+    implementation firebase.crashlytics
+    implementation firebase.performance
 
-    def nav_version = "2.3.5"
-    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
-
-    implementation platform('com.google.firebase:firebase-bom:28.4.0')
-    implementation 'com.google.firebase:firebase-analytics-ktx'
-    implementation 'com.google.firebase:firebase-crashlytics-ktx'
-    implementation 'com.google.firebase:firebase-perf-ktx'
-
-    def work_version = "2.5.0"
-    implementation "androidx.work:work-runtime-ktx:$work_version"
-
-    testImplementation 'junit:junit:4.+'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    testImplementation test.junit
+    androidTestImplementation test.junit_ext
+    androidTestImplementation test.espresso
 }
