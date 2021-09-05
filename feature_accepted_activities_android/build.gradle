@@ -6,7 +6,6 @@ plugins {
 android {
     compileSdk projectCompileSdk
     buildToolsVersion buildTools
-
     defaultConfig {
         minSdk projectMinSdk
         targetSdk projectTargetSdk
@@ -24,8 +23,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
         jvmTarget = '1.8'
@@ -33,20 +32,8 @@ android {
 }
 
 dependencies {
-    api project(path: ':domain')
-    api project(path: ':navigation')
-    api project(path: ':mvi_android')
-
-    api koin.android
-
-    api android_sdk.core
-    api android_sdk.appcompat
-    api android_sdk.material
-    api android_sdk.navigation_fragment
-    api android_sdk.navigation_ui
-    implementation android_sdk.lifecycle_viewmodel
-
-    api coroutines.core
+    implementation project(path: ':feature_accepted_activities')
+    implementation project(path: ':common_android')
 
     testImplementation test.junit
     androidTestImplementation test.junit_ext

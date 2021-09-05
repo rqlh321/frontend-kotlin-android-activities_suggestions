@@ -48,6 +48,7 @@ dependencies {
     implementation project(path: ':feature_auth_android')
     implementation project(path: ':feature_main_android')
     implementation project(path: ':feature_profile_android')
+    implementation project(path: ':feature_accepted_activities_android')
     implementation project(path: ':domain_impl')
     implementation project(path: ':data_impl')
     implementation project(path: ':navigation')
