@@ -46,8 +46,6 @@ dependencies {
     api android_sdk.navigation_ui
     implementation android_sdk.lifecycle_viewmodel
 
-    api coroutines.core
-
     testImplementation test.junit
     androidTestImplementation test.junit_ext
     androidTestImplementation test.espresso

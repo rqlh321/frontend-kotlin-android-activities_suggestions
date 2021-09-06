@@ -1,10 +1,12 @@
 package ru.gubatenko.domain.repo
 
+import kotlinx.coroutines.flow.Flow
 import ru.gubatenko.domain.model.Activity
 
 interface ActivityRepo {
     suspend fun create(query: CreateQuery)
     suspend fun read(query: ReadQuery): List<Activity>
+    suspend fun subscribe(query: SubscribeQuery): Flow<List<Activity>>
     suspend fun update(query: UpdateQuery)
     suspend fun delete(query: DeleteQuery)
 
@@ -17,6 +19,10 @@ interface ActivityRepo {
         object NewActivityFromSourceServerReadQuery : ReadQuery()
         object ActivityFromLocalStorageReadQuery : ReadQuery()
         object NotSyncedActivityFromLocalStorageReadQuery : ReadQuery()
+    }
+
+    sealed class SubscribeQuery{
+        object ActivityFromLocalStorage : SubscribeQuery()
     }
 
     sealed class UpdateQuery {

@@ -6,5 +6,5 @@ import ru.gubatenko.domain.usecase.GetAllSavedActivitiesUseCase
 class GetAllSavedActivitiesUseCaseImpl(
     private val repo: ActivityRepo,
 ) : GetAllSavedActivitiesUseCase {
-    override suspend fun execute() = repo.read(ActivityRepo.ReadQuery.ActivityFromLocalStorageReadQuery)
+    override suspend fun execute() = repo.subscribe(ActivityRepo.SubscribeQuery.ActivityFromLocalStorage)
 }

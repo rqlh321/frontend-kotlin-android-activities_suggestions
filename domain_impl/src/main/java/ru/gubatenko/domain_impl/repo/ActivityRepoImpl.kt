@@ -1,5 +1,6 @@
 package ru.gubatenko.domain_impl.repo
 
+import kotlinx.coroutines.flow.map
 import ru.gubatenko.data.Mapper
 import ru.gubatenko.data.dao.ActivityDao
 import ru.gubatenko.data.dto.ActivityDto
@@ -37,6 +38,10 @@ class ActivityRepoImpl(
         is ActivityRepo.ReadQuery.NewActivityFromSourceServerReadQuery -> {
             listOf(dtoToDomain.map(activitySourceService.activity()))
         }
+    }
+
+    override suspend fun subscribe(query: ActivityRepo.SubscribeQuery) = when(query){
+        is ActivityRepo.SubscribeQuery.ActivityFromLocalStorage -> dao.subscribe().map { it.map(storedToDomain::map) }
     }
 
     override suspend fun update(query: ActivityRepo.UpdateQuery) = when (query) {

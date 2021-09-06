@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':feature_accepted_activities')
+    implementation project(path: ':feature_promises')
     implementation project(path: ':common_android')
 
     testImplementation test.junit

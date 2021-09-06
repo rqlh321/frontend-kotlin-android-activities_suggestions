@@ -1,7 +1,6 @@
 package ru.gubatenko.common_android
 
 import android.view.View
-import androidx.annotation.IdRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
