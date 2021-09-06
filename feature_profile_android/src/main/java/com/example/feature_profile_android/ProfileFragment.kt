@@ -19,7 +19,7 @@ import ru.gubatenko.common_android.sharedGraphViewModel
 
 class ProfileFragment : BaseFragment(R.layout.fragment_profile), OnSuccessAuthorizationSensitive {
 
-    private val viewModel: ProfileViewModel by sharedGraphViewModel(NavigationScope.PROFILE_SCOPE)
+    private val viewModel: ProfileViewModel by sharedGraphViewModel(NavigationScope.FRAME_SCOPE)
 
     private val avatar: ImageView by lazy { requireView().findViewById(R.id.avatar_id) }
     private val name: TextView by lazy { requireView().findViewById(R.id.name_id) }

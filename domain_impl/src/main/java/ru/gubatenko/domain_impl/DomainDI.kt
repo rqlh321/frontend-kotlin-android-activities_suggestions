@@ -31,4 +31,5 @@ val rootScopeUsaCaseImplModuleDI = module {
     single<IsAuthorizedUseCase> { IsAuthorizedUseCaseImpl(repo = get()) }
     single<GetSignedInUserUseCase> { GetSignedInUserUseCaseImpl(repo = get()) }
     single<SignOutUseCase> { SignOutUseCaseImpl(repo = get()) }
+    single<GetAllSavedActivitiesUseCase> { GetAllSavedActivitiesUseCaseImpl(repo = get()) }
 }

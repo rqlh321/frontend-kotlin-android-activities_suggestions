@@ -20,7 +20,7 @@ import ru.gubatenko.feature_main.MainStore
 
 class MainFragment : BaseFragment(R.layout.fragment_main) {
 
-    private val viewModel: MainViewModel by sharedGraphViewModel(NavigationScope.MAIN_SCOPE)
+    private val viewModel: MainViewModel by sharedGraphViewModel(NavigationScope.FRAME_SCOPE)
 
     private val mainText: TextView by lazy { requireView().findViewById(R.id.result_text_id) }
     private val errorText: TextView by lazy { requireView().findViewById(R.id.error_text_id) }

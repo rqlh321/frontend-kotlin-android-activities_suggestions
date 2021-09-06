@@ -3,6 +3,7 @@ package ru.gubatenko.data_impl.sqlite
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 import ru.gubatenko.data.dao.ActivityDao
 
 @Dao
@@ -22,4 +23,7 @@ interface ActivityDaoRoom : ActivityDao<ActivityStoredEntity> {
 
     @Query("SELECT * FROM activity_table")
     override suspend fun all(): List<ActivityStoredEntity>
+
+    @Query("SELECT * FROM activity_table")
+    override fun subscribe(): Flow<List<ActivityStoredEntity>>
 }

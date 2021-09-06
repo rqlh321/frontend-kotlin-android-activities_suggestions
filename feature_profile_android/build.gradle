@@ -35,6 +35,8 @@ dependencies {
     implementation project(path: ':feature_profile')
     implementation project(path: ':common_android')
 
+    implementation util.glide
+
     testImplementation test.junit
     androidTestImplementation test.junit_ext
     androidTestImplementation test.espresso
