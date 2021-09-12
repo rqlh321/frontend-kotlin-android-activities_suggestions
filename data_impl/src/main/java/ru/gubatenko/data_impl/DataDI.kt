@@ -12,11 +12,13 @@ import ru.gubatenko.data.entity.ActivityStored
 import ru.gubatenko.data.prefs.Preference
 import ru.gubatenko.data.service.ActivitySourceService
 import ru.gubatenko.data.service.UserService
+import ru.gubatenko.data.text.StaticText
 import ru.gubatenko.data_impl.mapper.ActivityDtoToDomain
 import ru.gubatenko.data_impl.mapper.ActivityFromDomainToStoredRoom
 import ru.gubatenko.data_impl.mapper.ActivityFromStoredToDomain
 import ru.gubatenko.data_impl.mapper.DomainToActivityDto
 import ru.gubatenko.data_impl.sqlite.AppDatabase
+import ru.gubatenko.data_impl.text.StaticTextFromAssets
 import ru.gubatenko.domain.model.Activity
 
 val rootScopeDaoModuleDI = module {
@@ -42,4 +44,5 @@ val rootScopeStoredMapperImplModuleDI = module {
     single<Mapper<Activity, ActivityStored>>(named("domainToStored")) { ActivityFromDomainToStoredRoom() }
     single<Mapper<ActivityStored, Activity>>(named("storedToDomain")) { ActivityFromStoredToDomain() }
     single<Preference> { PreferenceSharedPrefs(get()) }
+    single<StaticText> { StaticTextFromAssets(get()) }
 }
