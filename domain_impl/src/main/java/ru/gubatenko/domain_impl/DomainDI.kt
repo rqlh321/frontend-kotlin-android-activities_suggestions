@@ -33,4 +33,5 @@ val rootScopeUsaCaseImplModuleDI = module {
     single<SignOutUseCase> { SignOutUseCaseImpl(repo = get()) }
     single<GetAllSavedActivitiesUseCase> { GetAllSavedActivitiesUseCaseImpl(repo = get()) }
     single<GetStaticTextUseCase> { GetStaticTextUseCaseImpl(staticText = get()) }
+    single<GetDynamicTextUseCase> { GetDynamicTextUseCaseImpl(dynamicText = get()) }
 }

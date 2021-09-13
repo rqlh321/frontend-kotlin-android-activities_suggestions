@@ -15,13 +15,6 @@ class ClickOnSignOutSideEffect(
         reducerCallback: suspend (ProfileStore.SideAction) -> Unit
     ) {
         useCase.execute()
-        reducerCallback.invoke(
-            ProfileStore.SideAction.SetupCurrentUserState(
-                name = null,
-                avatar = null,
-                isSignInButtonVisible = true,
-                isSignOutButtonVisible = false
-            )
-        )
+        reducerCallback.invoke(ProfileStore.SideAction.LogOut)
     }
 }

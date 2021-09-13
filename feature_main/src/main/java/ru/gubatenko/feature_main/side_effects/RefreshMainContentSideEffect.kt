@@ -1,5 +1,6 @@
 package ru.gubatenko.feature_main.side_effects
 
+import ru.gubatenko.domain.TextKey
 import ru.gubatenko.domain.usecase.GetStaticTextUseCase
 import ru.gubatenko.domain.usecase.GetSuggestedActivityUseCase
 import ru.gubatenko.feature_main.MainStore
@@ -23,7 +24,7 @@ class RefreshMainContentSideEffect(
             val activity = getSuggestedActivityUseCase.execute()
             reducerCallback.invoke(MainStore.SideAction.RefreshSuccess(activity))
         } catch (e: Exception) {
-            val message = getStaticTextUseCase.execute("error")
+            val message = getStaticTextUseCase.execute(TextKey.Common.ERROR)
             eventDispatcher.dispatch(MainStore.Event.ShowToast(message))
             reducerCallback.invoke(MainStore.SideAction.RefreshError)
         }

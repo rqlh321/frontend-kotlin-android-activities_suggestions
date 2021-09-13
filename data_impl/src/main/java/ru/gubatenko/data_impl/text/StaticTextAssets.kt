@@ -6,16 +6,16 @@ import org.json.JSONObject
 import ru.gubatenko.data.text.StaticText
 import java.util.*
 
-class StaticTextFromAssets(
+class StaticTextAssets(
     private val context: Context
 ) : StaticText {
 
     private val sourceJson: JSONObject by lazy {
         val country = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             val locales = context.resources.configuration.locales
-            if (locales.size() > 0) locales.get(0).country else Locale.ENGLISH
+            if (locales.size() > 0) locales.get(0).language else Locale.ENGLISH.language
         } else {
-            context.resources.configuration.locale.country
+            context.resources.configuration.locale.language
         }
 
         val source = try {
@@ -25,13 +25,13 @@ class StaticTextFromAssets(
                 .use { it.readText() }
         } catch (e: Exception) {
             context.assets
-                .open("static/text/EN.json")
+                .open("static/text/en.json")
                 .bufferedReader()
                 .use { it.readText() }
         }
         JSONObject(source)
     }
 
-    override fun value(key: String): String = sourceJson.getString(key)
+    override suspend fun value(key: String): String = sourceJson.getString(key)
 
 }

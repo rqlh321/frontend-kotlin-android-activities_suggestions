@@ -6,5 +6,10 @@ class OfferAuthReducer : Reducer<OfferAuthStore.State, OfferAuthStore.SideAction
     override fun invoke(
         currentState: OfferAuthStore.State,
         newAction: OfferAuthStore.SideAction
-    ) = currentState
+    ) = when (newAction) {
+        is OfferAuthStore.SideAction.SetupAuthOfferScreen -> currentState.copy(
+            titleText = newAction.labelText,
+            acceptTextButton = newAction.buttonText,
+        )
+    }
 }

@@ -58,6 +58,7 @@ dependencies {
     implementation platform(firebase.bom)
     implementation firebase.firestore
     implementation firebase.auth
+    implementation firebase.remote_config
 
     testImplementation test.junit
     androidTestImplementation test.junit_ext

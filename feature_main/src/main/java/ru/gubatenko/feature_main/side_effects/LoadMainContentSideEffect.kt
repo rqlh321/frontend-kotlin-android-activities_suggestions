@@ -1,5 +1,6 @@
 package ru.gubatenko.feature_main.side_effects
 
+import ru.gubatenko.domain.TextKey
 import ru.gubatenko.domain.usecase.GetStaticTextUseCase
 import ru.gubatenko.domain.usecase.GetSuggestedActivityUseCase
 import ru.gubatenko.feature_main.MainStore
@@ -24,11 +25,11 @@ class LoadMainContentSideEffect(
             }
             reducerCallback.invoke(MainStore.SideAction.LoadStart)
             val activity = getSuggestedActivityUseCase.execute()
-            val saveButtonText = getStaticTextUseCase.execute("save")
+            val saveButtonText = getStaticTextUseCase.execute(TextKey.Main.SAVE)
             reducerCallback.invoke(MainStore.SideAction.LoadSuccess(activity = activity, saveButtonText = saveButtonText))
         } catch (e: Exception) {
-            val message = getStaticTextUseCase.execute("error")
-            val retryButtonText = getStaticTextUseCase.execute("retry")
+            val message = getStaticTextUseCase.execute(TextKey.Common.ERROR)
+            val retryButtonText = getStaticTextUseCase.execute(TextKey.Common.RETRY)
             reducerCallback.invoke(MainStore.SideAction.LoadError(message = message, retryButtonText = retryButtonText))
         }
     }
