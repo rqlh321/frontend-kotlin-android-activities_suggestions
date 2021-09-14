@@ -29,6 +29,7 @@ val offerAuthAndroidModuleDI = module {
     }
     single {
         OfferAuthStore(
+            logger = get(),
             sideEffects = get(named(OFFER_AUTH_SIDE_EFFECTS)),
             stateObservable = get(named(OFFER_AUTH_STATE_OBSERVABLE)),
         )

@@ -44,6 +44,7 @@ dependencies {
 
     implementation coroutines.coroutines_play_services
 
+    implementation util.timber
     implementation koin.core
 
     api android_sdk.core

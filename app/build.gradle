@@ -46,6 +46,7 @@ android {
 
 dependencies {
     debugImplementation util.leakcanary
+    implementation util.timber
 
     implementation project(path: ':feature_auth_android')
     implementation project(path: ':feature_main_android')
@@ -54,6 +55,7 @@ dependencies {
     implementation project(path: ':domain_impl')
     implementation project(path: ':data_impl')
     implementation project(path: ':navigation')
+    implementation project(path: ':audit')
 
     implementation koin.android
     

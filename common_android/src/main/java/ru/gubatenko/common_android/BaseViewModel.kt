@@ -1,12 +1,12 @@
 package ru.gubatenko.common_android
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.gubatenko.domain.exception.UnknownUserException
+import timber.log.Timber
 
 abstract class BaseViewModel : ViewModel() {
 
@@ -25,10 +25,10 @@ abstract class BaseViewModel : ViewModel() {
             try {
                 block.invoke()
             } catch (e: Exception) {
+                Timber.d(e)
                 when (e) {
                     is UnknownUserException -> onUnknownUserException()
                 }
-                Log.d(this::class.java.simpleName, e.message ?: e::class.java.simpleName)
             }
         }
     }

@@ -20,15 +20,16 @@ val mainFeatureAndroidModuleDI = module {
 
     single (named(MAIN_SIDE_EFFECTS)){
         SideEffects.Builder<MainStore.Action, MainStore.SideAction>()
-            .append(sideEffect = SetupMainScreenSideEffect(getStaticTextUseCase = get(), getSuggestedActivityUseCase = get()))
+            .append(sideEffect = SetupMainScreenSideEffect(logger = get(), getStaticTextUseCase = get(), getSuggestedActivityUseCase = get()))
             .append(sideEffect = LoadMainContentSideEffect(getStaticTextUseCase = get(), stateObservable = get(named(MAIN_STATE_OBSERVABLE)), getSuggestedActivityUseCase = get()))
             .append(sideEffect = ClickOnMainContentSideEffect(eventDispatcher = get(named(MAIN_EVENT_DISPATCHER))))
             .append(sideEffect = ClickOnSaveSideEffect(useCase = get(), stateObservable = get(named(MAIN_STATE_OBSERVABLE))))
-            .append(sideEffect = RefreshMainContentSideEffect(eventDispatcher = get(named(MAIN_EVENT_DISPATCHER)), getStaticTextUseCase = get(), getSuggestedActivityUseCase = get()))
+            .append(sideEffect = RefreshMainContentSideEffect(logger = get(), eventDispatcher = get(named(MAIN_EVENT_DISPATCHER)), getStaticTextUseCase = get(), getSuggestedActivityUseCase = get()))
             .build()
     }
     single {
         MainStore(
+            logger = get(),
             sideEffects = get(named(MAIN_SIDE_EFFECTS)),
             stateObservable = get(named(MAIN_STATE_OBSERVABLE)),
         )

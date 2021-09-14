@@ -3,11 +3,14 @@ package com.example.feature_auth
 import ru.gubatenko.mvi.AbstractStore
 import ru.gubatenko.mvi.SideEffects
 import ru.gubatenko.mvi.StateObservable
+import com.example.audit.Logger
 
 class OfferAuthStore(
+    logger: Logger,
     sideEffects: SideEffects<Action, SideAction>,
     stateObservable: StateObservable<State>,
 ) : AbstractStore<OfferAuthStore.Action, OfferAuthStore.SideAction, OfferAuthStore.State>(
+    logger = logger,
     stateObservable = stateObservable,
     reducer = OfferAuthReducer(),
     sideEffects = sideEffects
