@@ -3,11 +3,14 @@ package com.example.feature_profile
 import ru.gubatenko.mvi.AbstractStore
 import ru.gubatenko.mvi.SideEffects
 import ru.gubatenko.mvi.StateObservable
+import com.example.audit.Logger
 
 class ProfileStore(
+    logger: Logger,
     sideEffects: SideEffects<Action, SideAction>,
     stateObservable: StateObservable<State>,
 ) : AbstractStore<ProfileStore.Action, ProfileStore.SideAction, ProfileStore.State>(
+    logger = logger,
     stateObservable = stateObservable,
     reducer = ProfileStoreReducer(),
     sideEffects = sideEffects

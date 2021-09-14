@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import com.example.audit.Logger
 import com.example.navigation.AUTH_SUCCESS_BROADCAST
 import com.example.navigation.NavigationRoot
 import com.example.navigation.NavigationScope
@@ -19,6 +20,7 @@ import com.example.navigation.OnSuccessAuthorizationSensitive
 import org.koin.android.ext.android.inject
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
+import org.koin.dsl.module
 import ru.gubatenko.data_impl.rootScopeDaoModuleDI
 import ru.gubatenko.data_impl.rootScopeDtoMapperImplModuleDI
 import ru.gubatenko.data_impl.rootScopeServiceImplModuleDI

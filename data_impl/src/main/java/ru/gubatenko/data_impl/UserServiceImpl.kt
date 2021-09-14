@@ -9,6 +9,7 @@ import ru.gubatenko.data.dto.ActivityDto
 import ru.gubatenko.data.dto.UserDto
 import ru.gubatenko.data.service.UserService
 import ru.gubatenko.domain.exception.UnknownUserException
+import timber.log.Timber
 
 class UserServiceImpl : UserService {
 
@@ -35,6 +36,7 @@ class UserServiceImpl : UserService {
                 }
             }.await()
         } catch (e: FirebaseFirestoreException) {
+            Timber.d(e)
             when (e.code) {
                 FirebaseFirestoreException.Code.PERMISSION_DENIED -> throw UnknownUserException()
                 else                                              -> throw  e

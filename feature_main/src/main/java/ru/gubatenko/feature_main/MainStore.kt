@@ -4,11 +4,14 @@ import ru.gubatenko.domain.model.Activity
 import ru.gubatenko.mvi.AbstractStore
 import ru.gubatenko.mvi.SideEffects
 import ru.gubatenko.mvi.StateObservable
+import com.example.audit.Logger
 
 class MainStore(
+    logger: Logger,
     sideEffects: SideEffects<Action, SideAction>,
     stateObservable: StateObservable<State>,
 ) : AbstractStore<MainStore.Action, MainStore.SideAction, MainStore.State>(
+    logger = logger,
     stateObservable = stateObservable,
     reducer = MainStoreReducer(),
     sideEffects = sideEffects

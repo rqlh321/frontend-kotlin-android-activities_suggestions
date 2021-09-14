@@ -25,6 +25,7 @@ val activitiesFeatureAndroidModuleDI = module {
     }
     single {
         AcceptedActivitiesStore(
+            logger = get(),
             sideEffects = get(named(ACTIVITIES_SIDE_EFFECTS)),
             stateObservable = get(named(ACTIVITIES_STATE_OBSERVABLE)),
         )

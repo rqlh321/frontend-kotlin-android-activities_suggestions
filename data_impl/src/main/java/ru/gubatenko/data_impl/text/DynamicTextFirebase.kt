@@ -7,6 +7,7 @@ import com.google.firebase.remoteconfig.ktx.remoteConfig
 import kotlinx.coroutines.tasks.await
 import org.json.JSONObject
 import ru.gubatenko.data.text.DynamicText
+import timber.log.Timber
 import java.util.*
 
 class DynamicTextFirebase(context: Context) : DynamicText {
@@ -34,7 +35,7 @@ class DynamicTextFirebase(context: Context) : DynamicText {
                 sourceJson = if (textJson.has(country))
                     textJson.getJSONObject(country) else textJson.getJSONObject(Locale.ENGLISH.language)
             } catch (e: Exception) {
-                e.printStackTrace()
+                Timber.d(e)
             }
         }
 

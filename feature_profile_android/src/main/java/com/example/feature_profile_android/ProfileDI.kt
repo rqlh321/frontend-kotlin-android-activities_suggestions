@@ -29,6 +29,7 @@ val profileFeatureAndroidModuleDI = module {
     }
     single {
         ProfileStore(
+            logger = get(),
             sideEffects = get(named(PROFILE_SIDE_EFFECTS)),
             stateObservable = get(named(PROFILE_STATE_OBSERVABLE)),
         )

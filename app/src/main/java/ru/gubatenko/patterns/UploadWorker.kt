@@ -6,6 +6,7 @@ import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import ru.gubatenko.domain.exception.UnknownUserException
 import ru.gubatenko.domain.usecase.SyncActivitiesWithServerUseCase
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 class UploadWorker(
@@ -44,8 +45,10 @@ class UploadWorker(
             useCase.execute()
             Result.success()
         } catch (e: UnknownUserException) {
+            Timber.d(e)
             Result.failure()
         } catch (e: Exception) {
+            Timber.d(e)
             Result.retry()
         }
     }
