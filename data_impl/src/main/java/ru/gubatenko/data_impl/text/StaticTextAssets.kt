@@ -6,29 +6,25 @@ import org.json.JSONObject
 import ru.gubatenko.data.text.StaticText
 import java.util.*
 
-class StaticTextAssets(
-    private val context: Context
-) : StaticText {
+class StaticTextAssets(context: Context) : StaticText {
+
+    private val country = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+        val locales = context.resources.configuration.locales
+        if (locales.size() > 0) locales.get(0).language else Locale.ENGLISH.language
+    } else {
+        context.resources.configuration.locale.language
+    }
 
     private val sourceJson: JSONObject by lazy {
-        val country = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            val locales = context.resources.configuration.locales
-            if (locales.size() > 0) locales.get(0).language else Locale.ENGLISH.language
-        } else {
-            context.resources.configuration.locale.language
-        }
-
         val source = try {
-            context.assets
-                .open("static/text/$country.json")
-                .bufferedReader()
-                .use { it.readText() }
+            context.assets.open("static/text/$country.json")
         } catch (e: Exception) {
-            context.assets
-                .open("static/text/en.json")
-                .bufferedReader()
-                .use { it.readText() }
-        }
+            try {
+                context.assets.open("static/text/${Locale.ENGLISH.language}.json")
+            } catch (ex: Exception) {
+                return@lazy JSONObject()
+            }
+        }.bufferedReader().use { it.readText() }
         JSONObject(source)
     }
 

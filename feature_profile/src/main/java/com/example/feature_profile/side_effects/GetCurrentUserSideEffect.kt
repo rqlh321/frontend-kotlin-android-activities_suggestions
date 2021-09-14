@@ -21,13 +21,16 @@ class GetCurrentUserSideEffect(
     ) {
         val user = getSignedInUserUseCase.execute()
 
+        val aboutText = getDynamicTextUseCase.execute(TextKey.Dynamic.ABOUT)
+        val signInButtonText = getStaticTextUseCase.execute(TextKey.Profile.SIGN_IN)
+        val signOutButtonText = getStaticTextUseCase.execute(TextKey.Profile.SIGN_OUT)
         reducerCallback.invoke(
             ProfileStore.SideAction.SetupProfileScreen(
                 name = user?.name,
                 avatar = user?.avatar,
-                aboutText = getDynamicTextUseCase.execute(TextKey.Dynamic.ABOUT),
-                signInButtonText = getStaticTextUseCase.execute(TextKey.Profile.SIGN_IN),
-                signOutButtonText = getStaticTextUseCase.execute(TextKey.Profile.SIGN_OUT),
+                aboutText = aboutText,
+                signInButtonText = signInButtonText,
+                signOutButtonText = signOutButtonText,
                 isSignInButtonVisible = false,
                 isSignOutButtonVisible = true,
             )
