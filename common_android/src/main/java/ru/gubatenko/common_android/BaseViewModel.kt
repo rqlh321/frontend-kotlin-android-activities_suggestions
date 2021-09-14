@@ -11,7 +11,7 @@ import ru.gubatenko.domain.exception.UnknownUserException
 abstract class BaseViewModel : ViewModel() {
 
     protected fun io(block: suspend () -> Unit) = suspendFun(Dispatchers.IO, block)
-    protected fun default(block: suspend () -> Unit): Unit = suspendFun(Dispatchers.Default, block)
+    protected fun default(block: suspend () -> Unit) = suspendFun(Dispatchers.Default, block)
     protected fun main(block: suspend () -> Unit) = suspendFun(Dispatchers.Main, block)
     protected fun unconfined(block: suspend () -> Unit) = suspendFun(Dispatchers.Unconfined, block)
 

@@ -16,7 +16,6 @@ class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
             isRefreshEnabled = false,
 
             isRetryButtonVisible = false,
-            retryButtonText = null,
 
             isSaveButtonClickable = false,
 
@@ -31,7 +30,6 @@ class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
             isRefreshInProgress = true,
 
             isRetryButtonVisible = false,
-            retryButtonText = null,
 
             isSaveButtonVisible = true,
             isSaveButtonClickable = true,
@@ -44,8 +42,8 @@ class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
             isRefreshInProgress = false,
             isRefreshEnabled = false,
 
-            isRetryButtonVisible = true,
             retryButtonText = newAction.retryButtonText,
+            isRetryButtonVisible = true,
 
             isSaveButtonVisible = false,
             isSaveButtonClickable = false,
@@ -54,7 +52,7 @@ class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
             action = null,
 
             isErrorTextVisible = true,
-            errorText = newAction.errorMessageText,
+            errorText = newAction.message,
         )
         is MainStore.SideAction.RefreshError -> currentState.copy(
             isRefreshInProgress = false,
@@ -69,12 +67,10 @@ class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
             isRefreshEnabled = true,
 
             isRetryButtonVisible = false,
-            retryButtonText = null,
 
+            saveButtonText = newAction.saveButtonText ?: currentState.saveButtonText,
             isSaveButtonVisible = true,
             isSaveButtonClickable = true,
-
-            saveButtonText = newAction.saveButtonText,
 
             isActionTextVisible = true,
             action = newAction.activity,

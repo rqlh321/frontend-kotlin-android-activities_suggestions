@@ -4,10 +4,7 @@ import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import ru.gubatenko.feature_main.MainStore
-import ru.gubatenko.feature_main.side_effects.ClickOnMainContentSideEffect
-import ru.gubatenko.feature_main.side_effects.ClickOnSaveSideEffect
-import ru.gubatenko.feature_main.side_effects.LoadMainContentSideEffect
-import ru.gubatenko.feature_main.side_effects.RefreshMainContentSideEffect
+import ru.gubatenko.feature_main.side_effects.*
 import ru.gubatenko.mvi.EventDispatcher
 import ru.gubatenko.mvi.SideEffects
 import ru.gubatenko.mvi.StateObservable
@@ -23,10 +20,11 @@ val mainFeatureAndroidModuleDI = module {
 
     single (named(MAIN_SIDE_EFFECTS)){
         SideEffects.Builder<MainStore.Action, MainStore.SideAction>()
-            .append(sideEffect = LoadMainContentSideEffect(useCase = get(), stateObservable = get(named(MAIN_STATE_OBSERVABLE))))
+            .append(sideEffect = SetupMainScreenSideEffect(getStaticTextUseCase = get(), getSuggestedActivityUseCase = get()))
+            .append(sideEffect = LoadMainContentSideEffect(getStaticTextUseCase = get(), stateObservable = get(named(MAIN_STATE_OBSERVABLE)), getSuggestedActivityUseCase = get()))
             .append(sideEffect = ClickOnMainContentSideEffect(eventDispatcher = get(named(MAIN_EVENT_DISPATCHER))))
             .append(sideEffect = ClickOnSaveSideEffect(useCase = get(), stateObservable = get(named(MAIN_STATE_OBSERVABLE))))
-            .append(sideEffect = RefreshMainContentSideEffect(eventDispatcher = get(named(MAIN_EVENT_DISPATCHER)), useCase = get()))
+            .append(sideEffect = RefreshMainContentSideEffect(eventDispatcher = get(named(MAIN_EVENT_DISPATCHER)), getStaticTextUseCase = get(), getSuggestedActivityUseCase = get()))
             .build()
     }
     single {

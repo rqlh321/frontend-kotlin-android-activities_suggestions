@@ -15,6 +15,7 @@ class MainStore(
 ) {
 
     sealed class Action {
+        object SetupScreen : Action()
         object LoadContent : Action()
         object ClickOnContent : Action()
         object RefreshContent : Action()
@@ -30,22 +31,14 @@ class MainStore(
     sealed class SideAction {
         object RefreshStart : SideAction()
         object RefreshError : SideAction()
-        data class RefreshSuccess(
-            val activity: Activity,
-        ) : SideAction()
+        data class RefreshSuccess(val activity: Activity) : SideAction()
 
-        object LoadStart: SideAction()
-        object SavingStart: SideAction()
+        object LoadStart : SideAction()
+        object SavingStart : SideAction()
 
-        data class LoadError(
-            val retryButtonText: String,
-            val errorMessageText: String,
-        ) : SideAction()
+        data class LoadError(val message: String, val retryButtonText: String) : SideAction()
 
-        data class LoadSuccess(
-            val saveButtonText: String,
-            val activity: Activity,
-        ) : SideAction()
+        data class LoadSuccess(val activity: Activity, val saveButtonText: String? = null) : SideAction()
     }
 
     data class State(

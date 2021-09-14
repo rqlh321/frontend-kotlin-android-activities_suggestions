@@ -14,6 +14,12 @@ class OfferAuthViewModel(
     val state = (store.stateObservable as LiveDataStateObservable)
     val event = (dispatcher as LiveDataEventDispatcher<OfferAuthStore.Event>)
 
+    init {
+        main {
+            store.process(OfferAuthStore.Action.FetchAuthScreenData)
+        }
+    }
+
     fun accept() {
         main {
             store.process(OfferAuthStore.Action.AcceptAuthOffer)

@@ -4,29 +4,28 @@ import ru.gubatenko.domain.TextKey
 import ru.gubatenko.domain.usecase.GetStaticTextUseCase
 import ru.gubatenko.domain.usecase.GetSuggestedActivityUseCase
 import ru.gubatenko.feature_main.MainStore
-import ru.gubatenko.mvi.EventDispatcher
 import ru.gubatenko.mvi.SideEffect
 
-class RefreshMainContentSideEffect(
+class SetupMainScreenSideEffect(
     private val getStaticTextUseCase: GetStaticTextUseCase,
     private val getSuggestedActivityUseCase: GetSuggestedActivityUseCase,
-    private val eventDispatcher: EventDispatcher<MainStore.Event>
-) : SideEffect<MainStore.Action.RefreshContent, MainStore.SideAction> {
+) : SideEffect<MainStore.Action.SetupScreen, MainStore.SideAction> {
 
-    override fun actionId() = MainStore.Action.RefreshContent::class.java
+    override fun actionId() = MainStore.Action.SetupScreen::class.java
 
     override suspend fun execute(
-        action: MainStore.Action.RefreshContent,
+        action: MainStore.Action.SetupScreen,
         reducerCallback: suspend (MainStore.SideAction) -> Unit
     ) {
         try {
-            reducerCallback.invoke(MainStore.SideAction.RefreshStart)
+            reducerCallback.invoke(MainStore.SideAction.LoadStart)
             val activity = getSuggestedActivityUseCase.execute()
-            reducerCallback.invoke(MainStore.SideAction.RefreshSuccess(activity))
+            val saveButtonText = getStaticTextUseCase.execute(TextKey.Main.SAVE)
+            reducerCallback.invoke(MainStore.SideAction.LoadSuccess(activity = activity, saveButtonText = saveButtonText))
         } catch (e: Exception) {
             val message = getStaticTextUseCase.execute(TextKey.Common.ERROR)
-            eventDispatcher.dispatch(MainStore.Event.ShowToast(message))
-            reducerCallback.invoke(MainStore.SideAction.RefreshError)
+            val retryButtonText = getStaticTextUseCase.execute(TextKey.Common.RETRY)
+            reducerCallback.invoke(MainStore.SideAction.LoadError(message = message, retryButtonText = retryButtonText))
         }
     }
 }

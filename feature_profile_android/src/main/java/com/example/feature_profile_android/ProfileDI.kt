@@ -17,14 +17,14 @@ private const val PROFILE_STATE_OBSERVABLE = "PROFILE_STATE_OBSERVABLE"
 private const val PROFILE_EVENT_DISPATCHER = "PROFILE_EVENT_DISPATCHER"
 private const val PROFILE_SIDE_EFFECTS = "PROFILE_SIDE_EFFECTS"
 val profileFeatureAndroidModuleDI = module {
-    single<StateObservable<ProfileStore.State>> (named(PROFILE_STATE_OBSERVABLE)) { LiveDataStateObservable(ProfileStore.State(signInButtonText = "sign in", signOutButtonText = "sign out")) }
+    single<StateObservable<ProfileStore.State>> (named(PROFILE_STATE_OBSERVABLE)) { LiveDataStateObservable(ProfileStore.State()) }
     single<EventDispatcher<ProfileStore.Event>> (named(PROFILE_EVENT_DISPATCHER)) { LiveDataEventDispatcher() }
 
     single (named(PROFILE_SIDE_EFFECTS)){
         SideEffects.Builder<ProfileStore.Action, ProfileStore.SideAction>()
             .append(sideEffect = ClickOnSignInSideEffect(eventDispatcher = get(named(PROFILE_EVENT_DISPATCHER))))
             .append(sideEffect = ClickOnSignOutSideEffect(useCase = get()))
-            .append(sideEffect = GetCurrentUserSideEffect(useCase = get()))
+            .append(sideEffect = GetCurrentUserSideEffect(getSignedInUserUseCase = get(), getStaticTextUseCase = get(), getDynamicTextUseCase = get()))
             .build()
     }
     single {

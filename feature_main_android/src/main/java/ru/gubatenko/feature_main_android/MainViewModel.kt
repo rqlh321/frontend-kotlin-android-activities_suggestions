@@ -15,14 +15,14 @@ class MainViewModel(
     val event = (dispatcher as LiveDataEventDispatcher<MainStore.Event>)
 
     init {
-        load()
+        io {
+            store.process(MainStore.Action.SetupScreen)
+        }
     }
 
-    private fun load() = io {
+    fun reload() = io {
         store.process(MainStore.Action.LoadContent)
     }
-
-    fun reload() = load()
 
     fun save() = io {
         store.process(MainStore.Action.SaveContent)

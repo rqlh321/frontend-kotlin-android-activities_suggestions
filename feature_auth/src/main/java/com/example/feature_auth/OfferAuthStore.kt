@@ -14,18 +14,24 @@ class OfferAuthStore(
 ) {
 
     sealed class Action {
+        object FetchAuthScreenData : Action()
         object AcceptAuthOffer : Action()
         object RejectAuthOffer : Action()
     }
 
-    sealed class SideAction
+    sealed class SideAction {
+        data class SetupAuthOfferScreen(
+            val labelText: String,
+            val buttonText: String,
+        ) : SideAction()
+    }
 
     sealed class Event {
         object NavigateToAuthorization : Event()
     }
 
     data class State(
-        val titleText: String,
-        val acceptTextButton: String
+        val titleText: String? = null,
+        val acceptTextButton: String? = null
     )
 }
