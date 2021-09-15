@@ -19,20 +19,29 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {
-        debug {
+        development {
             keyAlias 'alias'
             keyPassword '123456'
-            storeFile file("debug_keystore.jks")
+            storeFile file("keystore.jks")
             storePassword '123456'
         }
     }
     buildTypes {
-        debug {
-            signingConfig signingConfigs.debug
-        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    // Specifies one flavor dimension.
+    flavorDimensions "version"
+    productFlavors {
+        development {
+            signingConfig signingConfigs.development
+            dimension "version"
+            versionNameSuffix "-development"
+        }
+        production {
+            dimension "version"
         }
     }
     compileOptions {
