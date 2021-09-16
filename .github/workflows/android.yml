@@ -23,7 +23,11 @@ jobs:
     - name: unit tests
       run: ./gradlew test
     - name: build release 
-      run: ./gradlew assembleRelease
+      run: |
+        ./gradlew assembleRelease
+        ./gradlew assembleReleaseAndroidTest
+    - name: Run Instrumentation Tests in Firebase Test Lab
+      run: gcloud firebase test android run --type instrumentation --app app-development-release/app-development-release.apk --test app-development-release-androidTest/app-development-release-androidTest.apk --device model=Pixel2,version=28,locale=en,orientation=portrait
     - name: upload artifact to Firebase App Distribution
       uses: wzieba/Firebase-Distribution-Github-Action@v1
       with:
