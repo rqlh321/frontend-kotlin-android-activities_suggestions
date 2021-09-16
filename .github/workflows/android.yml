@@ -20,6 +20,8 @@ jobs:
         distribution: 'adopt'
         cache: gradle
         
+    - name: unit tests
+      run: ./gradlew test
     - name: build release 
       run: ./gradlew assembleRelease
     - name: upload artifact to Firebase App Distribution
@@ -28,4 +30,4 @@ jobs:
         appId: ${{secrets.FIREBASE_APP_ID}}
         token: ${{secrets.FIREBASE_TOKEN}}
         groups: testers
-        file: app/build/outputs/apk/release/app-release-unsigned.apk
+        file: app/build/outputs/apk/development/release/app-development-release.apk
