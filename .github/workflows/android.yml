@@ -24,6 +24,12 @@ jobs:
       run: ./gradlew test
     - name: Build release 
       run: ./gradlew assembleRelease
+    - name: Run tests on Firebase Test Lab
+      uses: asadmansr/Firebase-Test-Lab-Action@v1.0
+      with:
+          arg-spec: 'tests.yml:android-pixel-4'
+      env:
+          SERVICE_ACCOUNT: ${{ secrets.SERVICE_ACCOUNT }}
     - name: Firebase App Distribution
       uses: wzieba/Firebase-Distribution-Github-Action@v1
       with:
