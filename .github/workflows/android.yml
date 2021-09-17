@@ -16,8 +16,27 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: '11'
+          
       - name: Run Unit tests
         run: bash ./gradlew test --stacktrace
+        
+      - name: Assemble app debug APK
+        run: bash ./gradlew assembleDebug
+        
+      - name: Upload app APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-development-debug
+          path: app/build/outputs/apk/development/debug/app-development-debug.apk
+          
+      - name: Assemble Android Instrumentation Tests
+        run: bash ./gradlew assembleAndroidTest
+        
+      - name: Upload Android Test APK
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-development-debug-androidTest
+          path: app/build/outputs/apk/androidTest/development/debug/app-development-debug-androidTest.apk
         
 #     steps:
 #     - uses: actions/checkout@v2
