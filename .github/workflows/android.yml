@@ -38,10 +38,10 @@ jobs:
           name: app-development-debug-androidTest
           path: app/build/outputs/apk/androidTest/development/debug/app-development-debug-androidTest.apk
         
-#       - name: Download app APK
-#         uses: actions/download-artifact@v1
-#         with:
-#           name: app-development-debug
+      - name: Download app APK
+        uses: actions/download-artifact@v1
+        with:
+          name: app-development-debug
           
 #       - name: Download Android test APK
 #         uses: actions/download-artifact@v1
