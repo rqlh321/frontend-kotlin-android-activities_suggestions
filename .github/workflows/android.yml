@@ -81,7 +81,7 @@ jobs:
           run: gcloud firebase test android run --type instrumentation --app app-development-release/app-development-release.apk --test app-development-release-androidTest/app-development-release-androidTest.apk --device model=Pixel2,version=28,locale=en,orientation=portrait
 
         - name: Run Robo Tests in Firebase Test Lab
-          run: gcloud firebase test android run --type robo --app app-development-release/app-development-release.apk --test app-development-release-androidTest/app-development-release-androidTest.apk --device model=Pixel2,version=28,locale=en,orientation=portrait
+          run: gcloud firebase test android run --type robo --app app-development-release/app-development-release.apk --device model=Pixel2,version=28,locale=en,orientation=portrait
 
   firebase-app-distribution:
       name: Firebase App Distribution
