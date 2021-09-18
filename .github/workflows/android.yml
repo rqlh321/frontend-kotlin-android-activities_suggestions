@@ -40,13 +40,13 @@ jobs:
           path: app/build/outputs/apk/development/release/app-development-release.apk
           
       - name: Assemble Android Instrumentation Tests
-        run: bash ./gradlew assembleAndroidTest
+        run: bash ./gradlew assembleAndroidTest -DtestBuildType=release
         
       - name: Upload Android Test APK
         uses: actions/upload-artifact@v1
         with:
-          name: app-development-debug-androidTest
-          path: app/build/outputs/apk/androidTest/development/debug/app-development-debug-androidTest.apk
+          name: app-development-release-androidTest
+          path: app/build/outputs/apk/androidTest/development/release/app-development-debug-androidTest.apk
           
       - uses: actions/checkout@v1
   firebase:
