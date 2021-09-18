@@ -51,7 +51,7 @@ jobs:
           
       - uses: actions/checkout@v1
   firebase-test-lab:
-      name: Run UI tests with Firebase Test Lab
+      name: Firebase Test Lab
       needs: apk-build
       runs-on: ubuntu-18.04
 
