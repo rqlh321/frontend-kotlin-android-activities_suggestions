@@ -74,7 +74,7 @@ jobs:
             service_account_key: ${{secrets.SERVICE_ACCOUNT}}
 
         - name: Set current project
-          run: gcloud config set project ${{secrets.FIREBASE_APP_ID}}
+          run: gcloud config set project ${{secrets.FIREBASE_PROMISES_APP_ID}}
           
         - name: Run Instrumentation Tests in Firebase Test Lab
           run: gcloud firebase test android run --type instrumentation --app app-development-release/app-development-release.apk --test app-development-debug-androidTest/app-development-debug-androidTest.apk --device model=Pixel2,version=28,locale=en,orientation=portrait
@@ -82,7 +82,7 @@ jobs:
         - name: Firebase App Distribution
           uses: wzieba/Firebase-Distribution-Github-Action@v1
           with:
-            appId: ${{secrets.FIREBASE_APP_ID}}
+            appId: ${{secrets.FIREBASE_PROMISES_APP_ID}}
             token: ${{secrets.FIREBASE_TOKEN}}
             groups: testers
             file: app-development-release/app-development-release.apk            
