@@ -46,7 +46,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: app-development-release-androidTest
-          path: app/build/outputs/apk/androidTest/development/release/app-development-debug-androidTest.apk
+          path: app/build/outputs/apk/androidTest/development/release/app-development-release-androidTest.apk
           
       - uses: actions/checkout@v1
   firebase:
