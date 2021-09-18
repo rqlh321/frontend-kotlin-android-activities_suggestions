@@ -82,7 +82,7 @@ jobs:
             appId: ${{secrets.FIREBASE_APP_ID}}
             token: ${{secrets.FIREBASE_TOKEN}}
             groups: testers
-            file: app/build/outputs/apk/development/release/app-development-release.apk
+            file: app/build/outputs/apk/development/debug/app-development-debug.apk
             
         - name: Run Instrumentation Tests in Firebase Test Lab
           run: gcloud firebase test android run --type instrumentation --app app-development-debug/app-development-debug.apk --test app-development-debug-androidTest/app-development-debug-androidTest.apk --device model=Pixel2,version=28,locale=en,orientation=portrait
