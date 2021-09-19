@@ -16,7 +16,7 @@ class UserServiceImpl : UserService {
     override suspend fun user() = Firebase.auth.currentUser?.let {
         UserDto(
             uid = it.uid,
-            name = it.displayName?:"",
+            name = it.displayName ?: "",
             avatar = it.photoUrl?.toString(),
         )
     }
@@ -39,9 +39,19 @@ class UserServiceImpl : UserService {
             Timber.d(e)
             when (e.code) {
                 FirebaseFirestoreException.Code.PERMISSION_DENIED -> throw UnknownUserException()
-                else                                              -> throw  e
+                else -> throw  e
             }
         }
+    }
+
+    override suspend fun get(): List<ActivityDto> {
+        val uid = Firebase.auth.currentUser?.uid ?: throw UnknownUserException()
+        return Firebase.firestore.collection("user_data")
+            .document(uid)
+            .collection("activity")
+            .get()
+            .await()
+            .toObjects(ActivityDto::class.java)
     }
 
     override suspend fun signOut() = Firebase.auth.signOut()

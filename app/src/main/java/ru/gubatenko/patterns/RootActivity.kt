@@ -7,20 +7,16 @@ import android.content.IntentFilter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.lifecycleScope
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import com.example.audit.Logger
+import androidx.work.WorkManager
 import com.example.navigation.AUTH_SUCCESS_BROADCAST
 import com.example.navigation.NavigationRoot
 import com.example.navigation.NavigationScope
-import com.example.navigation.OnSuccessAuthorizationSensitive
 import org.koin.android.ext.android.inject
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
-import org.koin.dsl.module
 import ru.gubatenko.data_impl.rootScopeDaoModuleDI
 import ru.gubatenko.data_impl.rootScopeDtoMapperImplModuleDI
 import ru.gubatenko.data_impl.rootScopeServiceImplModuleDI
@@ -28,7 +24,9 @@ import ru.gubatenko.data_impl.rootScopeStoredMapperImplModuleDI
 import ru.gubatenko.domain.usecase.IsAuthorizedUseCase
 import ru.gubatenko.domain_impl.rootScopeRepoImplModuleDI
 import ru.gubatenko.domain_impl.rootScopeUsaCaseImplModuleDI
-import ru.gubatenko.patterns.UploadWorker.Companion.runUploadWorker
+import ru.gubatenko.patterns.work.DownloadWorker.Companion.runDownloadWorker
+import ru.gubatenko.patterns.work.SYNC_JOB_TAG
+import ru.gubatenko.patterns.work.UploadWorker.Companion.runUploadWorker
 
 class RootActivity : AppCompatActivity(R.layout.activity_root), NavigationRoot {
 
@@ -44,33 +42,19 @@ class RootActivity : AppCompatActivity(R.layout.activity_root), NavigationRoot {
     private val isAuthorizedUseCase: IsAuthorizedUseCase by inject()
 
     private val successAuthReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context?, intent: Intent?) = setupAsAuthorized()
+        override fun onReceive(context: Context?, intent: Intent?) {
+            runDownloadWorker()
+            runUploadWorker()
+        }
     }
 
-    private val fragmentContainerView: FragmentContainerView by lazy { findViewById(R.id.root_host_fragment) }
-
-    private fun setupAsAuthorized() {
-        runUploadWorker()
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        val frameFragment = fragmentContainerView.getFragment<NavHostFragment>()
-            ?.childFragmentManager
-            ?.fragments
-            ?.filterIsInstance(FrameFragment::class.java)
-            ?.firstOrNull()
-        val navigationHostFragmentOfFrameFragment = frameFragment
-            ?.childFragmentManager
-            ?.fragments
-            ?.filterIsInstance(NavHostFragment::class.java)
-            ?.firstOrNull()
-        navigationHostFragmentOfFrameFragment
-            ?.childFragmentManager
-            ?.fragments
-            ?.filterIsInstance(OnSuccessAuthorizationSensitive::class.java)
-            ?.forEach { it.handleSuccessAuthorization() }
+    override fun setupNotAuthorized() {
+        WorkManager.getInstance(this).cancelAllWorkByTag(SYNC_JOB_TAG)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         loadKoinModules(rootScope)
         LocalBroadcastManager.getInstance(this)
             .registerReceiver(
@@ -81,7 +65,7 @@ class RootActivity : AppCompatActivity(R.layout.activity_root), NavigationRoot {
         if (savedInstanceState == null) {
             lifecycleScope.launchWhenCreated {
                 if (isAuthorizedUseCase.execute()) {
-                    setupAsAuthorized()
+                    runUploadWorker()
                 }
             }
         }
