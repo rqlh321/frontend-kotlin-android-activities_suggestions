@@ -1,23 +1,28 @@
 package com.example.feature_profile_android
 
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.bumptech.glide.Glide
 import com.example.feature_profile.ProfileStore
+import com.example.navigation.AUTH_SUCCESS_BROADCAST
 import com.example.navigation.NavigationRoot
 import com.example.navigation.NavigationScope
-import com.example.navigation.OnSuccessAuthorizationSensitive
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import ru.gubatenko.common_android.BaseFragment
 import ru.gubatenko.common_android.onClick
 import ru.gubatenko.common_android.sharedGraphViewModel
 
-class ProfileFragment : BaseFragment(R.layout.fragment_profile), OnSuccessAuthorizationSensitive {
+class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private val viewModel: ProfileViewModel by sharedGraphViewModel(NavigationScope.FRAME_SCOPE)
 
@@ -27,9 +32,20 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), OnSuccessAuthor
     private val signIn: Button by lazy { requireView().findViewById(R.id.sign_in_id) }
     private val signOut: Button by lazy { requireView().findViewById(R.id.sign_out_id) }
 
+    private val successAuthReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            viewModel.successAuthorization()
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadKoinModules(profileFeatureAndroidModuleDI)
+        LocalBroadcastManager.getInstance(requireContext())
+            .registerReceiver(
+                successAuthReceiver,
+                IntentFilter(AUTH_SUCCESS_BROADCAST)
+            )
 
         signIn.onClick(viewModel::signIn)
         signOut.onClick(viewModel::signOut)
@@ -39,6 +55,9 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), OnSuccessAuthor
     }
 
     override fun onDestroyView() {
+        LocalBroadcastManager.getInstance(requireContext())
+            .unregisterReceiver(successAuthReceiver)
+
         unloadKoinModules(profileFeatureAndroidModuleDI)
         super.onDestroyView()
     }
@@ -46,7 +65,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), OnSuccessAuthor
     private fun handle(event: ProfileStore.Event) {
         when (event) {
             is ProfileStore.Event.NavigateToAuthFlow -> (requireActivity() as? NavigationRoot)?.startAuthorizationFlow()
-            is ProfileStore.Event.StopSyncProcesses  -> (requireActivity() as? NavigationRoot)?.changeUserStateToUnAuthorized()
+            is ProfileStore.Event.StopSyncProcesses  -> (requireActivity() as? NavigationRoot)?.setupNotAuthorized()
         }
     }
 
@@ -60,7 +79,4 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile), OnSuccessAuthor
         signOut.isVisible = state.isSignOutButtonVisible
     }
 
-    override fun handleSuccessAuthorization() {
-        viewModel.successAuthorization()
-    }
 }

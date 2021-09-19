@@ -1,7 +1,7 @@
 package com.example.navigation
 
 interface NavigationRoot {
-    fun changeUserStateToUnAuthorized()
+    fun setupNotAuthorized()
     fun startAuthorizationFlow()
     fun navigationScopeId(scope: NavigationScope):Int
 }

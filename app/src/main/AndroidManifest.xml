@@ -21,7 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.feature_auth_android.AuthActivity" />
+        <activity
+            android:name="com.example.feature_auth_android.AuthActivity"
+            android:theme="@style/Theme.Transparent" />
     </application>
 
 </manifest>
