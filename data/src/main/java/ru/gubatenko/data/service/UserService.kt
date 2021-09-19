@@ -9,5 +9,7 @@ interface UserService {
 
     suspend fun post(data: List<ActivityDto>)
 
+    suspend fun get(): List<ActivityDto>
+
     suspend fun signOut()
 }

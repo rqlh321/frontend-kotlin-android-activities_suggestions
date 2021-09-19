@@ -18,6 +18,7 @@ interface ActivityRepo {
     sealed class ReadQuery {
         object NewActivityFromSourceServerReadQuery : ReadQuery()
         object ActivityFromLocalStorageReadQuery : ReadQuery()
+        object GetUserActionsFromRemoteStorageReadQuery : ReadQuery()
         object NotSyncedActivityFromLocalStorageReadQuery : ReadQuery()
     }
 

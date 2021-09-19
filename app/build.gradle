@@ -39,7 +39,6 @@ android {
         development {
             signingConfig signingConfigs.development
             dimension "version"
-            versionNameSuffix "-development"
         }
         production {
             dimension "version"

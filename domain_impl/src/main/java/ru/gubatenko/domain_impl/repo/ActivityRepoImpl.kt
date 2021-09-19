@@ -23,7 +23,7 @@ class ActivityRepoImpl(
         is ActivityRepo.CreateQuery.NewActivityToLocalStorage -> {
             dao.saveAll(query.activities.map(domainToStored::map))
         }
-        is ActivityRepo.CreateQuery.NewActivityToWebStorage -> {
+        is ActivityRepo.CreateQuery.NewActivityToWebStorage   -> {
             userService.post(query.activities.map(domainToDto::map))
         }
     }
@@ -32,20 +32,27 @@ class ActivityRepoImpl(
         is ActivityRepo.ReadQuery.NotSyncedActivityFromLocalStorageReadQuery -> {
             dao.getNotSynced().map(storedToDomain::map)
         }
-        is ActivityRepo.ReadQuery.ActivityFromLocalStorageReadQuery -> {
+        is ActivityRepo.ReadQuery.ActivityFromLocalStorageReadQuery          -> {
             dao.all().map(storedToDomain::map)
         }
-        is ActivityRepo.ReadQuery.NewActivityFromSourceServerReadQuery -> {
+        is ActivityRepo.ReadQuery.NewActivityFromSourceServerReadQuery       -> {
             listOf(dtoToDomain.map(activitySourceService.activity()))
+        }
+        is ActivityRepo.ReadQuery.GetUserActionsFromRemoteStorageReadQuery   -> {
+            userService.get().map(dtoToDomain::map)
         }
     }
 
     override suspend fun subscribe(query: ActivityRepo.SubscribeQuery) = when(query){
-        is ActivityRepo.SubscribeQuery.ActivityFromLocalStorage -> dao.subscribe().map { it.map(storedToDomain::map) }
+        is ActivityRepo.SubscribeQuery.ActivityFromLocalStorage -> {
+            dao.subscribe().map { it.map(storedToDomain::map) }
+        }
     }
 
     override suspend fun update(query: ActivityRepo.UpdateQuery) = when (query) {
-        is ActivityRepo.UpdateQuery.AllActivitiesSynced -> dao.updateAsSynced(query.activities.mapNotNull { it.uid })
+        is ActivityRepo.UpdateQuery.AllActivitiesSynced -> {
+            dao.updateAsSynced(query.activities.mapNotNull { it.uid })
+        }
     }
 
     override suspend fun delete(query: ActivityRepo.DeleteQuery) = Unit

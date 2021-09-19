@@ -1,4 +1,4 @@
-package ru.gubatenko.patterns
+package ru.gubatenko.patterns.work
 
 import android.content.Context
 import androidx.work.*
@@ -26,6 +26,7 @@ class UploadWorker(
                 flexTimeInterval = 10,
                 flexTimeIntervalUnit = TimeUnit.SECONDS
             )
+                .addTag(SYNC_JOB_TAG)
                 .setConstraints(constraint)
                 .build()
 
