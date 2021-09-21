@@ -1,13 +1,13 @@
 package com.example.feature_profile.side_effects
 
 import com.example.feature_profile.ProfileStore
+import ru.gubatenko.domain.usecase.LongTermWorkUseCase
 import ru.gubatenko.domain.usecase.SignOutUseCase
-import ru.gubatenko.mvi.EventDispatcher
 import ru.gubatenko.mvi.SideEffect
 
 class ClickOnSignOutSideEffect(
     private val useCase: SignOutUseCase,
-    private val eventDispatcher: EventDispatcher<ProfileStore.Event>
+    private val longTermWorkUseCase: LongTermWorkUseCase,
 ) : SideEffect<ProfileStore.Action.ClickOnSignOut, ProfileStore.SideAction> {
 
     override fun actionId() = ProfileStore.Action.ClickOnSignOut::class.java
@@ -17,7 +17,7 @@ class ClickOnSignOutSideEffect(
         reducerCallback: suspend (ProfileStore.SideAction) -> Unit
     ) {
         useCase.execute()
-        eventDispatcher.dispatch(ProfileStore.Event.StopSyncProcesses)
+        longTermWorkUseCase.execute(LongTermWorkUseCase.Query.StopLoad)
         reducerCallback.invoke(ProfileStore.SideAction.LogOut)
     }
 }

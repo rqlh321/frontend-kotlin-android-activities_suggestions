@@ -30,6 +30,8 @@ interface ActivityRepo {
         data class AllActivitiesSynced(val activities: List<Activity>) : UpdateQuery()
     }
 
-    sealed class DeleteQuery
+    sealed class DeleteQuery {
+        object ClearLocalStorage : ActivityRepo.DeleteQuery()
+    }
 
 }

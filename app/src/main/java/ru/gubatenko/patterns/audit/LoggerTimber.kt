@@ -1,4 +1,4 @@
-package ru.gubatenko.patterns
+package ru.gubatenko.patterns.audit
 
 import com.example.audit.Logger
 import timber.log.Timber

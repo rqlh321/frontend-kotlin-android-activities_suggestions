@@ -6,6 +6,8 @@ import com.example.audit.Logger
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import org.koin.dsl.module
+import ru.gubatenko.patterns.audit.LoggerTimber
+import ru.gubatenko.patterns.work.workerUseCaseImplModuleDI
 import timber.log.Timber
 
 class ThisApplication : Application() {
@@ -17,7 +19,10 @@ class ThisApplication : Application() {
         }
         startKoin {
             androidContext(this@ThisApplication)
-            modules(module { single<Logger> { LoggerTimber() } })
+            modules(
+                module { single<Logger> { LoggerTimber() } },
+                workerUseCaseImplModuleDI
+            )
         }
     }
 
