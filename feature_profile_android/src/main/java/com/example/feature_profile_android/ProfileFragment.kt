@@ -65,7 +65,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     private fun handle(event: ProfileStore.Event) {
         when (event) {
             is ProfileStore.Event.NavigateToAuthFlow -> (requireActivity() as? NavigationRoot)?.startAuthorizationFlow()
-            is ProfileStore.Event.StopSyncProcesses  -> (requireActivity() as? NavigationRoot)?.setupNotAuthorized()
         }
     }
 

@@ -1,8 +1,10 @@
 package com.example.feature_auth_android
 
 import android.content.Intent
+import android.os.Bundle
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.FragmentActivity
+import androidx.appcompat.app.AppCompatActivity
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.example.navigation.AUTH_SUCCESS_BROADCAST
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -13,11 +15,26 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import timber.log.Timber
 
-class AuthFirebaseHandler(private val activity: FragmentActivity) : AuthHandler {
+class FirebaseAuthActivity : AppCompatActivity() {
 
-    private val googleSignInForResult = activity.registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
+    private val localBroadcastManager by lazy { LocalBroadcastManager.getInstance(this) }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult(),
+            ::handleResult
+        ).launch(
+            GoogleSignIn.getClient(this, gso).signInIntent
+        )
+    }
+
+    private fun handleResult(it: ActivityResult?) {
         try {
             val signedInAccountFromIntent = GoogleSignIn.getSignedInAccountFromIntent(it?.data)
             val account = signedInAccountFromIntent.getResult(ApiException::class.java)
@@ -25,31 +42,16 @@ class AuthFirebaseHandler(private val activity: FragmentActivity) : AuthHandler 
 
             Firebase.auth
                 .signInWithCredential(credential)
-                .addOnCompleteListener(activity) { task ->
+                .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
                         localBroadcastManager.sendBroadcast(Intent(AUTH_SUCCESS_BROADCAST))
+                        //todo add run works
                     }
-                    activity.finish()
+                    finish()
                 }
         } catch (e: Exception) {
             Timber.d(e)
-            activity.finish()
+            finish()
         }
     }
-
-    private val localBroadcastManager by lazy { LocalBroadcastManager.getInstance(activity) }
-
-    private val googleSignInIntent: Intent by lazy {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(activity.getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-
-        GoogleSignIn.getClient(activity, gso).signInIntent
-    }
-
-    override fun authorize() {
-        googleSignInForResult.launch(googleSignInIntent)
-    }
-
 }

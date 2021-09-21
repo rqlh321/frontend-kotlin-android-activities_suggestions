@@ -5,6 +5,7 @@ import androidx.work.*
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import ru.gubatenko.domain.usecase.SyncLocalDatabaseUseCase
+import ru.gubatenko.patterns.work.LongTermWorkUseCaseImpl.Companion.SYNC_JOB_TAG
 import timber.log.Timber
 
 class DownloadWorker(

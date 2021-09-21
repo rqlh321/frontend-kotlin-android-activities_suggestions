@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.example.feature_auth_android.AuthActivity"
+            android:name="com.example.feature_auth_android.FirebaseAuthActivity"
             android:theme="@style/Theme.Transparent" />
     </application>
 

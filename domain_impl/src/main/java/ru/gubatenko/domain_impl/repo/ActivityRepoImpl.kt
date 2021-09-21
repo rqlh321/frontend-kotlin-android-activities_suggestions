@@ -21,7 +21,7 @@ class ActivityRepoImpl(
 ) : ActivityRepo {
     override suspend fun create(query: ActivityRepo.CreateQuery) = when (query) {
         is ActivityRepo.CreateQuery.NewActivityToLocalStorage -> {
-            dao.saveAll(query.activities.map(domainToStored::map))
+            dao.save(query.activities.map(domainToStored::map))
         }
         is ActivityRepo.CreateQuery.NewActivityToWebStorage   -> {
             userService.post(query.activities.map(domainToDto::map))
@@ -55,5 +55,9 @@ class ActivityRepoImpl(
         }
     }
 
-    override suspend fun delete(query: ActivityRepo.DeleteQuery) = Unit
+    override suspend fun delete(query: ActivityRepo.DeleteQuery) = when(query) {
+        is ActivityRepo.DeleteQuery.ClearLocalStorage -> {
+            dao.delete()
+        }
+    }
 }

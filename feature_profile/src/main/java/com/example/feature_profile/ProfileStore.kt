@@ -24,7 +24,6 @@ class ProfileStore(
 
     sealed class Event {
         object NavigateToAuthFlow : Event()
-        object StopSyncProcesses : Event()
     }
 
     sealed class SideAction {
