@@ -1,6 +1,6 @@
-package com.example.feature_auth.side_effects
+package com.example.feature_auth.offer_auth.side_effects
 
-import com.example.feature_auth.OfferAuthStore
+import com.example.feature_auth.offer_auth.OfferAuthStore
 import ru.gubatenko.domain.usecase.AuthOfferIsViewedUseCase
 import ru.gubatenko.mvi.EventDispatcher
 import ru.gubatenko.mvi.SideEffect

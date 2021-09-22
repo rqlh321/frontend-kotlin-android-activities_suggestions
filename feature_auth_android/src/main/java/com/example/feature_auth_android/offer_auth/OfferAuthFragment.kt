@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
-import com.example.feature_auth.OfferAuthStore
+import com.example.feature_auth.offer_auth.OfferAuthStore
 import com.example.feature_auth_android.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import org.koin.androidx.viewmodel.ext.android.viewModel
