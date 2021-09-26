@@ -12,6 +12,6 @@
 
     <activity
         android:id="@+id/auth_activity_id"
-        android:name="com.example.feature_auth_android.sign_in.firebase.FirebaseAuthActivity" />
+        android:name="com.example.feature_auth_android.sign_in.view.SignInFirebaseActivity" />
 
 </navigation>

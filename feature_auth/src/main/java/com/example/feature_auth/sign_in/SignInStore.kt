@@ -17,7 +17,7 @@ class SignInStore(
 ) {
 
     sealed class Action {
-        class SignIn(credential: Any) : Action()
+        data class SignIn(val credential: Any) : Action()
     }
 
     sealed class SideAction

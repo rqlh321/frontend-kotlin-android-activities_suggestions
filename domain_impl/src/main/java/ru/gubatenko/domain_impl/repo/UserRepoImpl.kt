@@ -24,7 +24,8 @@ class UserRepoImpl(
     }
 
     override suspend fun update(query: UserRepo.UpdateQuery) = when(query){
-        UserRepo.UpdateQuery.SignOutUserQuery -> service.signOut()
+        is UserRepo.UpdateQuery.SignOutUserQuery -> service.signOut()
+        is UserRepo.UpdateQuery.SignInUserQuery -> service.signIn(query.credential)
     }
 
     override suspend fun delete(query: UserRepo.DeleteQuery) {
