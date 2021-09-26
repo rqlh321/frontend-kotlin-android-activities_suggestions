@@ -1,5 +1,6 @@
 package ru.gubatenko.data_impl
 
+import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestoreException
 import com.google.firebase.firestore.ktx.firestore
@@ -52,6 +53,16 @@ class UserServiceImpl : UserService {
             .get()
             .await()
             .toObjects(ActivityDto::class.java)
+    }
+
+    override suspend fun signIn(cred: Any) {
+        (cred as? AuthCredential)?.let { firebaseCred ->
+            Firebase.auth
+                .signInWithCredential(firebaseCred)
+                .await()
+                ?: throw Exception("Bad credentials")
+
+        } ?: throw IllegalArgumentException("Wrong credential class")
     }
 
     override suspend fun signOut() = Firebase.auth.signOut()

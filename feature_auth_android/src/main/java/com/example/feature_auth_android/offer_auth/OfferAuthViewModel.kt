@@ -1,6 +1,6 @@
 package com.example.feature_auth_android.offer_auth
 
-import com.example.feature_auth.OfferAuthStore
+import com.example.feature_auth.offer_auth.OfferAuthStore
 import ru.gubatenko.common_android.BaseViewModel
 import ru.gubatenko.mvi.EventDispatcher
 import ru.gubatenko.mvi_android.android.LiveDataEventDispatcher

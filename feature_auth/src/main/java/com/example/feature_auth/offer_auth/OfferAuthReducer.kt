@@ -1,4 +1,4 @@
-package com.example.feature_auth
+package com.example.feature_auth.offer_auth
 
 import ru.gubatenko.mvi.Reducer
 

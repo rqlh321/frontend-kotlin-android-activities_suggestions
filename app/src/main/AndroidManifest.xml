@@ -21,9 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.example.feature_auth_android.FirebaseAuthActivity"
-            android:theme="@style/Theme.Transparent" />
+        <activity android:name="com.example.feature_auth_android.sign_in.view.SignInFirebaseActivity" />
     </application>
 
 </manifest>

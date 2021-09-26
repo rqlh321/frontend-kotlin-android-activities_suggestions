@@ -11,5 +11,7 @@ interface UserService {
 
     suspend fun get(): List<ActivityDto>
 
+    suspend fun signIn(cred: Any)
+
     suspend fun signOut()
 }
