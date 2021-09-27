@@ -16,6 +16,9 @@ import com.example.feature_profile.ProfileStore
 import com.example.navigation.AUTH_SUCCESS_BROADCAST
 import com.example.navigation.NavigationRoot
 import com.example.navigation.NavigationScope
+import com.google.android.material.imageview.ShapeableImageView
+import com.google.android.material.shape.CornerFamily
+import com.google.android.material.shape.RelativeCornerSize
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import ru.gubatenko.common_android.BaseFragment
@@ -26,9 +29,8 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private val viewModel: ProfileViewModel by sharedGraphViewModel(NavigationScope.FRAME_SCOPE)
 
-    private val avatar: ImageView by lazy { requireView().findViewById(R.id.avatar_id) }
+    private val avatar: ShapeableImageView by lazy { requireView().findViewById(R.id.avatar_id) }
     private val name: TextView by lazy { requireView().findViewById(R.id.name_id) }
-    private val about: TextView by lazy { requireView().findViewById(R.id.about_id) }
     private val signIn: Button by lazy { requireView().findViewById(R.id.sign_in_id) }
     private val signOut: Button by lazy { requireView().findViewById(R.id.sign_out_id) }
 
@@ -41,6 +43,12 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadKoinModules(profileFeatureAndroidModuleDI)
+
+        avatar.shapeAppearanceModel = avatar.shapeAppearanceModel
+            .toBuilder()
+            .setAllCornerSizes(RelativeCornerSize(.5f))
+            .build()
+
         LocalBroadcastManager.getInstance(requireContext())
             .registerReceiver(
                 successAuthReceiver,
@@ -71,7 +79,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     private fun render(state: ProfileStore.State) {
         name.text = state.name
         Glide.with(avatar).load(state.avatar).into(avatar)
-        about.text = state.about
         signIn.text = state.signInButtonText
         signIn.isVisible = state.isSignInButtonVisible
         signOut.text = state.signOutButtonText

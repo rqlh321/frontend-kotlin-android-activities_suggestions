@@ -24,7 +24,7 @@ val profileFeatureAndroidModuleDI = module {
         SideEffects.Builder<ProfileStore.Action, ProfileStore.SideAction>()
             .append(sideEffect = ClickOnSignInSideEffect(eventDispatcher = get(named(PROFILE_EVENT_DISPATCHER))))
             .append(sideEffect = ClickOnSignOutSideEffect(useCase = get(), longTermWorkUseCase = get()))
-            .append(sideEffect = GetCurrentUserSideEffect(getSignedInUserUseCase = get(), getStaticTextUseCase = get(), getDynamicTextUseCase = get()))
+            .append(sideEffect = GetCurrentUserSideEffect(getSignedInUserUseCase = get(), getStaticTextUseCase = get()))
             .build()
     }
     single {

@@ -15,6 +15,7 @@ class FrameFragment : Fragment(R.layout.fragment_frame) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navigation.itemIconTintList = null
         container.getFragment<NavHostFragment>()
             ?.let { navigation.setupWithNavController(it.navController) }
     }

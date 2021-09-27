@@ -30,7 +30,6 @@ class ProfileStore(
         data class SetupProfileScreen(
             val name: String?,
             val avatar: String?,
-            val aboutText: String,
             val signInButtonText: String,
             val signOutButtonText: String,
             val isSignInButtonVisible: Boolean,
@@ -42,7 +41,6 @@ class ProfileStore(
     data class State(
         val name: String? = null,
         val avatar: String? = null,
-        val about: String? = null,
 
         val signInButtonText: String? = null,
         val isSignInButtonVisible: Boolean = false,

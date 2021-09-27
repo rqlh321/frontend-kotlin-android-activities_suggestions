@@ -10,7 +10,6 @@ class ProfileStoreReducer : Reducer<ProfileStore.State, ProfileStore.SideAction>
         is ProfileStore.SideAction.SetupProfileScreen -> currentState.copy(
             name = newAction.name,
             avatar = newAction.avatar,
-            about = newAction.aboutText,
             isSignOutButtonVisible = newAction.isSignOutButtonVisible,
             isSignInButtonVisible = newAction.isSignInButtonVisible,
             signInButtonText = newAction.signInButtonText,

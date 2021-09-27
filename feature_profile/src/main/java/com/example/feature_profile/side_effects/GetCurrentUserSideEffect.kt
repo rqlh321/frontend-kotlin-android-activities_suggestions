@@ -10,7 +10,6 @@ import ru.gubatenko.mvi.SideEffect
 class GetCurrentUserSideEffect(
     private val getSignedInUserUseCase: GetSignedInUserUseCase,
     private val getStaticTextUseCase: GetStaticTextUseCase,
-    private val getDynamicTextUseCase: GetDynamicTextUseCase,
 ) : SideEffect<ProfileStore.Action.InitProfileScreen, ProfileStore.SideAction> {
 
     override fun actionId() = ProfileStore.Action.InitProfileScreen::class.java
@@ -21,14 +20,12 @@ class GetCurrentUserSideEffect(
     ) {
         val user = getSignedInUserUseCase.execute()
 
-        val aboutText = getDynamicTextUseCase.execute(TextKey.Dynamic.ABOUT)
         val signInButtonText = getStaticTextUseCase.execute(TextKey.Profile.SIGN_IN)
         val signOutButtonText = getStaticTextUseCase.execute(TextKey.Profile.SIGN_OUT)
         reducerCallback.invoke(
             ProfileStore.SideAction.SetupProfileScreen(
                 name = user?.name,
                 avatar = user?.avatar,
-                aboutText = aboutText,
                 signInButtonText = signInButtonText,
                 signOutButtonText = signOutButtonText,
                 isSignInButtonVisible = false,
