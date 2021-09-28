@@ -19,6 +19,7 @@ class UserServiceImpl : UserService {
             uid = it.uid,
             name = it.displayName ?: "",
             avatar = it.photoUrl?.toString(),
+            email = it.email
         )
     }
 

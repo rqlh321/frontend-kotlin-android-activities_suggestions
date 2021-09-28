@@ -29,20 +29,20 @@ class ProfileStore(
     sealed class SideAction {
         data class SetupProfileScreen(
             val name: String?,
+            val email: String?,
             val avatar: String?,
-            val aboutText: String,
             val signInButtonText: String,
             val signOutButtonText: String,
             val isSignInButtonVisible: Boolean,
             val isSignOutButtonVisible: Boolean,
         ) : SideAction()
-        object LogOut: SideAction()
+        data class LogOut(val name: String): SideAction()
     }
 
     data class State(
         val name: String? = null,
         val avatar: String? = null,
-        val about: String? = null,
+        val email: String? = null,
 
         val signInButtonText: String? = null,
         val isSignInButtonVisible: Boolean = false,

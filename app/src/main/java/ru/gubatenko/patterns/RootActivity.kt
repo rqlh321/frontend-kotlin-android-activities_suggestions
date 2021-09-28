@@ -39,6 +39,10 @@ class RootActivity : AppCompatActivity(R.layout.activity_root), NavigationRoot {
         findNavController(R.id.root_host_fragment).navigate(R.id.auth_graph)
     }
 
+    override fun oferAuthorizationFlow() {
+        findNavController(R.id.root_host_fragment).navigate(R.id.ofer_auth_graph)
+    }
+
     override fun navigationScopeId(scope: NavigationScope) = R.id.frame_graph_id
 
 }

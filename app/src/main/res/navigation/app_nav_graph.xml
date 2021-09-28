@@ -10,6 +10,7 @@
         android:name="ru.gubatenko.patterns.FrameFragment"
         tools:layout="@layout/fragment_frame" />
 
+    <include app:graph="@navigation/ofer_auth_graph" />
     <include app:graph="@navigation/auth_graph" />
 
 </navigation>

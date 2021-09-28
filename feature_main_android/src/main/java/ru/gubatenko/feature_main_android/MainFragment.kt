@@ -55,7 +55,7 @@ class MainFragment : BaseFragment(R.layout.fragment_main) {
                 Toast.LENGTH_SHORT
             ).show()
             is MainStore.Event.NavigateTo -> findNavController().navigate(event.locationId)
-            is MainStore.Event.NavigateToAuthFlow -> (requireActivity() as? NavigationRoot)?.startAuthorizationFlow()
+            is MainStore.Event.NavigateToAuthFlow -> (requireActivity() as? NavigationRoot)?.oferAuthorizationFlow()
         }
     }
 

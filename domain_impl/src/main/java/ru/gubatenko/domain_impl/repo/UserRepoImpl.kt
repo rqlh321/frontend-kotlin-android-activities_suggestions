@@ -18,6 +18,7 @@ class UserRepoImpl(
                     uid = it.uid,
                     name = it.name,
                     avatar = it.avatar,
+                    email = it.email,
                 )
             }?.let(::listOf) ?: emptyList()
         }
