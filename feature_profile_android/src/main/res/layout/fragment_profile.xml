@@ -7,11 +7,16 @@
     android:orientation="vertical"
     android:padding="16dp">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".3" />
+
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/avatar_id"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:layout_marginTop="16dp"
+        android:background="@drawable/ic_profile_not_active"
         android:contentDescription="@string/profile_avatar_content_description" />
 
     <TextView
@@ -22,6 +27,14 @@
         android:layout_marginTop="16dp"
         tools:text="Firstname Lastname" />
 
+    <TextView
+        android:id="@+id/email_id"
+        style="@style/TextSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        tools:text="YourEmail@google.com" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -29,7 +42,7 @@
 
     <Button
         android:id="@+id/sign_in_id"
-        style="@style/Text"
+        style="@style/Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/pinzelan_regular"
@@ -37,7 +50,7 @@
 
     <Button
         android:id="@+id/sign_out_id"
-        style="@style/Text"
+        style="@style/Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/pinzelan_regular"

@@ -18,6 +18,7 @@ object TextKey {
     object Profile {
         const val SIGN_IN = "sign_in"
         const val SIGN_OUT = "sign_out"
+        const val DEFAULT_NAME = "default_name"
     }
 
     object Dynamic {
