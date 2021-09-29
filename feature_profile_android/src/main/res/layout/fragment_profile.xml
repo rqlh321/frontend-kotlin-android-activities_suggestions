@@ -21,10 +21,11 @@
 
     <TextView
         android:id="@+id/name_id"
-        style="@style/Text"
+        style="@style/TextMedium"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_medium"
         tools:text="Firstname Lastname" />
 
     <TextView
@@ -32,7 +33,7 @@
         style="@style/TextSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="@dimen/margin_small"
         tools:text="YourEmail@google.com" />
 
     <View
@@ -42,7 +43,7 @@
 
     <Button
         android:id="@+id/sign_in_id"
-        style="@style/Button"
+        style="@style/ButtonMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/pinzelan_regular"
@@ -50,7 +51,7 @@
 
     <Button
         android:id="@+id/sign_out_id"
-        style="@style/Button"
+        style="@style/ButtonMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/pinzelan_regular"

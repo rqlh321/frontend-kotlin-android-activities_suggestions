@@ -10,6 +10,10 @@ object TextKey {
         const val SAVE = "save"
     }
 
+    object Promise {
+        const val EMPTY_LIST = "promise_empty_list"
+    }
+
     object Auth {
         const val OFFER_AUTH_LABEL = "offer_auth_label"
         const val OFFER_AUTH_BUTTON = "offer_auth_button"

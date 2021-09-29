@@ -6,5 +6,6 @@
   "error": "Error",
   "save": "Save",
   "retry": "Retry",
-  "default_name": "Anonymous"
+  "default_name": "Anonymous",
+  "promise_empty_list": "You didn't promise anything yet... Good for you!"
 }

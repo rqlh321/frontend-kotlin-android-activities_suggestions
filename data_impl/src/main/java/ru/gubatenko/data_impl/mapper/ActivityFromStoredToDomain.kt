@@ -10,5 +10,6 @@ class ActivityFromStoredToDomain : Mapper<ActivityStored, Activity>() {
         activity = data.activity,
         type = null,
         accessibility = null,
+        isSynced = data.isSynced,
     )
 }

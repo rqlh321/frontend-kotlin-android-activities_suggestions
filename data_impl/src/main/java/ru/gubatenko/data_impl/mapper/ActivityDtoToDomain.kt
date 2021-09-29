@@ -10,5 +10,6 @@ class ActivityDtoToDomain : Mapper<ActivityDto, Activity>() {
         activity = data.activity,
         type = null,
         accessibility = null,
+        isSynced = true,
     )
 }
