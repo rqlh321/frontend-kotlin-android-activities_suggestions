@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Text">
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">18sp</item>
-        <item name="android:fontFamily">@font/pinzelan_regular</item>
-    </style>
-
-    <style name="Button">
+    <style name="TextMedium">
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/pinzelan_regular</item>
     </style>
 
     <style name="TextSmall">
         <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/pinzelan_regular</item>
+    </style>
+
+    <style name="ButtonMedium">
+        <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/pinzelan_regular</item>
     </style>
 

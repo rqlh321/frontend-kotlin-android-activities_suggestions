@@ -5,4 +5,5 @@ data class Activity(
     val activity: String,
     val type: String?,
     val accessibility: String?,
+    val isSynced: Boolean?,
 )
