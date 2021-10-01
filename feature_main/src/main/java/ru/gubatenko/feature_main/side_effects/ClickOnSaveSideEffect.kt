@@ -16,7 +16,7 @@ class ClickOnSaveSideEffect(
         action: MainStore.Action.SaveContent,
         reducerCallback: suspend (MainStore.SideAction) -> Unit
     ) {
-        val actionToSave = stateObservable.stateValue.action ?: return
+        val actionToSave = stateObservable.stateValue.idea ?: return
         useCase.execute(actionToSave)
     }
 }

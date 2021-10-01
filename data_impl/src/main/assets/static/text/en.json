@@ -5,6 +5,7 @@
   "sign_out": "Sign Out",
   "error": "Error",
   "save": "Save",
+  "next": "Next",
   "retry": "Retry",
   "default_name": "Anonymous",
   "promise_empty_list": "You didn't promise anything yet... Good for you!"

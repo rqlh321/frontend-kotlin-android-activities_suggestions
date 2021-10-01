@@ -8,6 +8,7 @@ object TextKey {
 
     object Main {
         const val SAVE = "save"
+        const val NEXT = "next"
     }
 
     object Promise {

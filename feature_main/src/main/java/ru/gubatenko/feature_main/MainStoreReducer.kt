@@ -12,35 +12,20 @@ class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
         )
         is MainStore.SideAction.LoadStart -> currentState.copy(
             isLoadingProgressVisible = true,
-            isRefreshInProgress = false,
-            isRefreshEnabled = false,
 
             isRetryButtonVisible = false,
 
             isSaveButtonClickable = false,
+            isNextButtonClickable = false,
 
-            isActionTextVisible = false,
-            action = null,
-
-            isErrorTextVisible = false,
-            errorText = null,
-        )
-        is MainStore.SideAction.RefreshStart -> currentState.copy(
-            isLoadingProgressVisible = false,
-            isRefreshInProgress = true,
-
-            isRetryButtonVisible = false,
-
-            isSaveButtonVisible = true,
-            isSaveButtonClickable = true,
+            isIdeaTextVisible = false,
+            idea = null,
 
             isErrorTextVisible = false,
             errorText = null,
         )
         is MainStore.SideAction.LoadError -> currentState.copy(
             isLoadingProgressVisible = false,
-            isRefreshInProgress = false,
-            isRefreshEnabled = false,
 
             retryButtonText = newAction.retryButtonText,
             isRetryButtonVisible = true,
@@ -48,23 +33,14 @@ class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
             isSaveButtonVisible = false,
             isSaveButtonClickable = false,
 
-            isActionTextVisible = false,
-            action = null,
+            isIdeaTextVisible = false,
+            idea = null,
 
             isErrorTextVisible = true,
             errorText = newAction.message,
         )
-        is MainStore.SideAction.RefreshError -> currentState.copy(
-            isRefreshInProgress = false,
-        )
-        is MainStore.SideAction.RefreshSuccess -> currentState.copy(
-            action = newAction.activity,
-            isRefreshInProgress = false,
-        )
         is MainStore.SideAction.LoadSuccess -> currentState.copy(
             isLoadingProgressVisible = false,
-            isRefreshInProgress = false,
-            isRefreshEnabled = true,
 
             isRetryButtonVisible = false,
 
@@ -72,8 +48,12 @@ class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
             isSaveButtonVisible = true,
             isSaveButtonClickable = true,
 
-            isActionTextVisible = true,
-            action = newAction.activity,
+            nextButtonText = newAction.nextButtonText ?: currentState.nextButtonText,
+            isNextButtonVisible = true,
+            isNextButtonClickable = true,
+
+            isIdeaTextVisible = true,
+            idea = newAction.idea,
 
             isErrorTextVisible = false,
             errorText = null,

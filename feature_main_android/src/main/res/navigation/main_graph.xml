@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/main_fragment_id"
-        android:name="ru.gubatenko.feature_main_android.MainFragment"
-        tools:layout="@layout/fragment_main" />
+        android:name="ru.gubatenko.feature_main_android.IdeaFragment"
+        tools:layout="@layout/fragment_idea" />
 
 </navigation>

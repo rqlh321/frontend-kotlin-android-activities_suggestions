@@ -6,7 +6,7 @@ import ru.gubatenko.mvi.EventDispatcher
 import ru.gubatenko.mvi_android.android.LiveDataEventDispatcher
 import ru.gubatenko.mvi_android.android.LiveDataStateObservable
 
-class MainViewModel(
+class IdeaViewModel(
     dispatcher: EventDispatcher<MainStore.Event>,
     private val store: MainStore
 ) : BaseViewModel() {
@@ -16,7 +16,7 @@ class MainViewModel(
 
     init {
         io {
-            store.process(MainStore.Action.SetupScreen)
+            store.process(MainStore.Action.LoadContent)
         }
     }
 
@@ -29,12 +29,8 @@ class MainViewModel(
         store.process(MainStore.Action.LoadContent)
     }
 
-    fun onContentClick() = default {
-        store.process(MainStore.Action.ClickOnContent)
-    }
-
-    fun refresh() = io {
-        store.process(MainStore.Action.RefreshContent)
+    fun next() = io {
+        store.process(MainStore.Action.LoadContent)
     }
 
     override fun onUnknownUserException() = default {
