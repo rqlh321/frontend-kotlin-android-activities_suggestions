@@ -5,11 +5,9 @@ import ru.gubatenko.domain.usecase.GetStaticTextUseCase
 import ru.gubatenko.domain.usecase.GetSuggestedActivityUseCase
 import ru.gubatenko.feature_main.MainStore
 import ru.gubatenko.mvi.SideEffect
-import ru.gubatenko.mvi.StateObservable
 
 class LoadMainContentSideEffect(
     private val getStaticTextUseCase: GetStaticTextUseCase,
-    private val stateObservable: StateObservable<MainStore.State>,
     private val getSuggestedActivityUseCase: GetSuggestedActivityUseCase
 ) : SideEffect<MainStore.Action.LoadContent, MainStore.SideAction> {
 
@@ -20,17 +18,26 @@ class LoadMainContentSideEffect(
         reducerCallback: suspend (MainStore.SideAction) -> Unit
     ) {
         try {
-            if (stateObservable.stateValue.isRefreshInProgress) {
-                return
-            }
             reducerCallback.invoke(MainStore.SideAction.LoadStart)
-            val activity = getSuggestedActivityUseCase.execute()
+            val idea = getSuggestedActivityUseCase.execute()
             val saveButtonText = getStaticTextUseCase.execute(TextKey.Main.SAVE)
-            reducerCallback.invoke(MainStore.SideAction.LoadSuccess(activity = activity, saveButtonText = saveButtonText))
+            val nextButtonText = getStaticTextUseCase.execute(TextKey.Main.NEXT)
+            reducerCallback.invoke(
+                MainStore.SideAction.LoadSuccess(
+                    idea = idea,
+                    saveButtonText = saveButtonText,
+                    nextButtonText = nextButtonText
+                )
+            )
         } catch (e: Exception) {
             val message = getStaticTextUseCase.execute(TextKey.Common.ERROR)
             val retryButtonText = getStaticTextUseCase.execute(TextKey.Common.RETRY)
-            reducerCallback.invoke(MainStore.SideAction.LoadError(message = message, retryButtonText = retryButtonText))
+            reducerCallback.invoke(
+                MainStore.SideAction.LoadError(
+                    message = message,
+                    retryButtonText = retryButtonText
+                )
+            )
         }
     }
 }
