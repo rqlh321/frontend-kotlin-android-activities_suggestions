@@ -1,21 +1,21 @@
 package ru.gubatenko.common_android
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.gubatenko.domain.exception.UnknownUserException
+import timber.log.Timber
 
 abstract class BaseViewModel : ViewModel() {
 
     protected fun io(block: suspend () -> Unit) = suspendFun(Dispatchers.IO, block)
-    protected fun default(block: suspend () -> Unit): Unit = suspendFun(Dispatchers.Default, block)
+    protected fun default(block: suspend () -> Unit) = suspendFun(Dispatchers.Default, block)
     protected fun main(block: suspend () -> Unit) = suspendFun(Dispatchers.Main, block)
     protected fun unconfined(block: suspend () -> Unit) = suspendFun(Dispatchers.Unconfined, block)
 
-    protected abstract fun onUnknownUserException()
+    protected open fun onUnknownUserException() = Unit
 
     private fun suspendFun(
         dispatcher: CoroutineDispatcher,
@@ -25,10 +25,10 @@ abstract class BaseViewModel : ViewModel() {
             try {
                 block.invoke()
             } catch (e: Exception) {
+                Timber.d(e)
                 when (e) {
                     is UnknownUserException -> onUnknownUserException()
                 }
-                Log.d(this::class.java.simpleName, e.message ?: e::class.java.simpleName)
             }
         }
     }

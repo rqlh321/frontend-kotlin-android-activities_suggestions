@@ -1,0 +1,12 @@
+{
+  "offer_auth_label": "Reveal your self",
+  "offer_auth_button": "Coming out",
+  "sign_in": "Sign In",
+  "sign_out": "Sign Out",
+  "error": "Error",
+  "save": "Save",
+  "next": "Next",
+  "retry": "Retry",
+  "default_name": "Anonymous",
+  "promise_empty_list": "You didn't promise anything yet... Good for you!"
+}

@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "415842981247-ts74pvoq5748neonqpf4pc1uv09endsb.apps.googleusercontent.com",
+          "client_id": "415842981247-i3uoa8qr1pb2eepvsm65ddgcgv664068.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "ru.gubatenko.patterns",
-            "certificate_hash": "6f6a4dd56382a1d0b34fb95517eace4b23ba17b4"
+            "certificate_hash": "a0e5c0232dc1a0797501981caf90b61ee69d34f7"
           }
         },
         {

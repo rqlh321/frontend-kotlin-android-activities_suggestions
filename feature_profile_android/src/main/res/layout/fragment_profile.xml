@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight=".3" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/avatar_id"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/ic_profile_not_active"
+        android:contentDescription="@string/profile_avatar_content_description" />
+
+    <TextView
+        android:id="@+id/name_id"
+        style="@style/TextMedium"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_medium"
+        tools:text="Firstname Lastname" />
+
+    <TextView
+        android:id="@+id/email_id"
+        style="@style/TextSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
+        tools:text="YourEmail@google.com" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <Button
+        android:id="@+id/sign_in_id"
+        style="@style/ButtonMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pinzelan_regular"
+        tools:text="Sign In" />
+
+    <Button
+        android:id="@+id/sign_out_id"
+        style="@style/ButtonMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pinzelan_regular"
+        tools:text="Sign Out" />
+
+</LinearLayout>

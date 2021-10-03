@@ -13,7 +13,7 @@ class SideEffects<Action : Any, SideAction : Any> private constructor() {
 
         private val sideEffects = SideEffects<Action, SideAction>()
 
-        fun appendSideEffect(
+        fun append(
             sideEffect: SideEffect<out Action, out SideAction>
         ): Builder<Action, SideAction> {
             sideEffects.sideEffectsMap[sideEffect.actionId()] = sideEffect

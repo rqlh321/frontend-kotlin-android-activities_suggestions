@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ofer_auth_graph"
+    app:startDestination="@id/offer_auth_fragment_id">
+
+    <dialog
+        android:id="@+id/offer_auth_fragment_id"
+        android:name="com.example.feature_auth_android.offer_auth.OfferAuthFragment"
+        tools:layout="@layout/fragment_offer_auth" />
+
+    <activity
+        android:id="@+id/auth_activity_id"
+        android:name="com.example.feature_auth_android.sign_in.view.SignInFirebaseActivity" />
+
+</navigation>

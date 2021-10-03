@@ -2,33 +2,38 @@ package ru.gubatenko.domain_impl
 
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import ru.gubatenko.domain.repo.ActivitySourceRepo
-import ru.gubatenko.domain.repo.UserActivityRepo
-import ru.gubatenko.domain.usecase.ActivityUseCase
-import ru.gubatenko.domain_impl.repo.ActivitySourceRepoImpl
-import ru.gubatenko.domain_impl.repo.UserActivityRepoImpl
-import ru.gubatenko.domain_impl.use_case.ActivityUseCaseImpl
+import ru.gubatenko.domain.repo.ActivityRepo
+import ru.gubatenko.domain.repo.UserRepo
+import ru.gubatenko.domain.usecase.*
+import ru.gubatenko.domain_impl.repo.ActivityRepoImpl
+import ru.gubatenko.domain_impl.repo.UserRepoImpl
+import ru.gubatenko.domain_impl.use_case.*
 
-val repoImplModuleDI = module {
-    single<UserActivityRepo> {
-        UserActivityRepoImpl(
+val rootScopeRepoImplModuleDI = module {
+    single<ActivityRepo> {
+        ActivityRepoImpl(
             dao = get(),
-            toStored = get(named("2")),
-            toDomain = get(named("3"))
+            activitySourceService = get(),
+            userService = get(),
+            domainToStored = get(named("domainToStored")),
+            storedToDomain = get(named("storedToDomain")),
+            domainToDto = get(named("domainToDto")),
+            dtoToDomain = get(named("dtoToDomain")),
         )
     }
-    single<ActivitySourceRepo> {
-        ActivitySourceRepoImpl(
-            service = get(),
-            toDomain = get(named("1"))
-        )
-    }
+    single<UserRepo> { UserRepoImpl(service = get()) }
 }
-val usaCaseImplModuleDI = module {
-    single<ActivityUseCase> {
-        ActivityUseCaseImpl(
-            activityRepo = get(),
-            userActivityRepo = get(),
-        )
-    }
+val rootScopeUsaCaseImplModuleDI = module {
+    single<GetSuggestedActivityUseCase> { GetSuggestedActivityUseCaseImpl(repo = get()) }
+    single<SaveActivityToLocalStorageUseCase> { SaveActivityToLocalStorageUseCaseImpl(repo = get(), prefs = get()) }
+    single<SyncActivitiesWithServerUseCase> { SyncActivitiesWithServerUseCaseImpl(repo = get()) }
+    single<AuthOfferIsViewedUseCase> { AuthOfferIsViewedUseCaseImpl(prefs = get()) }
+    single<IsAuthorizedUseCase> { IsAuthorizedUseCaseImpl(repo = get()) }
+    single<GetSignedInUserUseCase> { GetSignedInUserUseCaseImpl(repo = get()) }
+    single<SignOutUseCase> { SignOutUseCaseImpl(userRepo = get(), activityRepo = get()) }
+    single<GetAllPromiseUseCase> { GetAllSavedActivitiesUseCaseImpl(repo = get()) }
+    single<GetStaticTextUseCase> { GetStaticTextUseCaseImpl(staticText = get()) }
+    single<GetDynamicTextUseCase> { GetDynamicTextUseCaseImpl(dynamicText = get()) }
+    single<SyncLocalDatabaseUseCase> {  SyncLocalDatabaseUseCaseImpl(repo = get())}
+    single<SignInUseCase> { SignInUseCaseImpl( repo=get()) }
 }

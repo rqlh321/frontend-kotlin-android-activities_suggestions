@@ -1,33 +1,29 @@
 package ru.gubatenko.patterns
 
 import android.app.Application
+import androidx.work.*
+import com.example.audit.Logger
 import org.koin.android.ext.koin.androidContext
-import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
-import ru.gubatenko.data_impl.serviceImplModuleDI
-import ru.gubatenko.domain_impl.repoImplModuleDI
-import ru.gubatenko.domain_impl.usaCaseImplModuleDI
-import ru.gubatenko.feature_main_android.mainFeatureAndroidModuleDI
-import ru.gubatenko.data_impl.daoModuleDI
-import ru.gubatenko.data_impl.dtoMapperImplModuleDI
-import ru.gubatenko.data_impl.storedMapperImplModuleDI
+import org.koin.dsl.module
+import ru.gubatenko.patterns.audit.LoggerTimber
+import ru.gubatenko.patterns.work.workerUseCaseImplModuleDI
+import timber.log.Timber
 
 class ThisApplication : Application() {
 
     override fun onCreate() {
         super.onCreate()
+        if (BuildConfig.DEBUG) {
+            Timber.plant(Timber.DebugTree())
+        }
         startKoin {
-            androidLogger()
             androidContext(this@ThisApplication)
             modules(
-                storedMapperImplModuleDI,
-                dtoMapperImplModuleDI,
-                daoModuleDI,
-                serviceImplModuleDI,
-                repoImplModuleDI,
-                usaCaseImplModuleDI,
-                mainFeatureAndroidModuleDI,
+                module { single<Logger> { LoggerTimber() } },
+                workerUseCaseImplModuleDI
             )
         }
     }
+
 }
