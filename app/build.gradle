@@ -26,12 +26,19 @@ android {
             storeFile file("keystore.jks")
             storePassword '123456'
         }
+        production {
+            keyAlias keystore_promise_release_alias
+            keyPassword keystore_promise_release_pass_key
+            storeFile file(keystore_promise_release_jks)
+            storePassword keystore_promise_release_pass_store
+        }
     }
     buildTypes {
         debug {
             signingConfig signingConfigs.development
         }
         release {
+            signingConfig signingConfigs.production
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -45,6 +52,7 @@ android {
             versionNameSuffix "-development"
         }
         production {
+            signingConfig signingConfigs.production
             dimension "version"
         }
     }
