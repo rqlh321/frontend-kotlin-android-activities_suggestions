@@ -22,6 +22,10 @@ class ProfileViewModel(
         store.process(ProfileStore.Action.InitProfileScreen)
     }
 
+    fun switchAction(id: String, isOn: Boolean) {
+
+    }
+
     fun signIn() = io {
         store.process(ProfileStore.Action.ClickOnSignIn)
     }

@@ -10,8 +10,10 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.feature_profile.ProfileStore
+import com.example.feature_profile_android.adapter.PrefAdapter
 import com.example.navigation.AUTH_SUCCESS_BROADCAST
 import com.example.navigation.NavigationRoot
 import com.example.navigation.NavigationScope
@@ -32,6 +34,9 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     private val email: TextView by lazy { requireView().findViewById(R.id.email_id) }
     private val signIn: Button by lazy { requireView().findViewById(R.id.sign_in_id) }
     private val signOut: Button by lazy { requireView().findViewById(R.id.sign_out_id) }
+    private val prefsList: RecyclerView by lazy { requireView().findViewById(R.id.prefs_list_id) }
+
+    private val prefsListAdapter: PrefAdapter by lazy { PrefAdapter(viewModel::switchAction) }
 
     private val successAuthReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -42,6 +47,8 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         loadKoinModules(profileFeatureAndroidModuleDI)
+
+        prefsList.adapter = prefsListAdapter
 
         avatar.shapeAppearanceModel = avatar.shapeAppearanceModel
             .toBuilder()
@@ -76,9 +83,10 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     }
 
     private fun render(state: ProfileStore.State) {
+        Glide.with(avatar).load(state.avatar).into(avatar)
         name.text = state.name
         email.text = state.email
-        Glide.with(avatar).load(state.avatar).into(avatar)
+        prefsListAdapter.data = state.pref
         signIn.text = state.signInButtonText
         signIn.isVisible = state.isSignInButtonVisible
         signOut.text = state.signOutButtonText

@@ -1,9 +1,9 @@
 package com.example.feature_profile
 
+import com.example.audit.Logger
 import ru.gubatenko.mvi.AbstractStore
 import ru.gubatenko.mvi.SideEffects
 import ru.gubatenko.mvi.StateObservable
-import com.example.audit.Logger
 
 class ProfileStore(
     logger: Logger,
@@ -36,13 +36,22 @@ class ProfileStore(
             val isSignInButtonVisible: Boolean,
             val isSignOutButtonVisible: Boolean,
         ) : SideAction()
-        data class LogOut(val name: String): SideAction()
+
+        data class LogOut(val name: String) : SideAction()
     }
 
     data class State(
         val name: String? = null,
         val avatar: String? = null,
         val email: String? = null,
+
+        val pref: List<PrefModel> = listOf(
+            SwitchPrefModel(
+                id = "id",
+                title = "title",
+                isOn = true
+            )
+        ),
 
         val signInButtonText: String? = null,
         val isSignInButtonVisible: Boolean = false,
