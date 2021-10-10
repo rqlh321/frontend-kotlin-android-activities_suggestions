@@ -4,13 +4,13 @@ import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.feature_profile.PrefModel
+import ru.gubatenko.domain.model.Pref
 
 class PrefAdapter(
     private val switchAction: ((String, Boolean) -> Unit)? = null
 ) : RecyclerView.Adapter<PrefViewHolder>() {
 
-    var data: List<PrefModel> = emptyList()
+    var data: List<Pref> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -30,7 +30,7 @@ class PrefAdapter(
     override fun getItemCount() = data.size
 
     private fun Int.toView(context: Context): View = when (this) {
-        PrefModel.SWITCH_PREF_VIEW -> SwitchPrefView(context)
+        Pref.SWITCH_PREF_VIEW -> SwitchPrefView(context)
         else -> throw IllegalArgumentException()
     }
 }

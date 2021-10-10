@@ -1,6 +1,7 @@
 package com.example.feature_profile
 
 import com.example.audit.Logger
+import ru.gubatenko.domain.model.Pref
 import ru.gubatenko.mvi.AbstractStore
 import ru.gubatenko.mvi.SideEffects
 import ru.gubatenko.mvi.StateObservable
@@ -17,7 +18,7 @@ class ProfileStore(
 ) {
 
     sealed class Action {
-        object InitProfileScreen : Action()
+        object OpenProfileScreen : Action()
         object ClickOnSignIn : Action()
         object ClickOnSignOut : Action()
     }
@@ -28,6 +29,7 @@ class ProfileStore(
 
     sealed class SideAction {
         data class SetupProfileScreen(
+            val pref: List<Pref>,
             val name: String?,
             val email: String?,
             val avatar: String?,
@@ -45,13 +47,7 @@ class ProfileStore(
         val avatar: String? = null,
         val email: String? = null,
 
-        val pref: List<PrefModel> = listOf(
-            SwitchPrefModel(
-                id = "id",
-                title = "title",
-                isOn = true
-            )
-        ),
+        val pref: List<Pref> = emptyList(),
 
         val signInButtonText: String? = null,
         val isSignInButtonVisible: Boolean = false,

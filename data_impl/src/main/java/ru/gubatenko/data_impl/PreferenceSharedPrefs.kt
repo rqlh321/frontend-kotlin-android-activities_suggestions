@@ -1,20 +1,21 @@
 package ru.gubatenko.data_impl
 
 import android.content.Context
-import ru.gubatenko.data.prefs.Preference
+import ru.gubatenko.data.prefs.PreferenceAbstract
 
 class PreferenceSharedPrefs(
     context: Context
-) : Preference {
+) : PreferenceAbstract() {
 
     private val pref = context.getSharedPreferences(javaClass.simpleName, Context.MODE_PRIVATE)
 
-    override fun isUserRejectedAuthorizationOffer() = pref.getBoolean(
-        javaClass.enclosingMethod?.name,
+    override fun getBoolean(key: String): Boolean = pref.getBoolean(
+        key,
         false
     )
 
-    override fun isUserRejectedAuthorizationOffer(value: Boolean) = pref.edit()
-        .putBoolean(javaClass.enclosingMethod?.name, value)
+    override fun setBoolean(key: String, value: Boolean) = pref.edit()
+        .putBoolean(key, value)
         .apply()
+
 }

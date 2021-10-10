@@ -1,6 +1,6 @@
 package ru.gubatenko.domain_impl.use_case
 
-import ru.gubatenko.data.prefs.Preference
+import ru.gubatenko.domain.Preference
 import ru.gubatenko.domain.exception.UnknownUserException
 import ru.gubatenko.domain.model.Activity
 import ru.gubatenko.domain.repo.ActivityRepo

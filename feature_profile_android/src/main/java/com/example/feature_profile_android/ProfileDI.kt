@@ -3,7 +3,7 @@ package com.example.feature_profile_android
 import com.example.feature_profile.ProfileStore
 import com.example.feature_profile.side_effects.ClickOnSignInSideEffect
 import com.example.feature_profile.side_effects.ClickOnSignOutSideEffect
-import com.example.feature_profile.side_effects.GetCurrentUserSideEffect
+import com.example.feature_profile.side_effects.SetupProfileScreenSideEffect
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -24,7 +24,7 @@ val profileFeatureAndroidModuleDI = module {
         SideEffects.Builder<ProfileStore.Action, ProfileStore.SideAction>()
             .append(sideEffect = ClickOnSignInSideEffect(eventDispatcher = get(named(PROFILE_EVENT_DISPATCHER))))
             .append(sideEffect = ClickOnSignOutSideEffect(useCase = get(), longTermWorkUseCase = get(), getStaticTextUseCase = get()))
-            .append(sideEffect = GetCurrentUserSideEffect(getSignedInUserUseCase = get(), getStaticTextUseCase = get()))
+            .append(sideEffect = SetupProfileScreenSideEffect(getSignedInUserUseCase = get(), getStaticTextUseCase = get(), getProfilePrefsUseCase = get()))
             .build()
     }
     single {

@@ -1,6 +1,6 @@
 package ru.gubatenko.domain_impl.use_case
 
-import ru.gubatenko.data.prefs.Preference
+import ru.gubatenko.domain.Preference
 import ru.gubatenko.domain.usecase.AuthOfferIsViewedUseCase
 
 class AuthOfferIsViewedUseCaseImpl(

@@ -9,7 +9,6 @@ import ru.gubatenko.data.Mapper
 import ru.gubatenko.data.dao.ActivityDao
 import ru.gubatenko.data.dto.ActivityDto
 import ru.gubatenko.data.entity.ActivityStored
-import ru.gubatenko.data.prefs.Preference
 import ru.gubatenko.data.service.ActivitySourceService
 import ru.gubatenko.data.service.UserService
 import ru.gubatenko.data.text.DynamicText
@@ -21,6 +20,7 @@ import ru.gubatenko.data_impl.mapper.DomainToActivityDto
 import ru.gubatenko.data_impl.sqlite.AppDatabase
 import ru.gubatenko.data_impl.text.DynamicTextFirebase
 import ru.gubatenko.data_impl.text.StaticTextAssets
+import ru.gubatenko.domain.Preference
 import ru.gubatenko.domain.model.Activity
 
 val rootScopeDaoModuleDI = module {

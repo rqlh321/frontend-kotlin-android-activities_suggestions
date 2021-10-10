@@ -11,6 +11,7 @@ class ProfileStoreReducer : Reducer<ProfileStore.State, ProfileStore.SideAction>
             name = newAction.name,
             email = newAction.email,
             avatar = newAction.avatar,
+            pref = newAction.pref,
             isSignOutButtonVisible = newAction.isSignOutButtonVisible,
             isSignInButtonVisible = newAction.isSignInButtonVisible,
             signInButtonText = newAction.signInButtonText,

@@ -36,4 +36,5 @@ val rootScopeUsaCaseImplModuleDI = module {
     single<GetDynamicTextUseCase> { GetDynamicTextUseCaseImpl(dynamicText = get()) }
     single<SyncLocalDatabaseUseCase> {  SyncLocalDatabaseUseCaseImpl(repo = get())}
     single<SignInUseCase> { SignInUseCaseImpl( repo=get()) }
+    single<GetProfilePrefsUseCase> { GetProfilePrefsUseCaseImpl(prefs = get(), getStaticTextUseCase = get()) }
 }

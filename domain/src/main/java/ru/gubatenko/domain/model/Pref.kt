@@ -1,17 +1,19 @@
-package com.example.feature_profile
+package ru.gubatenko.domain.model
 
-sealed class PrefModel {
+sealed class Pref {
     companion object {
+        const val PREF_THEME_ID = "PREF_THEME"
+
         const val SWITCH_PREF_VIEW = 0
     }
 
     abstract fun type(): Int
 }
 
-data class SwitchPrefModel(
+data class SwitchPref(
     val id: String,
     val title: String,
     val isOn: Boolean,
-) : PrefModel() {
+) : Pref() {
     override fun type() = SWITCH_PREF_VIEW
 }
