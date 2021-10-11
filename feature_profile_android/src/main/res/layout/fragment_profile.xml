@@ -22,16 +22,17 @@
 
     <TextView
         android:id="@+id/name_id"
+        android:textColor="?attr/colorPrimary"
         style="@style/TextMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
-        android:textColor="@color/black"
         tools:text="Firstname Lastname" />
 
     <TextView
         android:id="@+id/email_id"
         style="@style/TextSmall"
+        android:textColor="?attr/colorSecondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"

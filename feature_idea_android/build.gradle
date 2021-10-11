@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-    implementation project(path: ':feature_main')
+    implementation project(path: ':feature_idea')
     implementation project(path: ':common_android')
 
     implementation android_sdk.swiperefreshlayout

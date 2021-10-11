@@ -8,5 +8,5 @@
     android:gravity="center"
     android:minHeight="@dimen/medium_item_height"
     android:padding="@dimen/padding_medium"
-    android:textColor="@color/black"
+    android:textColor="?attr/colorPrimary"
     tools:text="@tools:sample/lorem/random" />
