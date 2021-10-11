@@ -20,6 +20,7 @@ import ru.gubatenko.data_impl.mapper.DomainToActivityDto
 import ru.gubatenko.data_impl.sqlite.AppDatabase
 import ru.gubatenko.data_impl.text.DynamicTextFirebase
 import ru.gubatenko.data_impl.text.StaticTextAssets
+import ru.gubatenko.domain.DefinedPreference
 import ru.gubatenko.domain.Preference
 import ru.gubatenko.domain.model.Activity
 
@@ -45,7 +46,9 @@ val rootScopeDtoMapperImplModuleDI = module {
 val rootScopeStoredMapperImplModuleDI = module {
     single<Mapper<Activity, ActivityStored>>(named("domainToStored")) { ActivityFromDomainToStoredRoom() }
     single<Mapper<ActivityStored, Activity>>(named("storedToDomain")) { ActivityFromStoredToDomain() }
-    single<Preference> { PreferenceSharedPrefs(get()) }
+    single { PreferenceSharedPrefs(get()) }
+    single<Preference> { get<PreferenceSharedPrefs>() }
+    single<DefinedPreference> { get<PreferenceSharedPrefs>() }
     single<StaticText> { StaticTextAssets(get()) }
     single<DynamicText> { DynamicTextFirebase(get()) }
 }

@@ -6,16 +6,19 @@ import ru.gubatenko.domain.model.Pref
 import ru.gubatenko.domain.model.Pref.Companion.PREF_THEME_ID
 import ru.gubatenko.domain.model.SwitchPref
 import ru.gubatenko.domain.model.User
+import ru.gubatenko.domain.repo.UserRepo
 import ru.gubatenko.domain.usecase.GetProfilePrefsUseCase
 import ru.gubatenko.domain.usecase.GetStaticTextUseCase
 
 class GetProfilePrefsUseCaseImpl(
     private val prefs: Preference,
     private val getStaticTextUseCase: GetStaticTextUseCase,
+    private val userRepo: UserRepo,
 ) : GetProfilePrefsUseCase {
 
-    override suspend fun execute(user: User?): List<Pref> = if (user != null)
-        prefAuthUser() else prefsUnAuthUser()
+    override suspend fun execute(): List<Pref> = if (
+        userRepo.read(UserRepo.ReadQuery.GetSignedInUserQuery).isNotEmpty()
+    ) prefAuthUser() else prefsUnAuthUser()
 
 
     private fun prefsUnAuthUser(): List<SwitchPref> = emptyList()
@@ -24,7 +27,7 @@ class GetProfilePrefsUseCaseImpl(
         SwitchPref(
             id = PREF_THEME_ID,
             title = getStaticTextUseCase.execute(TextKey.Profile.PREF_NAME_THEME),
-            isOn = prefs.isDarkThemeEnabled()
+            isOn = prefs.getBoolean(PREF_THEME_ID)
         )
     )
 }

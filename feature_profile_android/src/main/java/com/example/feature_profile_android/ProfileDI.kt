@@ -4,6 +4,7 @@ import com.example.feature_profile.ProfileStore
 import com.example.feature_profile.side_effects.ClickOnSignInSideEffect
 import com.example.feature_profile.side_effects.ClickOnSignOutSideEffect
 import com.example.feature_profile.side_effects.SetupProfileScreenSideEffect
+import com.example.feature_profile.side_effects.SwitchPrefSideEffect
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
@@ -23,7 +24,8 @@ val profileFeatureAndroidModuleDI = module {
     single (named(PROFILE_SIDE_EFFECTS)){
         SideEffects.Builder<ProfileStore.Action, ProfileStore.SideAction>()
             .append(sideEffect = ClickOnSignInSideEffect(eventDispatcher = get(named(PROFILE_EVENT_DISPATCHER))))
-            .append(sideEffect = ClickOnSignOutSideEffect(useCase = get(), longTermWorkUseCase = get(), getStaticTextUseCase = get()))
+            .append(sideEffect = SwitchPrefSideEffect(eventDispatcher = get(named(PROFILE_EVENT_DISPATCHER)), setPrefUseCase = get(), getProfilePrefsUseCase = get()))
+            .append(sideEffect = ClickOnSignOutSideEffect(signOutUseCase = get(), longTermWorkUseCase = get(), getStaticTextUseCase = get()))
             .append(sideEffect = SetupProfileScreenSideEffect(getSignedInUserUseCase = get(), getStaticTextUseCase = get(), getProfilePrefsUseCase = get()))
             .build()
     }

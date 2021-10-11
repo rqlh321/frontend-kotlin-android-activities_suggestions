@@ -22,8 +22,8 @@ class ProfileViewModel(
         store.process(ProfileStore.Action.OpenProfileScreen)
     }
 
-    fun switchAction(id: String, isOn: Boolean) {
-
+    fun switchPref(id: String, isOn: Boolean) = default {
+        store.process(ProfileStore.Action.SwitchPref(id, isOn))
     }
 
     fun signIn() = io {

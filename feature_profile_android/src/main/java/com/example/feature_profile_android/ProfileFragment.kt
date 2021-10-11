@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,7 +37,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     private val signOut: Button by lazy { requireView().findViewById(R.id.sign_out_id) }
     private val prefsList: RecyclerView by lazy { requireView().findViewById(R.id.prefs_list_id) }
 
-    private val prefsListAdapter: PrefAdapter by lazy { PrefAdapter(viewModel::switchAction) }
+    private val prefsListAdapter: PrefAdapter by lazy { PrefAdapter(viewModel::switchPref) }
 
     private val successAuthReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -79,6 +80,9 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     private fun handle(event: ProfileStore.Event) {
         when (event) {
             is ProfileStore.Event.NavigateToAuthFlow -> (requireActivity() as? NavigationRoot)?.startAuthorizationFlow()
+            is ProfileStore.Event.ChangeAppThem ->  AppCompatDelegate.setDefaultNightMode(
+                if (event.isDarkThemEnabled) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+            )
         }
     }
 
@@ -86,7 +90,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         Glide.with(avatar).load(state.avatar).into(avatar)
         name.text = state.name
         email.text = state.email
-        prefsListAdapter.data = state.pref
+        prefsListAdapter.data = state.prefs
         signIn.text = state.signInButtonText
         signIn.isVisible = state.isSignInButtonVisible
         signOut.text = state.signOutButtonText

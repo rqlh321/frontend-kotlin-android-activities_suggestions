@@ -21,10 +21,15 @@ class ProfileStore(
         object OpenProfileScreen : Action()
         object ClickOnSignIn : Action()
         object ClickOnSignOut : Action()
+        data class SwitchPref(
+            val id: String,
+            val isOn: Boolean
+        ) : Action()
     }
 
     sealed class Event {
         object NavigateToAuthFlow : Event()
+        data class ChangeAppThem(val isDarkThemEnabled: Boolean) : Event()
     }
 
     sealed class SideAction {
@@ -40,6 +45,7 @@ class ProfileStore(
         ) : SideAction()
 
         data class LogOut(val name: String) : SideAction()
+        data class UpdatePrefs(val prefs: List<Pref>) : SideAction()
     }
 
     data class State(
@@ -47,7 +53,7 @@ class ProfileStore(
         val avatar: String? = null,
         val email: String? = null,
 
-        val pref: List<Pref> = emptyList(),
+        val prefs: List<Pref> = emptyList(),
 
         val signInButtonText: String? = null,
         val isSignInButtonVisible: Boolean = false,

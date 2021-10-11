@@ -1,7 +1,6 @@
 package com.example.feature_profile.side_effects
 
 import com.example.feature_profile.ProfileStore
-import ru.gubatenko.domain.Preference
 import ru.gubatenko.domain.TextKey
 import ru.gubatenko.domain.usecase.GetProfilePrefsUseCase
 import ru.gubatenko.domain.usecase.GetSignedInUserUseCase
@@ -21,13 +20,14 @@ class SetupProfileScreenSideEffect(
         reducerCallback: suspend (ProfileStore.SideAction) -> Unit
     ) {
         val user = getSignedInUserUseCase.execute()
-
-        val signInButtonText = getStaticTextUseCase.execute(TextKey.Profile.SIGN_IN)
-        val signOutButtonText = getStaticTextUseCase.execute(TextKey.Profile.SIGN_OUT)
         val isSignedIn = user != null
         val name = user?.name ?: getStaticTextUseCase.execute(TextKey.Profile.DEFAULT_NAME)
         val email = user?.email
-        val pref = getProfilePrefsUseCase.execute(user)
+
+        val signInButtonText = getStaticTextUseCase.execute(TextKey.Profile.SIGN_IN)
+        val signOutButtonText = getStaticTextUseCase.execute(TextKey.Profile.SIGN_OUT)
+
+        val pref = getProfilePrefsUseCase.execute()
 
         reducerCallback.invoke(
             ProfileStore.SideAction.SetupProfileScreen(
