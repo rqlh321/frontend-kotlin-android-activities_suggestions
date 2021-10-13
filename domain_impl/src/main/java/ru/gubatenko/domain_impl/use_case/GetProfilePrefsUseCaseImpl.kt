@@ -21,7 +21,13 @@ class GetProfilePrefsUseCaseImpl(
     ) prefAuthUser() else prefsUnAuthUser()
 
 
-    private fun prefsUnAuthUser(): List<SwitchPref> = emptyList()
+    private suspend fun prefsUnAuthUser() = listOf(
+        SwitchPref(
+            id = PREF_THEME_ID,
+            title = getStaticTextUseCase.execute(TextKey.Profile.PREF_NAME_THEME),
+            isOn = prefs.getBoolean(PREF_THEME_ID)
+        )
+    )
 
     private suspend fun prefAuthUser() = listOf(
         SwitchPref(

@@ -4,12 +4,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.navigation.fragment.findNavController
-import com.example.navigation.NavigationRoot
-import com.example.navigation.NavigationScope
+import com.example.navigation.NavigationMain
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import ru.gubatenko.common_android.BaseFragment
@@ -19,7 +17,7 @@ import ru.gubatenko.feature_main.MainStore
 
 class IdeaFragment : BaseFragment(R.layout.fragment_idea) {
 
-    private val viewModel: IdeaViewModel by sharedGraphViewModel(NavigationScope.FRAME_SCOPE)
+    private val viewModel: IdeaViewModel by sharedGraphViewModel()
 
     private val mainText: TextView by lazy { requireView().findViewById(R.id.result_text_id) }
     private val errorText: TextView by lazy { requireView().findViewById(R.id.error_text_id) }
@@ -48,7 +46,7 @@ class IdeaFragment : BaseFragment(R.layout.fragment_idea) {
     private fun handle(event: MainStore.Event) {
         when (event) {
             is MainStore.Event.NavigateTo         -> findNavController().navigate(event.locationId)
-            is MainStore.Event.NavigateToAuthFlow -> (requireActivity() as? NavigationRoot)?.oferAuthorizationFlow()
+            is MainStore.Event.NavigateToAuthFlow -> (requireActivity() as? NavigationMain)?.oferAuthorizationFlow()
         }
     }
 

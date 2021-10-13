@@ -2,11 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activities_graph_id"
-    app:startDestination="@id/activities_fragment_id">
+    android:id="@+id/promise_graph_id"
+    app:startDestination="@id/promise_fragment_id">
 
     <fragment
-        android:id="@+id/activities_fragment_id"
+        android:id="@+id/promise_fragment_id"
         android:name="com.example.feature_accepted_activities_android.PromiseFragment"
         tools:layout="@layout/fragment_promise" />
 

@@ -71,9 +71,8 @@ dependencies {
     implementation util.timber
 
     implementation project(path: ':feature_auth_android')
-    implementation project(path: ':feature_idea_android')
-    implementation project(path: ':feature_profile_android')
-    implementation project(path: ':feature_promise_android')
+    implementation project(path: ':feature_mainframe_android')
+
     implementation project(path: ':domain_impl')
     implementation project(path: ':data_impl')
     implementation project(path: ':navigation')
@@ -84,7 +83,6 @@ dependencies {
     implementation android_sdk.core
     implementation android_sdk.appcompat
     implementation android_sdk.material
-    implementation android_sdk.fragment
     implementation android_sdk.worker
     implementation android_sdk.navigation_fragment
     implementation android_sdk.navigation_ui

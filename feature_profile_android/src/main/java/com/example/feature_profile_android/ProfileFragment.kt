@@ -16,8 +16,7 @@ import com.bumptech.glide.Glide
 import com.example.feature_profile.ProfileStore
 import com.example.feature_profile_android.adapter.PrefAdapter
 import com.example.navigation.AUTH_SUCCESS_BROADCAST
-import com.example.navigation.NavigationRoot
-import com.example.navigation.NavigationScope
+import com.example.navigation.NavigationMain
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.RelativeCornerSize
 import org.koin.core.context.loadKoinModules
@@ -28,7 +27,7 @@ import ru.gubatenko.common_android.sharedGraphViewModel
 
 class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
-    private val viewModel: ProfileViewModel by sharedGraphViewModel(NavigationScope.FRAME_SCOPE)
+    private val viewModel: ProfileViewModel by sharedGraphViewModel()
 
     private val avatar: ShapeableImageView by lazy { requireView().findViewById(R.id.avatar_id) }
     private val name: TextView by lazy { requireView().findViewById(R.id.name_id) }
@@ -79,7 +78,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private fun handle(event: ProfileStore.Event) {
         when (event) {
-            is ProfileStore.Event.NavigateToAuthFlow -> (requireActivity() as? NavigationRoot)?.startAuthorizationFlow()
+            is ProfileStore.Event.NavigateToAuthFlow -> (requireActivity() as? NavigationMain)?.startAuthorizationFlow()
             is ProfileStore.Event.ChangeAppThem ->  AppCompatDelegate.setDefaultNightMode(
                 if (event.isDarkThemEnabled) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
             )
