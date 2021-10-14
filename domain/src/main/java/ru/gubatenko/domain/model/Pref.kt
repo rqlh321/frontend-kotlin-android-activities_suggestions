@@ -2,7 +2,7 @@ package ru.gubatenko.domain.model
 
 sealed class Pref {
     companion object {
-        const val PREF_THEME_ID = "PREF_THEME"
+        const val DARK_THEM_ENABLED_KEY = "PREF_THEME"
 
         const val SWITCH_PREF_VIEW = 0
     }

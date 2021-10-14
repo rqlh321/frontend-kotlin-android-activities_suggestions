@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentContainerView
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 
 class MainframeFragment : Fragment(R.layout.fragment_mainframe) {
 
@@ -16,12 +18,19 @@ class MainframeFragment : Fragment(R.layout.fragment_mainframe) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        navigation.itemIconTintList = null
-        navigation.setOnItemReselectedListener {
+        loadKoinModules(mainframeFeatureAndroidModuleDI)
 
-        }
+        navigation.itemIconTintList = null
+        navigation.setOnItemReselectedListener {}
         container.getFragment<NavHostFragment>()
             ?.let { navigation.setupWithNavController(it.navController) }
+
+
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+    }
+
+    override fun onDestroyView() {
+        unloadKoinModules(mainframeFeatureAndroidModuleDI)
+        super.onDestroyView()
     }
 }

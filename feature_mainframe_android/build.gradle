@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    compileSdk 31
-
+    compileSdk projectCompileSdk
+    buildToolsVersion buildTools
     defaultConfig {
-        minSdk 21
-        targetSdk 31
+        minSdk projectMinSdk
+        targetSdk projectTargetSdk
         versionCode 1
         versionName "1.0"
 
@@ -33,6 +33,8 @@ android {
 
 dependencies {
     implementation project(path: ':common_android')
+    implementation project(path: ':feature_mainframe')
+
     implementation project(path: ':feature_idea_android')
     implementation project(path: ':feature_profile_android')
     implementation project(path: ':feature_promise_android')
