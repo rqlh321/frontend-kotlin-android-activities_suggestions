@@ -10,5 +10,7 @@ interface NavigationMain {
      * */
     fun oferAuthorizationFlow()
 
+    fun restartApp()
+
     fun frameGraphId(): Int
 }

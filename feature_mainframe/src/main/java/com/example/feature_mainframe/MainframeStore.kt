@@ -28,7 +28,7 @@ class MainframeStore(
         ) : SideAction()
     }
 
-    class State(
+    data class State(
         val isDarkModeOn: Boolean = false
     )
 }

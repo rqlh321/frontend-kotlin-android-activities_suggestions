@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.RecyclerView
@@ -79,9 +78,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
     private fun handle(event: ProfileStore.Event) {
         when (event) {
             is ProfileStore.Event.NavigateToAuthFlow -> (requireActivity() as? NavigationMain)?.startAuthorizationFlow()
-            is ProfileStore.Event.ChangeAppThem ->  AppCompatDelegate.setDefaultNightMode(
-                if (event.isDarkThemEnabled) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-            )
+            is ProfileStore.Event.ChangeAppThem ->  (requireActivity() as? NavigationMain)?.restartApp()
         }
     }
 

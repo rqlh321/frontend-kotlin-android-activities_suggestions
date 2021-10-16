@@ -16,12 +16,19 @@ private const val MAINFRAME_EVENT_DISPATCHER = "MAINFRAME_EVENT_DISPATCHER"
 private const val MAINFRAME_SIDE_EFFECTS = "MAINFRAME_SIDE_EFFECTS"
 
 val mainframeFeatureAndroidModuleDI = module {
-    single<StateObservable<MainframeStore.State>> (named(MAINFRAME_STATE_OBSERVABLE)) { LiveDataStateObservable(MainframeStore.State()) }
-    single<EventDispatcher<MainframeStore.Event>> (named(MAINFRAME_EVENT_DISPATCHER)) { LiveDataEventDispatcher() }
-    single (named(MAINFRAME_SIDE_EFFECTS)) {
+    single<StateObservable<MainframeStore.State>>(named(MAINFRAME_STATE_OBSERVABLE)) { LiveDataStateObservable(MainframeStore.State()) }
+    single<EventDispatcher<MainframeStore.Event>>(named(MAINFRAME_EVENT_DISPATCHER)) { LiveDataEventDispatcher() }
+    single(named(MAINFRAME_SIDE_EFFECTS)) {
         SideEffects.Builder<MainframeStore.Action, MainframeStore.SideAction>()
             .append(sideEffect = SetupMainframeSideEffect(preference = get()))
             .build()
+    }
+    single {
+        MainframeStore(
+            logger = get(),
+            sideEffects = get(named(MAINFRAME_SIDE_EFFECTS)),
+            stateObservable = get(named(MAINFRAME_STATE_OBSERVABLE)),
+        )
     }
     viewModel {
         MainframeViewModel(
