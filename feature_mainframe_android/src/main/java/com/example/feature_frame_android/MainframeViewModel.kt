@@ -8,15 +8,10 @@ import ru.gubatenko.mvi_android.android.LiveDataStateObservable
 
 class MainframeViewModel(
     dispatcher: EventDispatcher<MainframeStore.Event>,
-    private val store: MainframeStore
+    store: MainframeStore
 ) : BaseViewModel() {
 
     val state = (store.stateObservable as LiveDataStateObservable)
     val event = (dispatcher as LiveDataEventDispatcher<MainframeStore.Event>)
 
-    init {
-        io {
-            store.process(MainframeStore.Action.CheckSettingsAction)
-        }
-    }
 }

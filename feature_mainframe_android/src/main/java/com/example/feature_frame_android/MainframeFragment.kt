@@ -29,7 +29,6 @@ class MainframeFragment : Fragment(R.layout.fragment_mainframe) {
         container.getFragment<NavHostFragment>()
             ?.let { navigation.setupWithNavController(it.navController) }
 
-
         viewModel.state.observe(viewLifecycleOwner, ::render)
     }
 

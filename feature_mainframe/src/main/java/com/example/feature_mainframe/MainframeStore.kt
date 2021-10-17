@@ -16,19 +16,13 @@ class MainframeStore(
     sideEffects = sideEffects
 ) {
 
-    sealed class Action {
-        object CheckSettingsAction : Action()
-    }
+    sealed class Action
 
     sealed class Event
 
-    sealed class SideAction {
-        data class SetupSideAction(
-            val isDarkModeOn: Boolean
-        ) : SideAction()
-    }
+    sealed class SideAction
 
     data class State(
-        val isDarkModeOn: Boolean = false
+        val isDarkModeOn: Boolean
     )
 }

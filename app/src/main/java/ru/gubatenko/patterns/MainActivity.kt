@@ -15,7 +15,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), NavigationMain {
 
     override fun restartApp() {
         finish()
-        startActivity(Intent(this, MainActivity::class.java))
+        val intent = Intent(this, MainActivity::class.java)
+        startActivity(intent)
     }
 
     override fun frameGraphId() = R.id.frame_graph_id
