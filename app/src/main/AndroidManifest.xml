@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Patterns">
         <activity
-            android:name=".RootActivity"
+            android:name=".MainActivity"
+            android:launchMode="singleTop"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,7 +22,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.feature_auth_android.sign_in.view.SignInFirebaseActivity" />
+        <activity
+            android:name="com.example.feature_auth_android.sign_in.view.SignInFirebaseActivity"
+            android:theme="@style/Theme.Transparent" />
     </application>
 
 </manifest>

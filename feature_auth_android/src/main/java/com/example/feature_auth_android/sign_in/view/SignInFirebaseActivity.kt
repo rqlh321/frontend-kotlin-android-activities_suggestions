@@ -25,7 +25,6 @@ class SignInFirebaseActivity : AppCompatActivity() {
     private val viewModel: SignInViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.Firebase_SignIn);
         super.onCreate(savedInstanceState)
         loadKoinModules(signInFeatureAndroidModuleDI)
 

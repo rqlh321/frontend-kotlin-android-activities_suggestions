@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,8 +22,8 @@
 
     <TextView
         android:id="@+id/name_id"
+        android:textColor="?attr/colorPrimary"
         style="@style/TextMedium"
-        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_medium"
@@ -31,10 +32,21 @@
     <TextView
         android:id="@+id/email_id"
         style="@style/TextSmall"
+        android:textColor="?attr/colorSecondary"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/margin_small"
         tools:text="YourEmail@google.com" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/prefs_list_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        tools:itemCount="3"
+        tools:listitem="@layout/list_item_pref_switch" />
 
     <View
         android:layout_width="match_parent"
@@ -46,7 +58,6 @@
         style="@style/ButtonMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/pinzelan_regular"
         tools:text="Sign In" />
 
     <Button
@@ -54,7 +65,6 @@
         style="@style/ButtonMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/pinzelan_regular"
         tools:text="Sign Out" />
 
 </LinearLayout>

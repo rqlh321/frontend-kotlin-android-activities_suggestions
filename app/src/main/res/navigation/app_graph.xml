@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_graph_id"
+    app:startDestination="@id/mainframe_fragment">
+
+    <fragment
+        android:id="@+id/mainframe_fragment"
+        android:name="com.example.feature_frame_android.MainframeFragment"
+        tools:layout="@layout/fragment_mainframe" />
+
+    <include app:graph="@navigation/ofer_auth_graph" />
+    <include app:graph="@navigation/auth_graph" />
+
+</navigation>

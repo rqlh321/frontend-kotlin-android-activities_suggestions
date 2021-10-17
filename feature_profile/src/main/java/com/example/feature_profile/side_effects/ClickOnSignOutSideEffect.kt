@@ -8,7 +8,7 @@ import ru.gubatenko.domain.usecase.SignOutUseCase
 import ru.gubatenko.mvi.SideEffect
 
 class ClickOnSignOutSideEffect(
-    private val useCase: SignOutUseCase,
+    private val signOutUseCase: SignOutUseCase,
     private val longTermWorkUseCase: LongTermWorkUseCase,
     private val getStaticTextUseCase: GetStaticTextUseCase,
 ) : SideEffect<ProfileStore.Action.ClickOnSignOut, ProfileStore.SideAction> {
@@ -19,7 +19,7 @@ class ClickOnSignOutSideEffect(
         action: ProfileStore.Action.ClickOnSignOut,
         reducerCallback: suspend (ProfileStore.SideAction) -> Unit
     ) {
-        useCase.execute()
+        signOutUseCase.execute()
         longTermWorkUseCase.execute(LongTermWorkUseCase.Query.StopLoad)
         val name = getStaticTextUseCase.execute(TextKey.Profile.DEFAULT_NAME)
         reducerCallback.invoke(ProfileStore.SideAction.LogOut(name))

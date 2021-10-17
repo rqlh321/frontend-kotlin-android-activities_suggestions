@@ -19,7 +19,11 @@ class ProfileViewModel(
     }
 
     private fun load() = io {
-        store.process(ProfileStore.Action.InitProfileScreen)
+        store.process(ProfileStore.Action.OpenProfileScreen)
+    }
+
+    fun switchPref(id: String, isOn: Boolean) = default {
+        store.process(ProfileStore.Action.SwitchPref(id, isOn))
     }
 
     fun signIn() = io {

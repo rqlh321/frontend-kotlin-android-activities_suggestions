@@ -8,11 +8,13 @@
 
     <TextView
         android:id="@+id/title_text_id"
+        style="@style/TextMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
     <Button
         android:id="@+id/accept_button_id"
+        style="@style/ButtonMedium"
         android:layout_marginTop="24dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
