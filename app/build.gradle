@@ -74,7 +74,8 @@ dependencies {
     implementation project(path: ':feature_mainframe_android')
 
     implementation project(path: ':domain_impl')
-    implementation project(path: ':data_impl')
+    implementation project(path: ':domain_android')
+    implementation project(path: ':data_android')
     implementation project(path: ':navigation')
     implementation project(path: ':audit')
 
@@ -83,7 +84,6 @@ dependencies {
     implementation android_sdk.core
     implementation android_sdk.appcompat
     implementation android_sdk.material
-    implementation android_sdk.worker
     implementation android_sdk.navigation_fragment
     implementation android_sdk.navigation_ui
 

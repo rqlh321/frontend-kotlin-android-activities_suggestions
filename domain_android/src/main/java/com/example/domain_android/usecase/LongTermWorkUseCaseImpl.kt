@@ -1,10 +1,10 @@
-package ru.gubatenko.patterns.work
+package com.example.domain_android.usecase
 
 import android.content.Context
 import androidx.work.WorkManager
 import ru.gubatenko.domain.usecase.LongTermWorkUseCase
-import ru.gubatenko.patterns.work.DownloadWorker.Companion.runDownloadWorker
-import ru.gubatenko.patterns.work.UploadWorker.Companion.runUploadWorker
+import com.example.domain_android.work.DownloadWorker.Companion.runDownloadWorker
+import com.example.domain_android.work.UploadWorker.Companion.runUploadWorker
 
 class LongTermWorkUseCaseImpl(
     private val context: Context

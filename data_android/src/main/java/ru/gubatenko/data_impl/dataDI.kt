@@ -20,8 +20,7 @@ import ru.gubatenko.data_impl.mapper.DomainToActivityDto
 import ru.gubatenko.data_impl.sqlite.AppDatabase
 import ru.gubatenko.data_impl.text.DynamicTextFirebase
 import ru.gubatenko.data_impl.text.StaticTextAssets
-import ru.gubatenko.domain.DefinedPreference
-import ru.gubatenko.domain.Preference
+import ru.gubatenko.domain.*
 import ru.gubatenko.domain.model.Activity
 
 val rootScopeDaoModuleDI = module {
@@ -38,16 +37,18 @@ val rootScopeServiceImplModuleDI = module {
     single<ActivitySourceService> { get<Retrofit>().create(ActivitySourceServiceRetrofit::class.java) }
     single<UserService> { UserServiceImpl() }
 }
-
-val rootScopeDtoMapperImplModuleDI = module {
-    single<Mapper<ActivityDto, Activity>>(named("dtoToDomain")) { ActivityDtoToDomain() }
-    single<Mapper<Activity, ActivityDto>>(named("domainToDto")) { DomainToActivityDto() }
+val mapperImplModuleDI = module {
+    single<Mapper<ActivityDto, Activity>>(named(MAPPER_DTO_TO_DOMAIN_ACTION)) { ActivityDtoToDomain() }
+    single<Mapper<Activity, ActivityDto>>(named(MAPPER_DOMAIN_TO_DTO_ACTION)) { DomainToActivityDto() }
+    single<Mapper<Activity, ActivityStored>>(named(MAPPER_DOMAIN_TO_STORED_ACTION)) { ActivityFromDomainToStoredRoom() }
+    single<Mapper<ActivityStored, Activity>>(named(MAPPER_STORED_TO_DOMAIN_ACTION)) { ActivityFromStoredToDomain() }
 }
-val rootScopeStoredMapperImplModuleDI = module {
-    single<Mapper<Activity, ActivityStored>>(named("domainToStored")) { ActivityFromDomainToStoredRoom() }
-    single<Mapper<ActivityStored, Activity>>(named("storedToDomain")) { ActivityFromStoredToDomain() }
+val prefsImplModuleDI = module {
     single { PreferenceSharedPrefs(get()) }
     single<Preference> { get<PreferenceSharedPrefs>() }
+    single<DefinedPreference> { get<PreferenceSharedPrefs>() }
+}
+val textImplModuleDI = module {
     single<DefinedPreference> { get<PreferenceSharedPrefs>() }
     single<StaticText> { StaticTextAssets(get()) }
     single<DynamicText> { DynamicTextFirebase(get()) }

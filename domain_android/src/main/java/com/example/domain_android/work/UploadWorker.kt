@@ -1,13 +1,13 @@
-package ru.gubatenko.patterns.work
+package com.example.domain_android.work
 
 import android.content.Context
 import androidx.work.*
+import com.example.audit.Logger
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import ru.gubatenko.domain.exception.UnknownUserException
 import ru.gubatenko.domain.usecase.SyncActivitiesWithServerUseCase
-import ru.gubatenko.patterns.work.LongTermWorkUseCaseImpl.Companion.SYNC_JOB_TAG
-import timber.log.Timber
+import com.example.domain_android.usecase.LongTermWorkUseCaseImpl.Companion.SYNC_JOB_TAG
 import java.util.concurrent.TimeUnit
 
 class UploadWorker(
@@ -41,16 +41,17 @@ class UploadWorker(
     }
 
     private val useCase: SyncActivitiesWithServerUseCase by inject()
+    private val logger: Logger by inject()
 
     override suspend fun doWork(): Result {
         return try {
             useCase.execute()
             Result.success()
         } catch (e: UnknownUserException) {
-            Timber.d(e)
+            logger.d(e)
             Result.failure()
         } catch (e: Exception) {
-            Timber.d(e)
+            logger.d(e)
             Result.retry()
         }
     }

@@ -2,6 +2,10 @@ package ru.gubatenko.domain_impl
 
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
+import ru.gubatenko.domain.MAPPER_DOMAIN_TO_DTO_ACTION
+import ru.gubatenko.domain.MAPPER_DOMAIN_TO_STORED_ACTION
+import ru.gubatenko.domain.MAPPER_DTO_TO_DOMAIN_ACTION
+import ru.gubatenko.domain.MAPPER_STORED_TO_DOMAIN_ACTION
 import ru.gubatenko.domain.repo.ActivityRepo
 import ru.gubatenko.domain.repo.UserRepo
 import ru.gubatenko.domain.usecase.*
@@ -15,10 +19,10 @@ val rootScopeRepoImplModuleDI = module {
             dao = get(),
             activitySourceService = get(),
             userService = get(),
-            domainToStored = get(named("domainToStored")),
-            storedToDomain = get(named("storedToDomain")),
-            domainToDto = get(named("domainToDto")),
-            dtoToDomain = get(named("dtoToDomain")),
+            domainToStored = get(named(MAPPER_DOMAIN_TO_STORED_ACTION)),
+            storedToDomain = get(named(MAPPER_STORED_TO_DOMAIN_ACTION)),
+            domainToDto = get(named(MAPPER_DOMAIN_TO_DTO_ACTION)),
+            dtoToDomain = get(named(MAPPER_DTO_TO_DOMAIN_ACTION)),
         )
     }
     single<UserRepo> { UserRepoImpl(service = get()) }
