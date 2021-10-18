@@ -4,7 +4,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
-import com.example.navigation.NavigationMain
+import ru.gubatenko.domain.navigation.NavigationMain
 import org.koin.android.ext.android.getKoin
 import org.koin.androidx.viewmodel.ViewModelParameter
 import org.koin.androidx.viewmodel.koin.getViewModel

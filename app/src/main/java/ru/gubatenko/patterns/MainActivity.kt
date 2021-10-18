@@ -3,7 +3,7 @@ package ru.gubatenko.patterns
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import com.example.navigation.NavigationMain
+import ru.gubatenko.domain.navigation.NavigationMain
 
 class MainActivity : AppCompatActivity(R.layout.activity_main), NavigationMain {
 

@@ -1,9 +1,13 @@
 plugins {
     id 'java-library'
     id 'kotlin'
+    id "io.realm.kotlin" version "0.6.0"
 }
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_7
     targetCompatibility = JavaVersion.VERSION_1_7
+}
+dependencies{
+    implementation 'io.realm.kotlin:library:0.5.0'
 }

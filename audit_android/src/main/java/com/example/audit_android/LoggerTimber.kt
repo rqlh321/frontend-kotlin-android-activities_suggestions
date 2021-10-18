@@ -1,9 +1,14 @@
-package ru.gubatenko.patterns.audit
+package com.example.audit_android
 
 import com.example.audit.Logger
 import timber.log.Timber
 
 class LoggerTimber : Logger {
+
+    init {
+        Timber.plant(Timber.DebugTree())
+    }
+
     override fun d(throwable: Throwable) = Timber.d(throwable)
     override fun d(message: String) = Timber.d(message)
     override fun e(message: String) = Timber.e(message)

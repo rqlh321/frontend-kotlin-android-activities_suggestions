@@ -23,11 +23,11 @@ import ru.gubatenko.data_impl.text.StaticTextAssets
 import ru.gubatenko.domain.*
 import ru.gubatenko.domain.model.Activity
 
-val rootScopeDaoModuleDI = module {
+val databaseModuleDI = module {
     single { Room.databaseBuilder(get(), AppDatabase::class.java, "database-name").build() }
     single<ActivityDao<*>> { get<AppDatabase>().activityDao() }
 }
-val rootScopeServiceImplModuleDI = module {
+val serviceImplModuleDI = module {
     single<Retrofit> {
         Retrofit.Builder()
             .baseUrl("https://www.boredapi.com/api/")
@@ -37,7 +37,7 @@ val rootScopeServiceImplModuleDI = module {
     single<ActivitySourceService> { get<Retrofit>().create(ActivitySourceServiceRetrofit::class.java) }
     single<UserService> { UserServiceImpl() }
 }
-val mapperImplModuleDI = module {
+val mapperActionImplModuleDI = module {
     single<Mapper<ActivityDto, Activity>>(named(MAPPER_DTO_TO_DOMAIN_ACTION)) { ActivityDtoToDomain() }
     single<Mapper<Activity, ActivityDto>>(named(MAPPER_DOMAIN_TO_DTO_ACTION)) { DomainToActivityDto() }
     single<Mapper<Activity, ActivityStored>>(named(MAPPER_DOMAIN_TO_STORED_ACTION)) { ActivityFromDomainToStoredRoom() }

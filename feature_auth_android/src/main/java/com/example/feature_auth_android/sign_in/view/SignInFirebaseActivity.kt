@@ -10,7 +10,7 @@ import com.example.feature_auth.sign_in.SignInStore
 import com.example.feature_auth_android.R
 import com.example.feature_auth_android.sign_in.SignInViewModel
 import com.example.feature_auth_android.sign_in.signInFeatureAndroidModuleDI
-import com.example.navigation.AUTH_SUCCESS_BROADCAST
+import ru.gubatenko.domain.navigation.AUTH_SUCCESS_BROADCAST
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException

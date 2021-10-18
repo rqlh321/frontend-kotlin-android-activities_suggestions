@@ -1,4 +1,4 @@
-package com.example.navigation
+package ru.gubatenko.domain.navigation
 
 interface NavigationMain {
     /**

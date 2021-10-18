@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.feature_profile.ProfileStore
 import com.example.feature_profile_android.adapter.PrefAdapter
-import com.example.navigation.AUTH_SUCCESS_BROADCAST
-import com.example.navigation.NavigationMain
+import ru.gubatenko.domain.navigation.AUTH_SUCCESS_BROADCAST
+import ru.gubatenko.domain.navigation.NavigationMain
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.RelativeCornerSize
 import org.koin.core.context.loadKoinModules

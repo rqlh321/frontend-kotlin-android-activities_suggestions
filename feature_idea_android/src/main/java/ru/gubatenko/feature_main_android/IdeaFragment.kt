@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.navigation.fragment.findNavController
-import com.example.navigation.NavigationMain
+import ru.gubatenko.domain.navigation.NavigationMain
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import ru.gubatenko.common_android.BaseFragment
