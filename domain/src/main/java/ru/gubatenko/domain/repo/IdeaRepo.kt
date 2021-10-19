@@ -3,7 +3,7 @@ package ru.gubatenko.domain.repo
 import kotlinx.coroutines.flow.Flow
 import ru.gubatenko.domain.model.Activity
 
-interface ActivityRepo {
+interface IdeaRepo {
     suspend fun create(query: CreateQuery)
     suspend fun read(query: ReadQuery): List<Activity>
     suspend fun subscribe(query: SubscribeQuery): Flow<List<Activity>>
@@ -31,7 +31,7 @@ interface ActivityRepo {
     }
 
     sealed class DeleteQuery {
-        object ClearLocalStorage : ActivityRepo.DeleteQuery()
+        object ClearLocalStorage : IdeaRepo.DeleteQuery()
     }
 
 }

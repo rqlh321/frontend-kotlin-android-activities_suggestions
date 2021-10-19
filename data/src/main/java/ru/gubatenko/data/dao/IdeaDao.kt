@@ -1,12 +1,12 @@
 package ru.gubatenko.data.dao
 
 import kotlinx.coroutines.flow.Flow
-import ru.gubatenko.data.entity.ActivityStored
+import ru.gubatenko.data.entity.IdeaStored
 
-interface ActivityDao<T : ActivityStored> {
+interface IdeaDao<T : IdeaStored> {
     suspend fun delete()
-    suspend fun save(activity: List<@JvmSuppressWildcards T>)
-    suspend fun save(activity: T)
+    suspend fun save(idea: List<@JvmSuppressWildcards T>)
+    suspend fun save(idea: T)
     suspend fun getNotSynced(): List<@JvmSuppressWildcards T>
     suspend fun updateAsSynced(ids: List<Long>)
     suspend fun all(): List<@JvmSuppressWildcards T>

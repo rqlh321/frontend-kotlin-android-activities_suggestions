@@ -2,30 +2,27 @@ package ru.gubatenko.domain_impl
 
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import ru.gubatenko.domain.MAPPER_DOMAIN_TO_DTO_ACTION
-import ru.gubatenko.domain.MAPPER_DOMAIN_TO_STORED_ACTION
-import ru.gubatenko.domain.MAPPER_DTO_TO_DOMAIN_ACTION
-import ru.gubatenko.domain.MAPPER_STORED_TO_DOMAIN_ACTION
-import ru.gubatenko.domain.repo.ActivityRepo
+import ru.gubatenko.domain.*
+import ru.gubatenko.domain.repo.IdeaRepo
 import ru.gubatenko.domain.repo.UserRepo
 import ru.gubatenko.domain.usecase.*
-import ru.gubatenko.domain_impl.repo.ActivityRepoImpl
+import ru.gubatenko.domain_impl.repo.IdeaRepoImpl
 import ru.gubatenko.domain_impl.repo.UserRepoImpl
 import ru.gubatenko.domain_impl.use_case.*
 
 val rootScopeRepoImplModuleDI = module {
-    single<ActivityRepo> {
-        ActivityRepoImpl(
-            dao = get(),
-            activitySourceService = get(),
+    single<IdeaRepo> {
+        IdeaRepoImpl(
+            ideaDao = get(named(DAO_IDEA_SQLITE)),
+            ideaService = get(),
             userService = get(),
-            domainToStored = get(named(MAPPER_DOMAIN_TO_STORED_ACTION)),
-            storedToDomain = get(named(MAPPER_STORED_TO_DOMAIN_ACTION)),
-            domainToDto = get(named(MAPPER_DOMAIN_TO_DTO_ACTION)),
-            dtoToDomain = get(named(MAPPER_DTO_TO_DOMAIN_ACTION)),
+            ideaDomainToStoredMapper = get(named(MAPPER_DOMAIN_TO_STORED_SQLITE_ACTION)),
+            ideaStoredToDomainMapper = get(named(MAPPER_STORED_TO_DOMAIN_ACTION)),
+            ideaDomainToDtoMapper = get(named(MAPPER_DOMAIN_TO_DTO_ACTION)),
+            ideaDtoToDomainMapper = get(named(MAPPER_DTO_TO_DOMAIN_ACTION)),
         )
     }
-    single<UserRepo> { UserRepoImpl(service = get()) }
+    single<UserRepo> { UserRepoImpl(userService = get()) }
 }
 val rootScopeUsaCaseImplModuleDI = module {
     single<GetSuggestedActivityUseCase> { GetSuggestedActivityUseCaseImpl(repo = get()) }
@@ -34,7 +31,7 @@ val rootScopeUsaCaseImplModuleDI = module {
     single<AuthOfferIsViewedUseCase> { AuthOfferIsViewedUseCaseImpl(prefs = get()) }
     single<IsAuthorizedUseCase> { IsAuthorizedUseCaseImpl(repo = get()) }
     single<GetSignedInUserUseCase> { GetSignedInUserUseCaseImpl(repo = get()) }
-    single<SignOutUseCase> { SignOutUseCaseImpl(userRepo = get(), activityRepo = get()) }
+    single<SignOutUseCase> { SignOutUseCaseImpl(userRepo = get(), ideaRepo = get()) }
     single<GetAllPromiseUseCase> { GetAllSavedActivitiesUseCaseImpl(repo = get()) }
     single<GetStaticTextUseCase> { GetStaticTextUseCaseImpl(staticText = get()) }
     single<GetDynamicTextUseCase> { GetDynamicTextUseCaseImpl(dynamicText = get()) }

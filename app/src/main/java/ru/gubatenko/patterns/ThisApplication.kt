@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.work.*
 import com.example.audit_android.auditModule
 import com.example.domain_android.domainUseCaseAndroidModuleDI
+import com.example.lib.mapperActionImplModuleDI
+import com.example.lib.serviceImplModuleDI
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import ru.gubatenko.data_impl.*
@@ -21,9 +23,15 @@ class ThisApplication : Application() {
                 auditModule,
                 prefsImplModuleDI,
                 textImplModuleDI,
+
+                mapperActionAndroidModuleDI,
                 mapperActionImplModuleDI,
-                databaseModuleDI,
+
+                databaseSQLiteModuleDI,
+
+                serviceAndroidModuleDI,
                 serviceImplModuleDI,
+
                 rootScopeRepoImplModuleDI,
                 rootScopeUsaCaseImplModuleDI,
                 domainUseCaseAndroidModuleDI

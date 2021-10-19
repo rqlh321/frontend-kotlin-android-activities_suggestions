@@ -5,7 +5,7 @@ import ru.gubatenko.domain.model.User
 import ru.gubatenko.domain.repo.UserRepo
 
 class UserRepoImpl(
-    private val service: UserService
+    private val userService: UserService
 ) : UserRepo {
     override suspend fun create(query: UserRepo.CreateQuery) {
         TODO("Not yet implemented")
@@ -13,7 +13,7 @@ class UserRepoImpl(
 
     override suspend fun read(query: UserRepo.ReadQuery) = when (query) {
         is UserRepo.ReadQuery.GetSignedInUserQuery -> {
-            service.user()?.let {
+            userService.user()?.let {
                 User(
                     uid = it.uid,
                     name = it.name,
@@ -25,8 +25,8 @@ class UserRepoImpl(
     }
 
     override suspend fun update(query: UserRepo.UpdateQuery) = when(query){
-        is UserRepo.UpdateQuery.SignOutUserQuery -> service.signOut()
-        is UserRepo.UpdateQuery.SignInUserQuery -> service.signIn(query.credential)
+        is UserRepo.UpdateQuery.SignOutUserQuery -> userService.signOut()
+        is UserRepo.UpdateQuery.SignInUserQuery -> userService.signIn(query.credential)
     }
 
     override suspend fun delete(query: UserRepo.DeleteQuery) {

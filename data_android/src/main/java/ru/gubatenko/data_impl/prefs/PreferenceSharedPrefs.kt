@@ -1,4 +1,4 @@
-package ru.gubatenko.data_impl
+package ru.gubatenko.data_impl.prefs
 
 import android.content.Context
 import ru.gubatenko.data.prefs.DefinedPreferenceAbstract

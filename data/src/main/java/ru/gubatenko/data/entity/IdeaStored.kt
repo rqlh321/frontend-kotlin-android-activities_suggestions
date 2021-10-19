@@ -1,7 +1,7 @@
 package ru.gubatenko.data.entity
 
-interface ActivityStored {
+interface IdeaStored {
     val uid: Long
-    val activity: String
+    val idea: String
     val isSynced: Boolean
 }

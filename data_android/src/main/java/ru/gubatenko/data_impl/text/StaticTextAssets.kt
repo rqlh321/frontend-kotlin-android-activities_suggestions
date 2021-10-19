@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Build
 import org.json.JSONObject
 import ru.gubatenko.data.text.StaticText
-import timber.log.Timber
 import java.util.*
 
 class StaticTextAssets(context: Context) : StaticText {
@@ -20,11 +19,9 @@ class StaticTextAssets(context: Context) : StaticText {
         val source = try {
             context.assets.open("static/text/$country.json")
         } catch (e: Exception) {
-            Timber.d(e)
             try {
                 context.assets.open("static/text/${Locale.ENGLISH.language}.json")
             } catch (ex: Exception) {
-                Timber.d(ex)
                 return@lazy JSONObject()
             }
         }.bufferedReader().use { it.readText() }

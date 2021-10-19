@@ -44,7 +44,6 @@ dependencies {
 
     implementation coroutines.coroutines_play_services
 
-    implementation util.timber
     implementation koin.core
 
     api android_sdk.core
@@ -52,9 +51,6 @@ dependencies {
     implementation android_sdk.room_runtime
     implementation android_sdk.room_ktx
     kapt android_sdk.room_compiler
-
-    implementation network.retrofit
-    implementation network.retrofit_converter
 
     implementation platform(firebase.bom)
     implementation firebase.firestore

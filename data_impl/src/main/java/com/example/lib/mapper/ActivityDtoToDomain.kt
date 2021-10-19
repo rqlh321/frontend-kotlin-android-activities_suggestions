@@ -1,11 +1,11 @@
-package ru.gubatenko.data_impl.mapper
+package com.example.lib.mapper
 
 import ru.gubatenko.data.Mapper
-import ru.gubatenko.data.dto.ActivityDto
+import ru.gubatenko.data.dto.IdeaDto
 import ru.gubatenko.domain.model.Activity
 
-class ActivityDtoToDomain : Mapper<ActivityDto, Activity>() {
-    override fun map(data: ActivityDto) = Activity(
+class ActivityDtoToDomain : Mapper<IdeaDto, Activity>() {
+    override fun map(data: IdeaDto) = Activity(
         uid = null,
         activity = data.activity,
         type = null,
