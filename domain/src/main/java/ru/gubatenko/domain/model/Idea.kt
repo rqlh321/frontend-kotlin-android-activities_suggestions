@@ -1,6 +1,6 @@
 package ru.gubatenko.domain.model
 
-data class Activity(
+data class Idea(
     val uid: Long?,
     val activity: String,
     val type: String?,

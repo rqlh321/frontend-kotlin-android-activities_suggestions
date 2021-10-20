@@ -1,7 +1,7 @@
 package com.example.feature_accepted_activities
 
 import com.example.audit.Logger
-import ru.gubatenko.domain.model.Activity
+import ru.gubatenko.domain.model.Idea
 import ru.gubatenko.mvi.AbstractStore
 import ru.gubatenko.mvi.SideEffects
 import ru.gubatenko.mvi.StateObservable
@@ -25,7 +25,7 @@ class PromiseStore(
 
     sealed class SideAction {
         data class LoadSuccess(
-            val promiseList: List<Activity>,
+            val promiseList: List<Idea>,
             val isPromiseListVisible: Boolean,
             val infoText: String,
             val isInfoTextVisible: Boolean
@@ -33,7 +33,7 @@ class PromiseStore(
     }
 
     data class State(
-        val promiseList: List<Activity> = emptyList(),
+        val promiseList: List<Idea> = emptyList(),
         val isPromiseListVisible: Boolean = false,
         val infoText: String? = null,
         val isInfoTextVisible: Boolean = false

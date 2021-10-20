@@ -8,12 +8,7 @@ import java.util.*
 
 class StaticTextAssets(context: Context) : StaticText {
 
-    private val country = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        val locales = context.resources.configuration.locales
-        if (locales.size() > 0) locales.get(0).language else Locale.ENGLISH.language
-    } else {
-        context.resources.configuration.locale.language
-    }
+    private val country = context.country
 
     private val sourceJson: JSONObject by lazy {
         val source = try {

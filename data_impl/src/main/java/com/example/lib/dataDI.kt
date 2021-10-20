@@ -12,12 +12,12 @@ import ru.gubatenko.data.dto.IdeaDto
 import ru.gubatenko.data.entity.IdeaStored
 import ru.gubatenko.data.service.IdeaSourceService
 import ru.gubatenko.domain.*
-import ru.gubatenko.domain.model.Activity
+import ru.gubatenko.domain.model.Idea
 
 val mapperActionImplModuleDI = module {
-    single<Mapper<IdeaDto, Activity>>(named(MAPPER_DTO_TO_DOMAIN_ACTION)) { ActivityDtoToDomain() }
-    single<Mapper<Activity, IdeaDto>>(named(MAPPER_DOMAIN_TO_DTO_ACTION)) { DomainToActivityDto() }
-    single<Mapper<IdeaStored, Activity>>(named(MAPPER_STORED_TO_DOMAIN_ACTION)) { ActivityFromStoredToDomain() }
+    single<Mapper<IdeaDto, Idea>>(named(MAPPER_DTO_TO_DOMAIN_ACTION)) { ActivityDtoToDomain() }
+    single<Mapper<Idea, IdeaDto>>(named(MAPPER_DOMAIN_TO_DTO_ACTION)) { DomainToActivityDto() }
+    single<Mapper<IdeaStored, Idea>>(named(MAPPER_STORED_TO_DOMAIN_ACTION)) { ActivityFromStoredToDomain() }
 }
 val serviceImplModuleDI = module {
     single<Retrofit> {

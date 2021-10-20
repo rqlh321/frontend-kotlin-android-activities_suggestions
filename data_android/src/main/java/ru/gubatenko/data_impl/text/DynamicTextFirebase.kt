@@ -17,12 +17,7 @@ class DynamicTextFirebase(context: Context) : DynamicText {
 
     private var sourceJson: JSONObject? = null
 
-    private val country = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        val locales = context.resources.configuration.locales
-        if (locales.size() > 0) locales.get(0).language else Locale.ENGLISH.language
-    } else {
-        context.resources.configuration.locale.language
-    }
+    private val country = context.country
 
     override suspend fun value(key: String): String {
         if (sourceJson == null) {

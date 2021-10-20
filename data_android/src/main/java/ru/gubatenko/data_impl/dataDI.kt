@@ -16,7 +16,7 @@ import ru.gubatenko.data_impl.sqlite.AppDatabase
 import ru.gubatenko.data_impl.text.DynamicTextFirebase
 import ru.gubatenko.data_impl.text.StaticTextAssets
 import ru.gubatenko.domain.*
-import ru.gubatenko.domain.model.Activity
+import ru.gubatenko.domain.model.Idea
 
 val databaseSQLiteModuleDI = module {
     single { Room.databaseBuilder(get(), AppDatabase::class.java, "database-name").build() }
@@ -26,7 +26,7 @@ val serviceAndroidModuleDI = module {
     single<UserService> { UserServiceImpl() }
 }
 val mapperActionAndroidModuleDI = module {
-    single<Mapper<Activity, IdeaStored>>(named(MAPPER_DOMAIN_TO_STORED_SQLITE_ACTION)) { ActivityFromDomainToStoredRoom() }
+    single<Mapper<Idea, IdeaStored>>(named(MAPPER_DOMAIN_TO_STORED_SQLITE_ACTION)) { ActivityFromDomainToStoredRoom() }
 }
 
 val prefsImplModuleDI = module {

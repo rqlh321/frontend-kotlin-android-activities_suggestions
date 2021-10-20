@@ -7,24 +7,24 @@ import ru.gubatenko.data.dto.IdeaDto
 import ru.gubatenko.data.entity.IdeaStored
 import ru.gubatenko.data.service.IdeaSourceService
 import ru.gubatenko.data.service.UserService
-import ru.gubatenko.domain.model.Activity
+import ru.gubatenko.domain.model.Idea
 import ru.gubatenko.domain.repo.IdeaRepo
 
 class IdeaRepoImpl(
     private val ideaService: IdeaSourceService,
     private val userService: UserService,
     private val ideaDao: IdeaDao<IdeaStored>,
-    private val ideaDomainToStoredMapper: Mapper<Activity, IdeaStored>,
-    private val ideaStoredToDomainMapper: Mapper<IdeaStored, Activity>,
-    private val ideaDomainToDtoMapper: Mapper<Activity, IdeaDto>,
-    private val ideaDtoToDomainMapper: Mapper<IdeaDto, Activity>,
+    private val ideaDomainToStoredMapper: Mapper<Idea, IdeaStored>,
+    private val ideaStoredToDomainMapper: Mapper<IdeaStored, Idea>,
+    private val ideaDomainToDtoMapper: Mapper<Idea, IdeaDto>,
+    private val ideaDtoToDomainMapper: Mapper<IdeaDto, Idea>,
 ) : IdeaRepo {
     override suspend fun create(query: IdeaRepo.CreateQuery) = when (query) {
         is IdeaRepo.CreateQuery.NewActivityToLocalStorage -> {
-            ideaDao.save(query.activities.map(ideaDomainToStoredMapper::map))
+            ideaDao.save(query.ideas.map(ideaDomainToStoredMapper::map))
         }
         is IdeaRepo.CreateQuery.NewActivityToWebStorage   -> {
-            userService.post(query.activities.map(ideaDomainToDtoMapper::map))
+            userService.post(query.ideas.map(ideaDomainToDtoMapper::map))
         }
     }
 
@@ -51,7 +51,7 @@ class IdeaRepoImpl(
 
     override suspend fun update(query: IdeaRepo.UpdateQuery) = when (query) {
         is IdeaRepo.UpdateQuery.AllActivitiesSynced -> {
-            ideaDao.updateAsSynced(query.activities.mapNotNull { it.uid })
+            ideaDao.updateAsSynced(query.ideas.mapNotNull { it.uid })
         }
     }
 

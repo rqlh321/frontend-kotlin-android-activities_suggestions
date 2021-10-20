@@ -3,10 +3,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
+}
     dependencies {
         classpath "com.android.tools.build:gradle:7.0.2"
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.30'
@@ -33,9 +30,6 @@ ext {
     koin = [
             android: "io.insert-koin:koin-android:3.1.2",
             core   : "io.insert-koin:koin-core:3.1.2"
-    ]
-    database = [
-            realm   : "io.realm.kotlin:library:0.5.0"
     ]
     android_sdk = [
             core               : "androidx.core:core-ktx:1.6.0",

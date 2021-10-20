@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.feature_accepted_activities_android.R
-import ru.gubatenko.domain.model.Activity
+import ru.gubatenko.domain.model.Idea
 
 class PromiseAdapter : RecyclerView.Adapter<PromiseViewHolder>() {
 
-    private var data = emptyList<Activity>()
+    private var data = emptyList<Idea>()
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -29,7 +29,7 @@ class PromiseAdapter : RecyclerView.Adapter<PromiseViewHolder>() {
 
     override fun getItemCount() = data.size
 
-    fun set(newData: List<Activity>) {
+    fun set(newData: List<Idea>) {
         val diffCallback = PromiseDifUtil(old = data, new = newData)
         val diffResult = DiffUtil.calculateDiff(diffCallback)
 

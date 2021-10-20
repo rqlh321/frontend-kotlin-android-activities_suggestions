@@ -1,7 +1,7 @@
 package ru.gubatenko.feature_main
 
 import com.example.audit.Logger
-import ru.gubatenko.domain.model.Activity
+import ru.gubatenko.domain.model.Idea
 import ru.gubatenko.mvi.AbstractStore
 import ru.gubatenko.mvi.SideEffects
 import ru.gubatenko.mvi.StateObservable
@@ -40,14 +40,14 @@ class MainStore(
         ) : SideAction()
 
         data class LoadSuccess(
-            val idea: Activity,
+            val idea: Idea,
             val saveButtonText: String? = null,
             val nextButtonText: String? = null,
         ) : SideAction()
     }
 
     data class State(
-        val idea: Activity? = null,
+        val idea: Idea? = null,
         val isIdeaTextVisible: Boolean = false,
 
         val errorText: String? = null,

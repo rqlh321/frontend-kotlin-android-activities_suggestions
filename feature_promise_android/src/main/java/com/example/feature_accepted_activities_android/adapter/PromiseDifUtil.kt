@@ -1,11 +1,11 @@
 package com.example.feature_accepted_activities_android.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import ru.gubatenko.domain.model.Activity
+import ru.gubatenko.domain.model.Idea
 
 class PromiseDifUtil(
-    private val old: List<Activity>,
-    private val new: List<Activity>,
+    private val old: List<Idea>,
+    private val new: List<Idea>,
 ) : DiffUtil.Callback() {
     override fun getOldListSize() = old.size
 

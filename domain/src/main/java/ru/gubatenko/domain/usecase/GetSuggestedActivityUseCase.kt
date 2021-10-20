@@ -1,7 +1,7 @@
 package ru.gubatenko.domain.usecase
 
-import ru.gubatenko.domain.model.Activity
+import ru.gubatenko.domain.model.Idea
 
 interface GetSuggestedActivityUseCase {
-    suspend fun execute(): Activity
+    suspend fun execute(): Idea
 }

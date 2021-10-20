@@ -10,7 +10,7 @@ import ru.gubatenko.domain_impl.repo.IdeaRepoImpl
 import ru.gubatenko.domain_impl.repo.UserRepoImpl
 import ru.gubatenko.domain_impl.use_case.*
 
-val rootScopeRepoImplModuleDI = module {
+val repoImplModuleDI = module {
     single<IdeaRepo> {
         IdeaRepoImpl(
             ideaDao = get(named(DAO_IDEA_SQLITE)),
@@ -24,7 +24,7 @@ val rootScopeRepoImplModuleDI = module {
     }
     single<UserRepo> { UserRepoImpl(userService = get()) }
 }
-val rootScopeUsaCaseImplModuleDI = module {
+val usaCaseImplModuleDI = module {
     single<GetSuggestedActivityUseCase> { GetSuggestedActivityUseCaseImpl(repo = get()) }
     single<SaveActivityToLocalStorageUseCase> { SaveActivityToLocalStorageUseCaseImpl(repo = get(), prefs = get()) }
     single<SyncActivitiesWithServerUseCase> { SyncActivitiesWithServerUseCaseImpl(repo = get()) }
