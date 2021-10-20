@@ -18,7 +18,6 @@ import com.google.firebase.auth.GoogleAuthProvider
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
-import timber.log.Timber
 
 class SignInFirebaseActivity : AppCompatActivity() {
 
@@ -69,7 +68,6 @@ class SignInFirebaseActivity : AppCompatActivity() {
             val credential = GoogleAuthProvider.getCredential(account.idToken, null)
             viewModel.signIn(credential)
         } catch (e: Exception) {
-            Timber.d(e)
             finish()
         }
     }

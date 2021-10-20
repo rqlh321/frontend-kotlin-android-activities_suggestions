@@ -39,7 +39,6 @@ dependencies {
 
     api koin.android
 
-    api util.timber
     api android_sdk.core
     api android_sdk.appcompat
     api android_sdk.material

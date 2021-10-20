@@ -6,7 +6,6 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import ru.gubatenko.domain.exception.UnknownUserException
-import timber.log.Timber
 
 abstract class BaseViewModel : ViewModel() {
 
@@ -25,7 +24,6 @@ abstract class BaseViewModel : ViewModel() {
             try {
                 block.invoke()
             } catch (e: Exception) {
-                Timber.d(e)
                 when (e) {
                     is UnknownUserException -> onUnknownUserException()
                 }
