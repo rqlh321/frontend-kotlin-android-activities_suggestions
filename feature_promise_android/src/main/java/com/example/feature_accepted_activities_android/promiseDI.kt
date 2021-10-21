@@ -20,7 +20,7 @@ val promiseFeatureAndroidModuleDI = module {
 
     single (named(PROMISE_SIDE_EFFECTS)){
         SideEffects.Builder<PromiseStore.Action, PromiseStore.SideAction>()
-            .append(sideEffect = ShowContentSideEffect(useCase = get(), getStaticTextUseCase = get()))
+            .append(sideEffect = ShowContentSideEffect(getAllPromiseUseCase = get(), getStaticTextUseCase = get()))
             .build()
     }
     single {
