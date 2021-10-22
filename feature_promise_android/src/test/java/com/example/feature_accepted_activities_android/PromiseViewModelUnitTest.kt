@@ -5,7 +5,6 @@ import com.example.audit.Logger
 import com.example.audit.LoggerStub
 import com.example.feature_accepted_activities.PromiseStore
 import junit.framework.TestCase.assertEquals
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -18,7 +17,6 @@ import org.koin.dsl.module
 import org.koin.java.KoinJavaComponent.inject
 import org.mockito.Mockito
 import ru.gubatenko.domain.TextKey
-import ru.gubatenko.domain.model.Idea
 import ru.gubatenko.domain.usecase.GetAllPromiseUseCase
 import ru.gubatenko.domain.usecase.GetStaticTextUseCase
 
@@ -26,20 +24,6 @@ class PromiseViewModelUnitTest : KoinComponent {
 
     @get:Rule
     val instantExecutorRule = InstantTaskExecutorRule()
-
-    private val ideaFlow = flow {
-        emit(
-            listOf(
-                Idea(
-                    uid = Long.MAX_VALUE,
-                    activity = "activity",
-                    type = "type",
-                    accessibility = "accessibility",
-                    isSynced = false,
-                )
-            )
-        )
-    }
 
     private val getAllPromiseUseCase: GetAllPromiseUseCase by inject(GetAllPromiseUseCase::class.java)
     private val getStaticTextUseCase: GetStaticTextUseCase by inject(GetStaticTextUseCase::class.java)
@@ -60,11 +44,7 @@ class PromiseViewModelUnitTest : KoinComponent {
         }
         Mockito
             .`when`(getStaticTextUseCase.execute(TextKey.Promise.EMPTY_LIST))
-            .thenReturn("")
-
-        Mockito
-            .`when`(getAllPromiseUseCase.execute())
-            .thenReturn(ideaFlow)
+            .thenReturn(EMPTY_LIST_TEXT)
     }
 
     @After
@@ -73,9 +53,27 @@ class PromiseViewModelUnitTest : KoinComponent {
     }
 
     @Test
-    fun init() = runBlocking {
+    fun loadContentIsNotEmpty() = runBlocking {
+        Mockito.`when`(getAllPromiseUseCase.execute())
+            .thenReturn(ideaFlow)
+
         store.process(PromiseStore.Action.LoadContent)
-        assertEquals(1, store.stateObservable.stateValue.promiseList.size)
+        assertEquals(true, store.stateObservable.stateValue.isPromiseListVisible)
+        assertEquals(false, store.stateObservable.stateValue.isInfoTextVisible)
+        assertEquals(EMPTY_LIST_TEXT, store.stateObservable.stateValue.infoText)
+        assertEquals(ideas.size, store.stateObservable.stateValue.promiseList.size)
+    }
+
+    @Test
+    fun loadContentIsEmpty() = runBlocking {
+        Mockito.`when`(getAllPromiseUseCase.execute())
+            .thenReturn(emptyIdeaFlow)
+
+        store.process(PromiseStore.Action.LoadContent)
+        assertEquals(false, store.stateObservable.stateValue.isPromiseListVisible)
+        assertEquals(true, store.stateObservable.stateValue.isInfoTextVisible)
+        assertEquals(EMPTY_LIST_TEXT, store.stateObservable.stateValue.infoText)
+        assertEquals(0, store.stateObservable.stateValue.promiseList.size)
     }
 
 }
