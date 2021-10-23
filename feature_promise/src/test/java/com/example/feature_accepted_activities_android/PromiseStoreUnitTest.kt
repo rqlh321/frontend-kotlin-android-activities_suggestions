@@ -63,7 +63,7 @@ class PromiseStoreUnitTest : KoinComponent {
         assertEquals(false, store.stateObservable.stateValue.isPromiseListVisible)
         assertEquals(true, store.stateObservable.stateValue.isInfoTextVisible)
         assertEquals(EMPTY_LIST_TEXT, store.stateObservable.stateValue.infoText)
-        assertEquals(true, store.stateObservable.stateValue.promiseList.isEmpty())
+        assertEquals(false, store.stateObservable.stateValue.promiseList.isEmpty())
     }
 
     @Test
