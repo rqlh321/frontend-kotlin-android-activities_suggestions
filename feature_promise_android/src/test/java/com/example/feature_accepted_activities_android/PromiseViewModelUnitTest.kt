@@ -34,11 +34,7 @@ class PromiseViewModelUnitTest : KoinComponent {
     fun setup(): Unit = runBlocking {
         startKoin {
             modules(
-                module {
-                    single<Logger> { LoggerStub() }
-                    single<GetAllPromiseUseCase> { Mockito.mock(GetAllPromiseUseCase::class.java) }
-                    single<GetStaticTextUseCase> { Mockito.mock(GetStaticTextUseCase::class.java) }
-                },
+                mockedUseCase,
                 promiseFeatureAndroidModuleDI
             )
         }
