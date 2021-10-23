@@ -18,8 +18,6 @@ import ru.gubatenko.domain.navigation.AUTH_SUCCESS_BROADCAST
 import ru.gubatenko.domain.navigation.NavigationMain
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.RelativeCornerSize
-import org.koin.core.context.loadKoinModules
-import org.koin.core.context.unloadKoinModules
 import ru.gubatenko.common_android.BaseFragment
 import ru.gubatenko.common_android.onClick
 import ru.gubatenko.common_android.sharedGraphViewModel
@@ -42,10 +40,10 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             viewModel.successAuthorization()
         }
     }
+    override val diModules= listOf(profileFeatureAndroidModuleDI)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadKoinModules(profileFeatureAndroidModuleDI)
 
         prefsList.adapter = prefsListAdapter
 
@@ -71,7 +69,6 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
         LocalBroadcastManager.getInstance(requireContext())
             .unregisterReceiver(successAuthReceiver)
 
-        unloadKoinModules(profileFeatureAndroidModuleDI)
         super.onDestroyView()
     }
 

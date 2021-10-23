@@ -8,8 +8,6 @@ import androidx.core.view.isVisible
 import androidx.core.widget.ContentLoadingProgressBar
 import androidx.navigation.fragment.findNavController
 import ru.gubatenko.domain.navigation.NavigationMain
-import org.koin.core.context.loadKoinModules
-import org.koin.core.context.unloadKoinModules
 import ru.gubatenko.common_android.BaseFragment
 import ru.gubatenko.common_android.onClick
 import ru.gubatenko.common_android.sharedGraphViewModel
@@ -26,9 +24,10 @@ class IdeaFragment : BaseFragment(R.layout.fragment_idea) {
     private val nextButton: Button by lazy { requireView().findViewById(R.id.next_button_id) }
     private val loadingProgress: ContentLoadingProgressBar by lazy { requireView().findViewById(R.id.loading_progress_id) }
 
+    override val diModules = listOf(ideaFeatureAndroidModuleDI)
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        loadKoinModules(ideaFeatureAndroidModuleDI)
 
         retryButton.onClick(viewModel::reload)
         saveButton.onClick(viewModel::save)
@@ -36,11 +35,6 @@ class IdeaFragment : BaseFragment(R.layout.fragment_idea) {
 
         viewModel.event.observe(viewLifecycleOwner, ::handle)
         viewModel.state.observe(viewLifecycleOwner, ::render)
-    }
-
-    override fun onDestroyView() {
-        unloadKoinModules(ideaFeatureAndroidModuleDI)
-        super.onDestroyView()
     }
 
     private fun handle(event: MainStore.Event) {

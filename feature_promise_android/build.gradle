@@ -34,12 +34,4 @@ android {
 dependencies {
     implementation project(path: ':feature_promise')
     implementation project(path: ':common_android')
-
-    testImplementation test.junit
-    testImplementation test.mockito
-    testImplementation test.robolectric
-    testImplementation test.arch_core
-
-    androidTestImplementation test.junit_ext
-    androidTestImplementation test.espresso
 }

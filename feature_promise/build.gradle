@@ -10,4 +10,12 @@ java {
 dependencies {
     implementation project(path: ':mvi')
     implementation project(path: ':domain')
+
+    implementation koin.core
+
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'androidx.test.ext:junit:1.1.2'
+    testImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    testImplementation 'org.mockito:mockito-core:3.11.2'
+
 }
