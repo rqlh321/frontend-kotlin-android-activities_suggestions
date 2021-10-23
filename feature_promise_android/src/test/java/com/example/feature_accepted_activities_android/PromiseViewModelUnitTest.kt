@@ -1,8 +1,6 @@
 package com.example.feature_accepted_activities_android
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.example.audit.Logger
-import com.example.audit.LoggerStub
 import com.example.feature_accepted_activities.PromiseStore
 import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.runBlocking
@@ -13,7 +11,6 @@ import org.junit.Test
 import org.koin.core.component.KoinComponent
 import org.koin.core.context.startKoin
 import org.koin.core.context.stopKoin
-import org.koin.dsl.module
 import org.koin.java.KoinJavaComponent.inject
 import org.mockito.Mockito
 import ru.gubatenko.domain.TextKey
@@ -49,7 +46,7 @@ class PromiseViewModelUnitTest : KoinComponent {
     }
 
     @Test
-    fun loadContentIsNotEmpty() = runBlocking {
+    fun loadedContentIsNotEmpty() = runBlocking {
         Mockito.`when`(getAllPromiseUseCase.execute())
             .thenReturn(ideaFlow)
 
@@ -57,11 +54,11 @@ class PromiseViewModelUnitTest : KoinComponent {
         assertEquals(true, store.stateObservable.stateValue.isPromiseListVisible)
         assertEquals(false, store.stateObservable.stateValue.isInfoTextVisible)
         assertEquals(EMPTY_LIST_TEXT, store.stateObservable.stateValue.infoText)
-        assertEquals(ideas.size, store.stateObservable.stateValue.promiseList.size)
+        assertEquals(true, store.stateObservable.stateValue.promiseList.isNotEmpty())
     }
 
     @Test
-    fun loadContentIsEmpty() = runBlocking {
+    fun loadedContentIsEmpty() = runBlocking {
         Mockito.`when`(getAllPromiseUseCase.execute())
             .thenReturn(emptyIdeaFlow)
 
@@ -69,7 +66,18 @@ class PromiseViewModelUnitTest : KoinComponent {
         assertEquals(false, store.stateObservable.stateValue.isPromiseListVisible)
         assertEquals(true, store.stateObservable.stateValue.isInfoTextVisible)
         assertEquals(EMPTY_LIST_TEXT, store.stateObservable.stateValue.infoText)
-        assertEquals(0, store.stateObservable.stateValue.promiseList.size)
+        assertEquals(true, store.stateObservable.stateValue.promiseList.isEmpty())
     }
 
+    @Test
+    fun loadContentFail() = runBlocking {
+        Mockito.`when`(getAllPromiseUseCase.execute())
+            .thenReturn(throwExceptionIdeaFlow)
+
+        store.process(PromiseStore.Action.LoadContent)
+        assertEquals(false, store.stateObservable.stateValue.isPromiseListVisible)
+        assertEquals(false, store.stateObservable.stateValue.isInfoTextVisible)
+        assertEquals(null, store.stateObservable.stateValue.infoText)
+        assertEquals(true, store.stateObservable.stateValue.promiseList.isEmpty())
+    }
 }

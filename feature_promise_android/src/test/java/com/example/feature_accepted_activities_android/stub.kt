@@ -21,4 +21,5 @@ val ideas = listOf(
 )
 
 val ideaFlow = flow { emit(ideas) }
-val emptyIdeaFlow = flow { emit(emptyList<Idea>()) }
+val emptyIdeaFlow = flow<List<Idea>> { emit(emptyList()) }
+val throwExceptionIdeaFlow = flow<List<Idea>> { throw Exception() }

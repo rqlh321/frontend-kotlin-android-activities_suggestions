@@ -11,7 +11,7 @@ class PromiseViewModel(
     val state = (store.stateObservable as LiveDataStateObservable)
 
     init {
-        io {
+        unconfined {
             store.process(PromiseStore.Action.LoadContent)
         }
     }
