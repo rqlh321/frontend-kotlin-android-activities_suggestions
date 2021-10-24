@@ -19,6 +19,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testBuildType System.getProperty('testBuildType', 'debug')
     }
+    testBuildType "release"
     signingConfigs {
         development {
             keyAlias 'alias'
@@ -27,23 +28,19 @@ android {
             storePassword '123456'
         }
         production {
-            keyAlias keystore_promise_release_alias
-            keyPassword keystore_promise_release_pass_key
-            storeFile file(keystore_promise_release_jks)
-            storePassword keystore_promise_release_pass_store
+            try {
+                keyAlias keystore_promise_release_alias
+                keyPassword keystore_promise_release_pass_key
+                storeFile file(keystore_promise_release_jks)
+                storePassword keystore_promise_release_pass_store
+            } catch(Exception ignored){
+                keyAlias 'stub'
+                keyPassword 'stub'
+                storeFile file('stub')
+                storePassword 'stub'
+            }
         }
     }
-    buildTypes {
-        debug {
-            signingConfig signingConfigs.development
-        }
-        release {
-            signingConfig signingConfigs.production
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
     flavorDimensions "version"
     productFlavors {
         development {
@@ -56,7 +53,17 @@ android {
             dimension "version"
         }
     }
-
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.development
+        }
+        release {
+            productFlavors.development.signingConfig signingConfigs.development
+            productFlavors.production.signingConfig signingConfigs.production
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
