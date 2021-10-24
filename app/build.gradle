@@ -34,10 +34,10 @@ android {
                 storeFile file(keystore_promise_release_jks)
                 storePassword keystore_promise_release_pass_store
             } catch(Exception ignored){
-                keyAlias ''
-                keyPassword ''
-                storeFile file('')
-                storePassword ''
+                keyAlias 'stub'
+                keyPassword 'stub'
+                storeFile file('stub')
+                storePassword 'stub'
             }
         }
     }
