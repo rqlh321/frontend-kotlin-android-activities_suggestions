@@ -19,6 +19,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         testBuildType System.getProperty('testBuildType', 'debug')
     }
+    testBuildType "release"
     signingConfigs {
         development {
             keyAlias 'alias'
