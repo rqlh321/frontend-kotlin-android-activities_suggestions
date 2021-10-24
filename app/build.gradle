@@ -33,17 +33,6 @@ android {
             storePassword "keystore_promise_release_pass_store"
         }
     }
-    buildTypes {
-        debug {
-            signingConfig signingConfigs.development
-        }
-        release {
-            signingConfig signingConfigs.production
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-    }
-
     flavorDimensions "version"
     productFlavors {
         development {
@@ -56,7 +45,17 @@ android {
             dimension "version"
         }
     }
-
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.development
+        }
+        release {
+            productFlavors.development.signingConfig signingConfigs.development
+            productFlavors.production.signingConfig signingConfigs.production
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
