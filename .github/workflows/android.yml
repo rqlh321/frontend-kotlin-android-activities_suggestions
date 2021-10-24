@@ -39,7 +39,7 @@ jobs:
           path: app/build/outputs/apk/development/release/app-development-release.apk
           
       - name: Assemble Android Instrumentation Tests
-        run: bash ./gradlew assembleDevelopmentReleaseAndroidTest -DtestBuildType=release
+        run: bash ./gradlew assembleAndroidTest -DtestBuildType=release
         
       - name: Upload Android Test APK
         uses: actions/upload-artifact@v1
