@@ -29,8 +29,8 @@ jobs:
         with:
           java-version: '11'
             
-      - name: Assemble app debug APK
-        run: bash ./gradlew assemble
+      - name: Assemble app development Release APK
+        run: bash ./gradlew assembleDevelopmentRelease
         
       - name: Upload app APK
         uses: actions/upload-artifact@v1
@@ -39,7 +39,7 @@ jobs:
           path: app/build/outputs/apk/development/release/app-development-release.apk
           
       - name: Assemble Android Instrumentation Tests
-        run: bash ./gradlew assembleAndroidTest -DtestBuildType=release
+        run: bash ./gradlew assembleDevelopmentReleaseAndroidTest
         
       - name: Upload Android Test APK
         uses: actions/upload-artifact@v1
