@@ -45,8 +45,4 @@ dependencies {
     api android_sdk.navigation_fragment
     api android_sdk.navigation_ui
     implementation android_sdk.lifecycle_viewmodel
-
-    testImplementation test.junit
-    androidTestImplementation test.junit_ext
-    androidTestImplementation test.espresso
 }

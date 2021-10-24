@@ -40,8 +40,4 @@ dependencies {
     implementation project(path: ':feature_promise_android')
 
     implementation android_sdk.fragment
-
-    testImplementation test.junit
-    androidTestImplementation test.junit_ext
-    androidTestImplementation test.espresso
 }

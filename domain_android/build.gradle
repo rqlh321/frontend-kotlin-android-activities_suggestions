@@ -37,8 +37,4 @@ dependencies {
 
     implementation koin.core
     implementation android_sdk.worker
-
-    testImplementation test.junit
-    androidTestImplementation test.junit_ext
-    androidTestImplementation test.espresso
 }
