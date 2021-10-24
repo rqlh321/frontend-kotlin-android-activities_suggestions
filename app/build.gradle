@@ -28,10 +28,17 @@ android {
             storePassword '123456'
         }
         production {
-            keyAlias "keystore_promise_release_alias"
-            keyPassword "keystore_promise_release_pass_key"
-            storeFile file("keystore_promise_release_jks")
-            storePassword "keystore_promise_release_pass_store"
+            try {
+                keyAlias keystore_promise_release_alias
+                keyPassword keystore_promise_release_pass_key
+                storeFile file(keystore_promise_release_jks)
+                storePassword keystore_promise_release_pass_store
+            } catch(Exception ignored){
+                keyAlias ''
+                keyPassword ''
+                storeFile file('')
+                storePassword ''
+            }
         }
     }
     flavorDimensions "version"
