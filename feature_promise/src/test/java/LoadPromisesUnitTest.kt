@@ -16,7 +16,7 @@ import ru.gubatenko.domain.TextKey
 import ru.gubatenko.domain.usecase.GetAllPromiseUseCase
 import ru.gubatenko.domain.usecase.GetStaticTextUseCase
 
-class PromiseStoreUnitTest : KoinComponent {
+class LoadPromisesUnitTest : KoinComponent {
 
     private val getAllPromiseUseCase: GetAllPromiseUseCase by inject(GetAllPromiseUseCase::class.java)
     private val getStaticTextUseCase: GetStaticTextUseCase by inject(GetStaticTextUseCase::class.java)

@@ -1,6 +1,6 @@
 package com.example.feature_accepted_activities
 
-import com.example.feature_accepted_activities.side_effects.ShowContentSideEffect
+import com.example.feature_accepted_activities.side_effects.LoadPromisesSideEffect
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import ru.gubatenko.mvi.SideEffects
@@ -11,7 +11,7 @@ const val PROMISE_SIDE_EFFECTS = "PROMISE_SIDE_EFFECTS"
 val promiseStoreModuleDI = module {
     single (named(PROMISE_SIDE_EFFECTS)){
         SideEffects.Builder<PromiseStore.Action, PromiseStore.SideAction>()
-            .append(sideEffect = ShowContentSideEffect(getAllPromiseUseCase = get(), getStaticTextUseCase = get()))
+            .append(sideEffect = LoadPromisesSideEffect(getAllPromiseUseCase = get(), getStaticTextUseCase = get()))
             .build()
     }
     single {

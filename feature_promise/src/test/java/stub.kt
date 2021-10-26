@@ -9,6 +9,8 @@ import org.koin.dsl.module
 import ru.gubatenko.domain.model.Idea
 import ru.gubatenko.mvi.EventDispatcher
 import ru.gubatenko.mvi.StateObservable
+import ru.gubatenko.mvi.StubEventDispatcher
+import ru.gubatenko.mvi.StubStateObservable
 
 const val EMPTY_LIST_TEXT = "EMPTY_LIST_TEXT"
 const val IDEA_ACTIVITY = "activity"
@@ -31,16 +33,7 @@ val ideaFlow = flow { emit(ideas) }
 val emptyIdeaFlow = flow<List<Idea>> { emit(emptyList()) }
 val throwExceptionIdeaFlow = flow<List<Idea>> { throw Exception() }
 
-class StubStateObservable<T : Any>(override var stateValue: T) : StateObservable<T>
-class StubEventDispatcher<T : Any> : EventDispatcher<T> {
-    override suspend fun dispatch(event: T) = Unit
-}
-
 val stubStateEvent = module {
-    single<StateObservable<PromiseStore.State>>(named(PROMISE_STATE_OBSERVABLE)) {
-        StubStateObservable(
-            PromiseStore.State()
-        )
-    }
+    single<StateObservable<PromiseStore.State>>(named(PROMISE_STATE_OBSERVABLE)) { StubStateObservable(PromiseStore.State()) }
     single<EventDispatcher<PromiseStore.Event>>(named(PROMISE_EVENT_DISPATCHER)) { StubEventDispatcher() }
 }

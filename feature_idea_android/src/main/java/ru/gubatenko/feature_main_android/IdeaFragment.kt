@@ -11,7 +11,8 @@ import ru.gubatenko.domain.navigation.NavigationMain
 import ru.gubatenko.common_android.BaseFragment
 import ru.gubatenko.common_android.onClick
 import ru.gubatenko.common_android.sharedGraphViewModel
-import ru.gubatenko.feature_main.MainStore
+import ru.gubatenko.feature_main.IdeaStore
+import ru.gubatenko.feature_main.ideaStoreModuleDI
 
 class IdeaFragment : BaseFragment(R.layout.fragment_idea) {
 
@@ -24,7 +25,7 @@ class IdeaFragment : BaseFragment(R.layout.fragment_idea) {
     private val nextButton: Button by lazy { requireView().findViewById(R.id.next_button_id) }
     private val loadingProgress: ContentLoadingProgressBar by lazy { requireView().findViewById(R.id.loading_progress_id) }
 
-    override val diModules = listOf(ideaFeatureAndroidModuleDI)
+    override val diModules = listOf(ideaStoreModuleDI, ideaFeatureAndroidModuleDI)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,14 +38,14 @@ class IdeaFragment : BaseFragment(R.layout.fragment_idea) {
         viewModel.state.observe(viewLifecycleOwner, ::render)
     }
 
-    private fun handle(event: MainStore.Event) {
+    private fun handle(event: IdeaStore.Event) {
         when (event) {
-            is MainStore.Event.NavigateTo         -> findNavController().navigate(event.locationId)
-            is MainStore.Event.NavigateToAuthFlow -> (requireActivity() as? NavigationMain)?.oferAuthorizationFlow()
+            is IdeaStore.Event.NavigateTo         -> findNavController().navigate(event.locationId)
+            is IdeaStore.Event.NavigateToAuthFlow -> (requireActivity() as? NavigationMain)?.oferAuthorizationFlow()
         }
     }
 
-    private fun render(state: MainStore.State) {
+    private fun render(state: IdeaStore.State) {
         if (state.isLoadingProgressVisible) loadingProgress.show() else loadingProgress.hide()
 
         retryButton.text = state.retryButtonText

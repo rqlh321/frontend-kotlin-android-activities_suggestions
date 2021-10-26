@@ -3,27 +3,27 @@ package ru.gubatenko.feature_main.side_effects
 import ru.gubatenko.domain.TextKey
 import ru.gubatenko.domain.usecase.GetStaticTextUseCase
 import ru.gubatenko.domain.usecase.GetSuggestedActivityUseCase
-import ru.gubatenko.feature_main.MainStore
+import ru.gubatenko.feature_main.IdeaStore
 import ru.gubatenko.mvi.SideEffect
 
-class LoadMainContentSideEffect(
+class LoadIdeaSideEffect(
     private val getStaticTextUseCase: GetStaticTextUseCase,
     private val getSuggestedActivityUseCase: GetSuggestedActivityUseCase
-) : SideEffect<MainStore.Action.LoadContent, MainStore.SideAction> {
+) : SideEffect<IdeaStore.Action.LoadContent, IdeaStore.SideAction> {
 
-    override fun actionId() = MainStore.Action.LoadContent::class.java
+    override fun actionId() = IdeaStore.Action.LoadContent::class.java
 
     override suspend fun execute(
-        action: MainStore.Action.LoadContent,
-        reducerCallback: suspend (MainStore.SideAction) -> Unit
+        action: IdeaStore.Action.LoadContent,
+        reducerCallback: suspend (IdeaStore.SideAction) -> Unit
     ) {
         try {
-            reducerCallback.invoke(MainStore.SideAction.LoadStart)
+            reducerCallback.invoke(IdeaStore.SideAction.LoadStart)
             val idea = getSuggestedActivityUseCase.execute()
             val saveButtonText = getStaticTextUseCase.execute(TextKey.Main.SAVE)
             val nextButtonText = getStaticTextUseCase.execute(TextKey.Main.NEXT)
             reducerCallback.invoke(
-                MainStore.SideAction.LoadSuccess(
+                IdeaStore.SideAction.LoadSuccess(
                     idea = idea,
                     saveButtonText = saveButtonText,
                     nextButtonText = nextButtonText
@@ -33,7 +33,7 @@ class LoadMainContentSideEffect(
             val message = getStaticTextUseCase.execute(TextKey.Common.ERROR)
             val retryButtonText = getStaticTextUseCase.execute(TextKey.Common.RETRY)
             reducerCallback.invoke(
-                MainStore.SideAction.LoadError(
+                IdeaStore.SideAction.LoadError(
                     message = message,
                     retryButtonText = retryButtonText
                 )

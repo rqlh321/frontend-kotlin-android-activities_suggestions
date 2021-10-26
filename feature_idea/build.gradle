@@ -10,4 +10,11 @@ java {
 dependencies {
     implementation project(path: ':mvi')
     implementation project(path: ':domain')
+
+    implementation koin.core
+
+    testImplementation testing.junit
+    testImplementation testing.junit_ext
+    testImplementation testing.espresso
+    testImplementation testing.mockito
 }

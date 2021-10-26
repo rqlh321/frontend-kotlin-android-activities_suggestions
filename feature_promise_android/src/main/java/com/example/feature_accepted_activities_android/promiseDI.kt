@@ -3,12 +3,10 @@ package com.example.feature_accepted_activities_android
 import com.example.feature_accepted_activities.PROMISE_EVENT_DISPATCHER
 import com.example.feature_accepted_activities.PROMISE_STATE_OBSERVABLE
 import com.example.feature_accepted_activities.PromiseStore
-import com.example.feature_accepted_activities.side_effects.ShowContentSideEffect
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import ru.gubatenko.mvi.EventDispatcher
-import ru.gubatenko.mvi.SideEffects
 import ru.gubatenko.mvi.StateObservable
 import ru.gubatenko.mvi_android.android.LiveDataEventDispatcher
 import ru.gubatenko.mvi_android.android.LiveDataStateObservable

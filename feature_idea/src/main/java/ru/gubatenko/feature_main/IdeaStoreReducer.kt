@@ -2,15 +2,15 @@ package ru.gubatenko.feature_main
 
 import ru.gubatenko.mvi.Reducer
 
-class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
+class IdeaStoreReducer : Reducer<IdeaStore.State, IdeaStore.SideAction> {
     override fun invoke(
-        currentState: MainStore.State,
-        newAction: MainStore.SideAction
-    ): MainStore.State = when (newAction) {
-        is MainStore.SideAction.SavingStart -> currentState.copy(
+        currentState: IdeaStore.State,
+        newAction: IdeaStore.SideAction
+    ): IdeaStore.State = when (newAction) {
+        is IdeaStore.SideAction.SavingStart -> currentState.copy(
             isSaveButtonClickable = false,
         )
-        is MainStore.SideAction.LoadStart -> currentState.copy(
+        is IdeaStore.SideAction.LoadStart -> currentState.copy(
             isLoadingProgressVisible = true,
 
             isRetryButtonVisible = false,
@@ -24,7 +24,7 @@ class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
             isErrorTextVisible = false,
             errorText = null,
         )
-        is MainStore.SideAction.LoadError -> currentState.copy(
+        is IdeaStore.SideAction.LoadError -> currentState.copy(
             isLoadingProgressVisible = false,
 
             retryButtonText = newAction.retryButtonText,
@@ -39,7 +39,7 @@ class MainStoreReducer : Reducer<MainStore.State, MainStore.SideAction> {
             isErrorTextVisible = true,
             errorText = newAction.message,
         )
-        is MainStore.SideAction.LoadSuccess -> currentState.copy(
+        is IdeaStore.SideAction.LoadSuccess -> currentState.copy(
             isLoadingProgressVisible = false,
 
             isRetryButtonVisible = false,

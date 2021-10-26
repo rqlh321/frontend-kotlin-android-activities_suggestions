@@ -1,22 +1,22 @@
 package ru.gubatenko.feature_main.side_effects
 
 import ru.gubatenko.domain.usecase.SaveActivityToLocalStorageUseCase
-import ru.gubatenko.feature_main.MainStore
+import ru.gubatenko.feature_main.IdeaStore
 import ru.gubatenko.mvi.SideEffect
 import ru.gubatenko.mvi.StateObservable
 
 class ClickOnSaveSideEffect(
-    private val stateObservable: StateObservable<MainStore.State>,
-    private val useCase: SaveActivityToLocalStorageUseCase,
-) : SideEffect<MainStore.Action.SaveContent, MainStore.SideAction> {
+    private val stateObservable: StateObservable<IdeaStore.State>,
+    private val saveActivityToLocalStorageUseCase: SaveActivityToLocalStorageUseCase,
+) : SideEffect<IdeaStore.Action.SaveContent, IdeaStore.SideAction> {
 
-    override fun actionId() = MainStore.Action.SaveContent::class.java
+    override fun actionId() = IdeaStore.Action.SaveContent::class.java
 
     override suspend fun execute(
-        action: MainStore.Action.SaveContent,
-        reducerCallback: suspend (MainStore.SideAction) -> Unit
+        action: IdeaStore.Action.SaveContent,
+        reducerCallback: suspend (IdeaStore.SideAction) -> Unit
     ) {
-        val actionToSave = stateObservable.stateValue.idea ?: return
-        useCase.execute(actionToSave)
+        val actionToSave = stateObservable.stateValue.idea ?: throw IllegalArgumentException()
+        saveActivityToLocalStorageUseCase.execute(actionToSave)
     }
 }

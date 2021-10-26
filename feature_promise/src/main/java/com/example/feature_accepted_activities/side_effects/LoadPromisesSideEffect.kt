@@ -9,7 +9,7 @@ import ru.gubatenko.domain.usecase.GetAllPromiseUseCase
 import ru.gubatenko.domain.usecase.GetStaticTextUseCase
 import ru.gubatenko.mvi.SideEffect
 
-class ShowContentSideEffect(
+class LoadPromisesSideEffect(
     private val getAllPromiseUseCase: GetAllPromiseUseCase,
     private val getStaticTextUseCase: GetStaticTextUseCase,
 ) : SideEffect<PromiseStore.Action.LoadContent, PromiseStore.SideAction> {
@@ -22,9 +22,7 @@ class ShowContentSideEffect(
     ) {
         val noPromiseInfoText = getStaticTextUseCase.execute(TextKey.Promise.EMPTY_LIST)
         getAllPromiseUseCase.execute()
-            .catch {
-this
-            }
+            .catch {}
             .onEach { promiseList ->
                 reducerCallback.invoke(
                     PromiseStore.SideAction.LoadSuccess(

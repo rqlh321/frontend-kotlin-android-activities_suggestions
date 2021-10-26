@@ -6,14 +6,14 @@ import ru.gubatenko.mvi.AbstractStore
 import ru.gubatenko.mvi.SideEffects
 import ru.gubatenko.mvi.StateObservable
 
-class MainStore(
+class IdeaStore(
     logger: Logger,
     sideEffects: SideEffects<Action, SideAction>,
     stateObservable: StateObservable<State>,
-) : AbstractStore<MainStore.Action, MainStore.SideAction, MainStore.State>(
+) : AbstractStore<IdeaStore.Action, IdeaStore.SideAction, IdeaStore.State>(
     logger = logger,
     stateObservable = stateObservable,
-    reducer = MainStoreReducer(),
+    reducer = IdeaStoreReducer(),
     sideEffects = sideEffects
 ) {
 
