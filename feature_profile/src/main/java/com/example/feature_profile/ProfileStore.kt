@@ -18,7 +18,7 @@ class ProfileStore(
 ) {
 
     sealed class Action {
-        object OpenProfileScreen : Action()
+        object LoadProfile : Action()
         object ClickOnSignIn : Action()
         object ClickOnSignOut : Action()
         data class SwitchPref(

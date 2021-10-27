@@ -1,5 +1,7 @@
 package com.example.feature_accepted_activities_android
 
+import com.example.audit.Logger
+import com.example.audit.LoggerStub
 import com.example.feature_accepted_activities.PROMISE_EVENT_DISPATCHER
 import com.example.feature_accepted_activities.PROMISE_STATE_OBSERVABLE
 import com.example.feature_accepted_activities.PromiseStore
@@ -34,6 +36,7 @@ val emptyIdeaFlow = flow<List<Idea>> { emit(emptyList()) }
 val throwExceptionIdeaFlow = flow<List<Idea>> { throw Exception() }
 
 val stubStateEvent = module {
+    single<Logger> { LoggerStub() }
     single<StateObservable<PromiseStore.State>>(named(PROMISE_STATE_OBSERVABLE)) { StubStateObservable(PromiseStore.State()) }
     single<EventDispatcher<PromiseStore.Event>>(named(PROMISE_EVENT_DISPATCHER)) { StubEventDispatcher() }
 }

@@ -7,16 +7,16 @@ import ru.gubatenko.domain.usecase.GetSignedInUserUseCase
 import ru.gubatenko.domain.usecase.GetStaticTextUseCase
 import ru.gubatenko.mvi.SideEffect
 
-class SetupProfileScreenSideEffect(
+class LoadProfileSideEffect(
     private val getSignedInUserUseCase: GetSignedInUserUseCase,
     private val getStaticTextUseCase: GetStaticTextUseCase,
     private val getProfilePrefsUseCase: GetProfilePrefsUseCase,
-) : SideEffect<ProfileStore.Action.OpenProfileScreen, ProfileStore.SideAction> {
+) : SideEffect<ProfileStore.Action.LoadProfile, ProfileStore.SideAction> {
 
-    override fun actionId() = ProfileStore.Action.OpenProfileScreen::class.java
+    override fun actionId() = ProfileStore.Action.LoadProfile::class.java
 
     override suspend fun execute(
-        action: ProfileStore.Action.OpenProfileScreen,
+        action: ProfileStore.Action.LoadProfile,
         reducerCallback: suspend (ProfileStore.SideAction) -> Unit
     ) {
         val user = getSignedInUserUseCase.execute()

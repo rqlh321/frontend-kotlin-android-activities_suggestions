@@ -12,12 +12,12 @@ import ru.gubatenko.mvi.SideEffect
 class LoadPromisesSideEffect(
     private val getAllPromiseUseCase: GetAllPromiseUseCase,
     private val getStaticTextUseCase: GetStaticTextUseCase,
-) : SideEffect<PromiseStore.Action.LoadContent, PromiseStore.SideAction> {
+) : SideEffect<PromiseStore.Action.LoadPromises, PromiseStore.SideAction> {
 
-    override fun actionId() = PromiseStore.Action.LoadContent::class.java
+    override fun actionId() = PromiseStore.Action.LoadPromises::class.java
 
     override suspend fun execute(
-        action: PromiseStore.Action.LoadContent,
+        action: PromiseStore.Action.LoadPromises,
         reducerCallback: suspend (PromiseStore.SideAction) -> Unit
     ) {
         val noPromiseInfoText = getStaticTextUseCase.execute(TextKey.Promise.EMPTY_LIST)

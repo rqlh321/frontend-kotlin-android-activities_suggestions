@@ -18,7 +18,7 @@ class PromiseStore(
 ) {
 
     sealed class Action {
-        object LoadContent : Action()
+        object LoadPromises : Action()
     }
 
     sealed class Event

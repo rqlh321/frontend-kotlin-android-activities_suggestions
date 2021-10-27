@@ -47,7 +47,7 @@ class LoadPromisesUnitTest : KoinComponent {
         Mockito.`when`(getAllPromiseUseCase.execute())
             .thenReturn(ideaFlow)
 
-        store.process(PromiseStore.Action.LoadContent)
+        store.process(PromiseStore.Action.LoadPromises)
         assertEquals(true, store.stateObservable.stateValue.isPromiseListVisible)
         assertEquals(false, store.stateObservable.stateValue.isInfoTextVisible)
         assertEquals(EMPTY_LIST_TEXT, store.stateObservable.stateValue.infoText)
@@ -59,7 +59,7 @@ class LoadPromisesUnitTest : KoinComponent {
         Mockito.`when`(getAllPromiseUseCase.execute())
             .thenReturn(emptyIdeaFlow)
 
-        store.process(PromiseStore.Action.LoadContent)
+        store.process(PromiseStore.Action.LoadPromises)
         assertEquals(false, store.stateObservable.stateValue.isPromiseListVisible)
         assertEquals(true, store.stateObservable.stateValue.isInfoTextVisible)
         assertEquals(EMPTY_LIST_TEXT, store.stateObservable.stateValue.infoText)
@@ -71,7 +71,7 @@ class LoadPromisesUnitTest : KoinComponent {
         Mockito.`when`(getAllPromiseUseCase.execute())
             .thenReturn(throwExceptionIdeaFlow)
 
-        store.process(PromiseStore.Action.LoadContent)
+        store.process(PromiseStore.Action.LoadPromises)
         assertEquals(false, store.stateObservable.stateValue.isPromiseListVisible)
         assertEquals(false, store.stateObservable.stateValue.isInfoTextVisible)
         assertEquals(null, store.stateObservable.stateValue.infoText)

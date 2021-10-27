@@ -12,7 +12,7 @@ class PromiseViewModel(
 
     init {
         unconfined {
-            store.process(PromiseStore.Action.LoadContent)
+            store.process(PromiseStore.Action.LoadPromises)
         }
     }
 }

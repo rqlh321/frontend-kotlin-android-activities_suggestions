@@ -13,6 +13,7 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.feature_profile.ProfileStore
+import com.example.feature_profile.profileFeatureModuleDI
 import com.example.feature_profile_android.adapter.PrefAdapter
 import ru.gubatenko.domain.navigation.AUTH_SUCCESS_BROADCAST
 import ru.gubatenko.domain.navigation.NavigationMain
@@ -40,7 +41,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             viewModel.successAuthorization()
         }
     }
-    override val diModules= listOf(profileFeatureAndroidModuleDI)
+    override val diModules= listOf(profileFeatureModuleDI, profileFeatureAndroidModuleDI)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
