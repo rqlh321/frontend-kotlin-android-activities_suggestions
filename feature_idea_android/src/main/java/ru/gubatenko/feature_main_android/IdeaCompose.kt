@@ -18,6 +18,8 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.MutableLiveData
 import ru.gubatenko.feature_main.IdeaStore
 
+private val lightColors = lightColors()
+private val darkColors = darkColors()
 private val typography = Typography(
     defaultFontFamily = FontFamily(Font(R.font.pinzelan_regular)),
     body1 = TextStyle(
@@ -38,7 +40,7 @@ fun ComposePlaygroundTheme(
     content: @Composable () -> Unit
 ) {
     MaterialTheme(
-        colors = MaterialTheme.colors,
+        colors = if (darkTheme) darkColors else lightColors,
         typography = typography,
         shapes = MaterialTheme.shapes,
         content = content,
@@ -106,7 +108,13 @@ private inline fun MediumButton(
     if (buttonVisible) Button(
         modifier = Modifier.padding(16.dp),
         onClick = { if (buttonClickable) click.invoke() }) {
-        buttonText?.let { MediumText(text = it) }
+        buttonText?.let {
+            Text(
+                color = MaterialTheme.colors.onPrimary,
+                text = it,
+                style = MaterialTheme.typography.body1
+            )
+        }
     }
 }
 
@@ -117,6 +125,7 @@ private fun MediumText(
 ) {
     if (textVisible) text?.let {
         Text(
+            color = MaterialTheme.colors.primary,
             text = it,
             style = MaterialTheme.typography.body1
         )
