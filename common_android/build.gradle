@@ -16,7 +16,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
     }
-
+    buildFeatures {
+        compose true
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -30,6 +32,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.0.1'
+    }
 }
 
 dependencies {
@@ -38,6 +43,11 @@ dependencies {
     api project(path: ':audit')
 
     api koin.android
+
+    api "androidx.compose.ui:ui:1.0.5"
+    api 'androidx.compose.material:material:1.0.5'
+    api 'androidx.compose.ui:ui-tooling:1.0.5'
+    api "androidx.compose.runtime:runtime-livedata:1.0.5"
 
     api android_sdk.core
     api android_sdk.appcompat

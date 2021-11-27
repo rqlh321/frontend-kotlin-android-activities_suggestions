@@ -41,9 +41,4 @@ dependencies {
     implementation project(path: ':common_android')
 
     implementation android_sdk.swiperefreshlayout
-
-    implementation "androidx.compose.ui:ui:1.0.5"
-    implementation 'androidx.compose.material:material:1.0.5'
-    implementation 'androidx.compose.ui:ui-tooling:1.0.5'
-    implementation "androidx.compose.runtime:runtime-livedata:1.0.5"
 }

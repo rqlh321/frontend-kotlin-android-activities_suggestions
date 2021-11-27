@@ -7,6 +7,7 @@ import org.koin.core.context.loadKoinModules
 import org.koin.core.context.unloadKoinModules
 import org.koin.core.module.Module
 
+@Deprecated("Use BaseComposeFragment")
 abstract class BaseFragment(layout: Int) : Fragment(layout) {
 
     abstract val diModules: List<Module>
