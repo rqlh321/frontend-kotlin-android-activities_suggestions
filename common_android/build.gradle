@@ -44,10 +44,10 @@ dependencies {
 
     api koin.android
 
-    api "androidx.compose.ui:ui:1.0.5"
-    api 'androidx.compose.material:material:1.0.5'
-    api 'androidx.compose.ui:ui-tooling:1.0.5'
-    api "androidx.compose.runtime:runtime-livedata:1.0.5"
+    api compose.ui
+    api compose.material
+    api compose.ui_tooling
+    api compose.runtime_livedata
 
     api android_sdk.core
     api android_sdk.appcompat
