@@ -7,7 +7,6 @@
 
     <fragment
         android:id="@+id/promise_fragment_id"
-        android:name="com.example.feature_accepted_activities_android.PromiseComposeFragment"
-        tools:layout="@layout/fragment_promise" />
+        android:name="com.example.feature_accepted_activities_android.PromiseComposeFragment"/>
 
 </navigation>
