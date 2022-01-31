@@ -1,27 +1,32 @@
 package com.example.feature_profile_android
 
+import android.app.UiModeManager
+import android.app.UiModeManager.MODE_NIGHT_NO
+import android.app.UiModeManager.MODE_NIGHT_YES
 import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.Context.UI_MODE_SERVICE
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.feature_profile.ProfileStore
 import com.example.feature_profile.profileFeatureModuleDI
 import com.example.feature_profile_android.adapter.PrefAdapter
-import ru.gubatenko.domain.navigation.AUTH_SUCCESS_BROADCAST
-import ru.gubatenko.domain.navigation.NavigationMain
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.RelativeCornerSize
 import ru.gubatenko.common_android.BaseFragment
 import ru.gubatenko.common_android.onClick
 import ru.gubatenko.common_android.sharedGraphViewModel
+import ru.gubatenko.domain.navigation.AUTH_SUCCESS_BROADCAST
 
 class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
@@ -41,7 +46,7 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
             viewModel.successAuthorization()
         }
     }
-    override val diModules= listOf(profileFeatureModuleDI, profileFeatureAndroidModuleDI)
+    override val diModules = listOf(profileFeatureModuleDI, profileFeatureAndroidModuleDI)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -75,8 +80,16 @@ class ProfileFragment : BaseFragment(R.layout.fragment_profile) {
 
     private fun handle(event: ProfileStore.Event) {
         when (event) {
-            is ProfileStore.Event.NavigateToAuthFlow -> (requireActivity() as? NavigationMain)?.startAuthorizationFlow()
-            is ProfileStore.Event.ChangeAppThem ->  (requireActivity() as? NavigationMain)?.restartApp()
+            is ProfileStore.Event.NavigateToAuthFlow -> requireActivity()
+                .findNavController(R.id.fragment_container_view_id)
+                .navigate(R.id.auth_graph)
+            is ProfileStore.Event.ChangeAppThem -> {
+//                AppCompatDelegate.setDefaultNightMode(
+//                    if (event.isDarkThemEnabled) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+//                )
+                //todo handle recreate
+                requireActivity().recreate()
+            }
         }
     }
 

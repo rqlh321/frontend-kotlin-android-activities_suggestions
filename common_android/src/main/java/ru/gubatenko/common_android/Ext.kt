@@ -4,7 +4,6 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
-import ru.gubatenko.domain.navigation.NavigationMain
 import org.koin.android.ext.android.getKoin
 import org.koin.androidx.viewmodel.ViewModelParameter
 import org.koin.androidx.viewmodel.koin.getViewModel
@@ -17,7 +16,7 @@ inline fun <reified VM : ViewModel> Fragment.sharedGraphViewModel(
     qualifier: Qualifier? = null,
     noinline parameters: ParametersDefinition? = null
 ) = lazy {
-    val navGraphId = (requireActivity() as NavigationMain).frameGraphId()
+    val navGraphId = R.id.frame_graph_id
     val store = findNavController().getViewModelStoreOwner(navGraphId).viewModelStore
     getKoin().getViewModel(ViewModelParameter(VM::class, qualifier, parameters, null, store, null))
 }

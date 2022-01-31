@@ -13,4 +13,7 @@
     <include app:graph="@navigation/ofer_auth_graph" />
     <include app:graph="@navigation/auth_graph" />
 
+    <activity
+        android:id="@+id/main_activity_id"
+        android:name="ru.gubatenko.patterns.MainActivity" />
 </navigation>
