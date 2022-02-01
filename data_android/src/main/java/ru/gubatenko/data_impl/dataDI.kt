@@ -34,9 +34,8 @@ val mapperActionAndroidModuleDI = module {
 }
 
 val prefsImplModuleDI = module {
-    single { PreferenceDataStore(get()) }
-    single<Preference> { get<PreferenceDataStore>() }
-    single<DefinedPreference> { get<PreferenceDataStore>() }
+    single<Preference> { PreferenceSharedPrefs(get()) }
+    single<DefinedPreference> { PreferenceDataStore(get()) }
 }
 val textImplModuleDI = module {
     single<StaticText> { StaticTextAssets(get()) }

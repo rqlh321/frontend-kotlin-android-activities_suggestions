@@ -9,9 +9,8 @@ import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import ru.gubatenko.data.prefs.DefinedPreferenceAbstract
-import ru.gubatenko.domain.Preference
 
-class PreferenceDataStore(private val context: Context, ) : DefinedPreferenceAbstract(), Preference {
+class PreferenceDataStore(private val context: Context) : DefinedPreferenceAbstract() {
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(this::class.java.name)
 
