@@ -10,12 +10,16 @@ import ru.gubatenko.data.service.UserService
 import ru.gubatenko.data.text.DynamicText
 import ru.gubatenko.data.text.StaticText
 import ru.gubatenko.data_impl.mapper.ActivityFromDomainToStoredRoom
+import ru.gubatenko.data_impl.prefs.PreferenceDataStore
 import ru.gubatenko.data_impl.prefs.PreferenceSharedPrefs
 import ru.gubatenko.data_impl.service.UserServiceImpl
 import ru.gubatenko.data_impl.sqlite.AppDatabase
 import ru.gubatenko.data_impl.text.DynamicTextFirebase
 import ru.gubatenko.data_impl.text.StaticTextAssets
-import ru.gubatenko.domain.*
+import ru.gubatenko.domain.DAO_IDEA_SQLITE
+import ru.gubatenko.domain.DefinedPreference
+import ru.gubatenko.domain.MAPPER_DOMAIN_TO_STORED_SQLITE_ACTION
+import ru.gubatenko.domain.Preference
 import ru.gubatenko.domain.model.Idea
 
 val databaseSQLiteModuleDI = module {
@@ -30,12 +34,11 @@ val mapperActionAndroidModuleDI = module {
 }
 
 val prefsImplModuleDI = module {
-    single { PreferenceSharedPrefs(get()) }
-    single<Preference> { get<PreferenceSharedPrefs>() }
-    single<DefinedPreference> { get<PreferenceSharedPrefs>() }
+    single { PreferenceDataStore(get()) }
+    single<Preference> { get<PreferenceDataStore>() }
+    single<DefinedPreference> { get<PreferenceDataStore>() }
 }
 val textImplModuleDI = module {
-    single<DefinedPreference> { get<PreferenceSharedPrefs>() }
     single<StaticText> { StaticTextAssets(get()) }
     single<DynamicText> { DynamicTextFirebase(get()) }
 }

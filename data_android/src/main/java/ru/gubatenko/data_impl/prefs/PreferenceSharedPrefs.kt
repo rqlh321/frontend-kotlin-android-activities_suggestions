@@ -4,12 +4,9 @@ import android.content.Context
 import ru.gubatenko.data.prefs.DefinedPreferenceAbstract
 import ru.gubatenko.domain.Preference
 
-class PreferenceSharedPrefs(
-    context: Context,
-    name: String = "PreferenceSharedPrefs"
-) : DefinedPreferenceAbstract(), Preference {
+class PreferenceSharedPrefs(context: Context) : DefinedPreferenceAbstract(), Preference {
 
-    private val pref = context.getSharedPreferences(name, Context.MODE_PRIVATE)
+    private val pref = context.getSharedPreferences(this::class.java.name, Context.MODE_PRIVATE)
 
     override fun getBoolean(key: String): Boolean = pref.getBoolean(
         key,
