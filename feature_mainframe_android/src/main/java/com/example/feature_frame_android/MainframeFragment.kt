@@ -32,9 +32,10 @@ class MainframeFragment : BaseFragment(R.layout.fragment_mainframe) {
     }
 
     private fun render(state: MainframeStore.State) {
-        AppCompatDelegate.setDefaultNightMode(
-            if (state.isDarkModeOn) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
-        )
+        state.isDarkModeOn?.let {
+            val mode = if (it) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
+            AppCompatDelegate.setDefaultNightMode(mode)
+        }
     }
 
 }

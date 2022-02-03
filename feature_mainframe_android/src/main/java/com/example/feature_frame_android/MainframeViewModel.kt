@@ -14,4 +14,9 @@ class MainframeViewModel(
     val state = (store.stateObservable as LiveDataStateObservable)
     val event = (dispatcher as LiveDataEventDispatcher<MainframeStore.Event>)
 
+    init {
+//         main {
+//             store.process(MainframeStore.Action.SetupScreen)
+//         }
+    }
 }

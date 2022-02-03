@@ -1,6 +1,8 @@
 package com.example.feature_auth.offer_auth.side_effects
 
 import com.example.feature_auth.offer_auth.OfferAuthStore
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.withContext
 import ru.gubatenko.domain.usecase.AuthOfferIsViewedUseCase
 import ru.gubatenko.mvi.SideEffect
 
@@ -13,5 +15,5 @@ class RejectAuthOfferSideEffect(
     override suspend fun execute(
         action: OfferAuthStore.Action.RejectAuthOffer,
         reducerCallback: suspend (OfferAuthStore.SideAction) -> Unit
-    ) = useCase.execute()
+    ) = withContext(IO) { useCase.execute() }
 }

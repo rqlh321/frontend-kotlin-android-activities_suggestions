@@ -4,7 +4,6 @@ import com.example.feature_mainframe.MainframeStore
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
-import ru.gubatenko.domain.DefinedPreference
 import ru.gubatenko.mvi.EventDispatcher
 import ru.gubatenko.mvi.SideEffects
 import ru.gubatenko.mvi.StateObservable
@@ -17,9 +16,8 @@ private const val MAINFRAME_SIDE_EFFECTS = "MAINFRAME_SIDE_EFFECTS"
 
 val mainframeFeatureAndroidModuleDI = module {
     single<StateObservable<MainframeStore.State>>(named(MAINFRAME_STATE_OBSERVABLE)) {
-        val isDarkThemEnabled = get<DefinedPreference>().isDarkThemEnabled()
-        val state = MainframeStore.State(isDarkThemEnabled)
-        LiveDataStateObservable(state)
+//        val isDarkThemEnabled = get<ThemPreference>().isDarkThemEnabled()
+        LiveDataStateObservable(MainframeStore.State())
     }
     single<EventDispatcher<MainframeStore.Event>>(named(MAINFRAME_EVENT_DISPATCHER)) { LiveDataEventDispatcher() }
     single(named(MAINFRAME_SIDE_EFFECTS)) {

@@ -1,6 +1,6 @@
 package ru.gubatenko.domain_impl.use_case
 
-import ru.gubatenko.domain.Preference
+import ru.gubatenko.domain.pref.Preference
 import ru.gubatenko.domain.usecase.SetPrefUseCase
 
 class SetPrefUseCaseImpl(

@@ -3,14 +3,21 @@ package ru.gubatenko.domain_impl
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import ru.gubatenko.domain.*
+import ru.gubatenko.domain.pref.AuthPreference
+import ru.gubatenko.domain.pref.ThemPreference
 import ru.gubatenko.domain.repo.IdeaRepo
 import ru.gubatenko.domain.repo.UserRepo
 import ru.gubatenko.domain.usecase.*
+import ru.gubatenko.domain_impl.prefs.AuthPreferenceImpl
+import ru.gubatenko.domain_impl.prefs.ThemPreferenceImpl
 import ru.gubatenko.domain_impl.repo.IdeaRepoImpl
 import ru.gubatenko.domain_impl.repo.UserRepoImpl
 import ru.gubatenko.domain_impl.use_case.*
 
-val repoImplModuleDI = module {
+fun repoImplModuleDI() = module {
+    single<AuthPreference> { AuthPreferenceImpl(get()) }
+    single<ThemPreference> { ThemPreferenceImpl(get()) }
+
     single<IdeaRepo> {
         IdeaRepoImpl(
             ideaDao = get(named(DAO_IDEA_SQLITE)),
@@ -24,7 +31,7 @@ val repoImplModuleDI = module {
     }
     single<UserRepo> { UserRepoImpl(userService = get()) }
 }
-val usaCaseImplModuleDI = module {
+fun usaCaseImplModuleDI() = module {
     single<GetSuggestedActivityUseCase> { GetSuggestedActivityUseCaseImpl(repo = get()) }
     single<SaveActivityToLocalStorageUseCase> { SaveActivityToLocalStorageUseCaseImpl(repo = get(), prefs = get()) }
     single<SyncActivitiesWithServerUseCase> { SyncActivitiesWithServerUseCaseImpl(repo = get()) }

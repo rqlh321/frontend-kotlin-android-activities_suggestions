@@ -11,15 +11,18 @@ import ru.gubatenko.data.Mapper
 import ru.gubatenko.data.dto.IdeaDto
 import ru.gubatenko.data.entity.IdeaStored
 import ru.gubatenko.data.service.IdeaSourceService
-import ru.gubatenko.domain.*
+import ru.gubatenko.domain.MAPPER_DOMAIN_TO_DTO_ACTION
+import ru.gubatenko.domain.MAPPER_DTO_TO_DOMAIN_ACTION
+import ru.gubatenko.domain.MAPPER_STORED_TO_DOMAIN_ACTION
 import ru.gubatenko.domain.model.Idea
 
-val mapperActionImplModuleDI = module {
+fun mapperActionImplModuleDI() = module {
     single<Mapper<IdeaDto, Idea>>(named(MAPPER_DTO_TO_DOMAIN_ACTION)) { ActivityDtoToDomain() }
     single<Mapper<Idea, IdeaDto>>(named(MAPPER_DOMAIN_TO_DTO_ACTION)) { DomainToActivityDto() }
     single<Mapper<IdeaStored, Idea>>(named(MAPPER_STORED_TO_DOMAIN_ACTION)) { ActivityFromStoredToDomain() }
 }
-val serviceImplModuleDI = module {
+
+fun serviceImplModuleDI() = module {
     single<Retrofit> {
         Retrofit.Builder()
             .baseUrl("https://www.boredapi.com/api/")

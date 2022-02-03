@@ -1,7 +1,6 @@
 package ru.gubatenko.patterns
 
 import android.app.Application
-import androidx.work.*
 import com.example.audit_android.auditModule
 import com.example.domain_android.useCaseAndroidModuleDI
 import com.example.lib.mapperActionImplModuleDI
@@ -20,21 +19,22 @@ class ThisApplication : Application() {
         startKoin {
             androidContext(this@ThisApplication)
             modules(
-                auditModule,
-                prefsImplModuleDI,
-                textImplModuleDI,
+                auditModule(),
 
-                mapperActionAndroidModuleDI,
-                mapperActionImplModuleDI,
+                prefsAndroidModuleDI(),
+                textImplModuleDI(),
 
-                databaseSQLiteModuleDI,
+                mapperActionAndroidModuleDI(),
+                mapperActionImplModuleDI(),
 
-                serviceAndroidModuleDI,
-                serviceImplModuleDI,
+                databaseSQLiteModuleDI(),
 
-                repoImplModuleDI,
-                usaCaseImplModuleDI,
-                useCaseAndroidModuleDI
+                serviceAndroidModuleDI(),
+                serviceImplModuleDI(),
+
+                repoImplModuleDI(),
+                usaCaseImplModuleDI(),
+                useCaseAndroidModuleDI()
             )
         }
     }
