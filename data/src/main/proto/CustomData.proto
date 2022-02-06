@@ -1,0 +1,8 @@
+syntax = "proto3";
+
+option java_package = "ru.gubatenko.data_impl.prefs";
+option java_multiple_files = true;
+
+message CustomData {
+  int32 example_counter = 1;
+}

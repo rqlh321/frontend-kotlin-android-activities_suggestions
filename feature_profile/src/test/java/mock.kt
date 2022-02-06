@@ -8,7 +8,7 @@ val mockedUseCase = module {
     single<GetStaticTextUseCase> { Mockito.mock(GetStaticTextUseCase::class.java) }
     single<SignOutUseCase> { Mockito.mock(SignOutUseCase::class.java) }
     single<GetSignedInUserUseCase> { Mockito.mock(GetSignedInUserUseCase::class.java) }
-    single<SetPrefUseCase> { Mockito.mock(SetPrefUseCase::class.java) }
+    single<SetThemPrefUseCase> { Mockito.mock(SetThemPrefUseCase::class.java) }
     single<GetProfilePrefsUseCase> { Mockito.mock(GetProfilePrefsUseCase::class.java) }
     single<LongTermWorkUseCase> { Mockito.mock(LongTermWorkUseCase::class.java) }
 }

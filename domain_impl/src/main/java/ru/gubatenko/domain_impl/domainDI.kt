@@ -3,21 +3,14 @@ package ru.gubatenko.domain_impl
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import ru.gubatenko.domain.*
-import ru.gubatenko.domain.pref.AuthPreference
-import ru.gubatenko.domain.pref.ThemPreference
 import ru.gubatenko.domain.repo.IdeaRepo
 import ru.gubatenko.domain.repo.UserRepo
 import ru.gubatenko.domain.usecase.*
-import ru.gubatenko.domain_impl.prefs.AuthPreferenceImpl
-import ru.gubatenko.domain_impl.prefs.ThemPreferenceImpl
 import ru.gubatenko.domain_impl.repo.IdeaRepoImpl
 import ru.gubatenko.domain_impl.repo.UserRepoImpl
 import ru.gubatenko.domain_impl.use_case.*
 
 fun repoImplModuleDI() = module {
-    single<AuthPreference> { AuthPreferenceImpl(get()) }
-    single<ThemPreference> { ThemPreferenceImpl(get()) }
-
     single<IdeaRepo> {
         IdeaRepoImpl(
             ideaDao = get(named(DAO_IDEA_SQLITE)),
@@ -29,7 +22,7 @@ fun repoImplModuleDI() = module {
             ideaDtoToDomainMapper = get(named(MAPPER_DTO_TO_DOMAIN_ACTION)),
         )
     }
-    single<UserRepo> { UserRepoImpl(userService = get()) }
+    single<UserRepo> { UserRepoImpl(userService = get(), customDataStore = get()) }
 }
 fun usaCaseImplModuleDI() = module {
     single<GetSuggestedActivityUseCase> { GetSuggestedActivityUseCaseImpl(repo = get()) }

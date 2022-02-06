@@ -1,11 +1,13 @@
 package ru.gubatenko.domain_impl.repo
 
+import ru.gubatenko.data.pref.CustomDataStore
 import ru.gubatenko.data.service.UserService
 import ru.gubatenko.domain.model.User
 import ru.gubatenko.domain.repo.UserRepo
 
 class UserRepoImpl(
-    private val userService: UserService
+    private val userService: UserService,
+    private val customDataStore: CustomDataStore,
 ) : UserRepo {
     override suspend fun create(query: UserRepo.CreateQuery) {
         TODO("Not yet implemented")
@@ -24,9 +26,12 @@ class UserRepoImpl(
         }
     }
 
-    override suspend fun update(query: UserRepo.UpdateQuery) = when(query){
+    override suspend fun update(query: UserRepo.UpdateQuery) = when (query) {
         is UserRepo.UpdateQuery.SignOutUserQuery -> userService.signOut()
         is UserRepo.UpdateQuery.SignInUserQuery -> userService.signIn(query.credential)
+        is UserRepo.UpdateQuery.RefreshData -> {
+
+        }
     }
 
     override suspend fun delete(query: UserRepo.DeleteQuery) {

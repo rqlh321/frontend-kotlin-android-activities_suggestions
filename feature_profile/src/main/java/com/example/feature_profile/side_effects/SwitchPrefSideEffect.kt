@@ -1,7 +1,6 @@
 package com.example.feature_profile.side_effects
 
 import com.example.feature_profile.ProfileStore
-import kotlinx.coroutines.delay
 import ru.gubatenko.domain.usecase.GetProfilePrefsUseCase
 import ru.gubatenko.domain.usecase.SetPrefUseCase
 import ru.gubatenko.mvi.EventDispatcher

@@ -18,6 +18,7 @@ interface UserRepo {
     sealed class UpdateQuery {
         data class SignInUserQuery(val credential: Any) : UserRepo.UpdateQuery()
         object SignOutUserQuery : UserRepo.UpdateQuery()
+        object RefreshData : UserRepo.UpdateQuery()
     }
 
     sealed class DeleteQuery

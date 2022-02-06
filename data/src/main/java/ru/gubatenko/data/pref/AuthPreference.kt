@@ -1,6 +1,6 @@
-package ru.gubatenko.domain.pref
+package ru.gubatenko.data.pref
 
-interface AuthPreference : DefinedPrefs {
+interface AuthPreference {
 
     companion object {
         const val USER_REJECTED_AUTHORIZATION_OFFER_KEY = "USER_REJECTED_AUTHORIZATION_OFFER"
